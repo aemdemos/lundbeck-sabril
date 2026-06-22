@@ -134,15 +134,14 @@ export default async function decorate(block) {
   hamburger.className = 'nav-hamburger';
   hamburger.setAttribute('aria-label', 'Toggle navigation');
   hamburger.setAttribute('aria-expanded', 'false');
-  const hamburgerIcon = document.createElement('span');
-  hamburgerIcon.className = 'nav-hamburger-icon';
   const hamburgerText = document.createElement('span');
   hamburgerText.className = 'nav-hamburger-text';
   hamburgerText.textContent = 'MENU';
-  hamburger.append(hamburgerIcon, hamburgerText);
+  hamburger.append(hamburgerText);
   hamburger.addEventListener('click', () => {
     const expanded = hamburger.getAttribute('aria-expanded') === 'true';
     hamburger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    hamburgerText.textContent = expanded ? 'MENU' : 'X';
     nav.classList.toggle('nav-mobile-open', !expanded);
   });
 
@@ -161,6 +160,7 @@ export default async function decorate(block) {
   window.matchMedia('(min-width: 900px)').addEventListener('change', () => {
     nav.classList.remove('nav-mobile-open');
     hamburger.setAttribute('aria-expanded', 'false');
+    hamburgerText.textContent = 'MENU';
     closeAllDropdowns(nav);
   });
 

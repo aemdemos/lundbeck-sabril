@@ -40,10 +40,6 @@ footer .footer-main ul {
 footer .footer-main ul a {
   color: var(--brand-purple);
   font-size: 15px;
-  text-decoration: none;
-}
-
-footer .footer-main ul a:hover {
   text-decoration: underline;
 }
 
@@ -66,17 +62,23 @@ footer .footer-strip img {
 
 /* ===== Mobile (< 900px) ===== */
 @media (width < 900px) {
+  /* Logo on the left, links in a 2-column grid on the right (matches source) */
   footer .footer-main {
-    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: center;
-    text-align: center;
-    gap: 12px;
+    gap: 16px;
+    padding: 12px 15px 0;
+  }
+
+  footer .footer-main img {
+    width: 130px;
   }
 
   footer .footer-main ul {
-    margin: 0;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+    margin: 0 0 0 auto;
   }
 
   /* Source omits the Sitemap link on mobile */

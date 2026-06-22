@@ -62,10 +62,6 @@ header .nav-utility-links a {
   color: var(--text-color-light);
   font-size: 14.2px;
   font-weight: 400;
-  text-decoration: none;
-}
-
-header .nav-utility-links a:hover {
   text-decoration: underline;
 }
 
@@ -74,12 +70,9 @@ header .nav-rems-link {
   align-self: flex-end;
   color: var(--brand-orange-text);
   font-size: 16px;
-  font-weight: 400;
-  line-height: 1.19;
-  text-decoration: none;
-}
-
-header .nav-rems-link:hover {
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.43;
   text-decoration: underline;
 }
 
@@ -200,55 +193,24 @@ header .nav-hamburger {
     width: 160px;
   }
 
+  /* White box with green border showing MENU / X text (matches source) */
   header .nav-hamburger {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2px;
-    padding: 6px 10px;
-    background: var(--brand-green);
-    border: 0;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 11px;
+    justify-content: center;
+    min-width: 110px;
+    padding: 18px 24px;
+    background: #fff;
+    border: 2px solid var(--brand-green);
+    border-radius: 4px;
+    color: var(--brand-green);
+    font-size: 22px;
     font-weight: 700;
     cursor: pointer;
   }
 
-  header .nav-hamburger-icon,
-  header .nav-hamburger-icon::before,
-  header .nav-hamburger-icon::after {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #fff;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
-  header .nav-hamburger-icon {
-    position: relative;
-  }
-
-  header .nav-hamburger-icon::before,
-  header .nav-hamburger-icon::after {
-    content: '';
-    position: absolute;
-    left: 0;
-  }
-
-  header .nav-hamburger-icon::before { top: -6px; }
-  header .nav-hamburger-icon::after { top: 6px; }
-
-  header .nav-hamburger[aria-expanded='true'] .nav-hamburger-icon {
-    background: transparent;
-  }
-
-  header .nav-hamburger[aria-expanded='true'] .nav-hamburger-icon::before {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  header .nav-hamburger[aria-expanded='true'] .nav-hamburger-icon::after {
-    transform: translateY(-6px) rotate(-45deg);
+  header .nav-hamburger-text {
+    line-height: 1;
   }
 
   /* Green nav stays hidden until hamburger opens; breaks out to viewport edges */
