@@ -1,5 +1,5 @@
 <!-- Please always provide the [GitHub issue(s)](../issues) your PR is for, as well as test URLs where your change can be observed (before and after): -->
-<!-- Feel free to delete options that are not relevant to your PR. -->
+<!-- Feel free to delete options that are not relevant to your PR -->
 
 ## Issue
 
