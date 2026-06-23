@@ -22,7 +22,9 @@ header .header[data-block-status="loaded"] {
 header .nav-wrapper {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
+  /* gray strips above and below the header, matching the source */
+  border-top: 10px solid #d1d1d1;
+  border-bottom: 10px solid #d1d1d1;
 }
 
 header nav {
@@ -43,7 +45,7 @@ header nav .nav-brand-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 14px 0 0;
 }
 
 header nav .nav-brand-link img {
@@ -89,6 +91,7 @@ header nav .nav-utility-rems:hover {
 header nav .nav-links-row {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 14px;
 }
 
 header nav .nav-links-list {
@@ -100,6 +103,8 @@ header nav .nav-links-list {
 
 header nav .nav-links-list .nav-item {
   position: relative;
+  /* small gap between buttons, matching source li padding 0 2px */
+  padding: 0 2px;
 }
 
 header nav .nav-links-list .nav-item > p {
@@ -115,10 +120,14 @@ header nav .nav-links-list .nav-item > p > a {
   font-size: 16px;
   text-decoration: none;
   white-space: nowrap;
+  /* rounded top corners only, matching source */
+  border-radius: 12.8px 12.8px 0 0;
+  transition: background-color 0.2s ease;
 }
 
 header nav .nav-links-list .nav-item > a:hover,
-header nav .nav-links-list .nav-item > p > a:hover {
+header nav .nav-links-list .nav-item > p > a:hover,
+header nav .nav-links-list .nav-drop[aria-expanded="true"] > p > a {
   background-color: var(--sabril-green-dark);
 }
 
@@ -127,13 +136,15 @@ header nav .nav-dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
-  min-width: 160px;
+  left: 2px;
+  min-width: calc(100% - 4px);
   margin: 0;
   padding: 0;
   list-style: none;
   background-color: #fff;
+  border-radius: 0 0 4px 4px;
   box-shadow: 0 6px 12px rgb(0 0 0 / 17.6%);
+  overflow: hidden;
   z-index: 100;
 }
 
@@ -149,6 +160,7 @@ header nav .nav-dropdown-menu li a {
   font-size: 16px;
   text-decoration: none;
   white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 header nav .nav-dropdown-menu li a:hover {
@@ -222,14 +234,20 @@ header nav .nav-hamburger-label {
     display: block;
   }
 
-  /* nav buttons collapse until MENU is tapped */
+  /* nav buttons collapse until MENU is tapped — smooth slide open */
   header nav .nav-links-row {
-    display: none;
+    display: block;
     margin: 0 -15px;
+    max-height: 0;
+    overflow: hidden;
+    padding-bottom: 0;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.35s ease;
   }
 
   header nav.nav-mobile-open .nav-links-row {
-    display: block;
+    max-height: 1000px;
+    opacity: 1;
   }
 
   header nav .nav-links-list {
@@ -239,19 +257,22 @@ header nav .nav-hamburger-label {
 
   header nav .nav-links-list .nav-item {
     width: 100%;
+    padding: 0;
   }
 
   header nav .nav-links-list .nav-item > a,
   header nav .nav-links-list .nav-item > p > a {
     width: 100%;
     border-bottom: 1px solid rgb(255 255 255 / 25%);
+    border-radius: 0;
     text-align: center;
   }
 
   header nav .nav-dropdown-menu {
     position: static;
-    box-shadow: none;
     min-width: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   header nav .nav-dropdown-menu li a {
