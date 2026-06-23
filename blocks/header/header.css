@@ -76,11 +76,11 @@ header nav .nav-utility-link:hover {
 header nav .nav-utility-rems {
   color: var(--sabril-orange);
   font-size: 16px;
+  font-style: italic;
+  font-weight: 700;
   text-decoration: none;
-}
-
-header nav .nav-utility-rems:hover {
-  text-decoration: underline;
+  /* the "underline" is a 2px orange bottom border, matching the source */
+  border-bottom: 2px solid var(--sabril-orange);
 }
 
 /* ---------- main green nav bar ---------- */
@@ -124,8 +124,7 @@ header nav .nav-links-list .nav-item > p > a {
 }
 
 header nav .nav-links-list .nav-item > a:hover,
-header nav .nav-links-list .nav-item > p > a:hover,
-header nav .nav-links-list .nav-drop[aria-expanded="true"] > p > a {
+header nav .nav-links-list .nav-item > p > a:hover {
   background-color: var(--sabril-green-dark);
 }
 
@@ -304,13 +303,14 @@ header nav .nav-hamburger-label {
     grid-row: 1 / span 2;
     align-self: stretch;
     align-items: flex-end;
-    padding: 18px 0 0;
+    padding: 5px 0 0;
   }
 
   header nav .nav-utility {
     grid-column: 2;
     grid-row: 1;
-    padding-top: 18px;
+    /* utility links sit just below the top grey border, matching the source */
+    padding-top: 0;
   }
 
   header nav .nav-utility-links {
