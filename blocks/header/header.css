@@ -92,7 +92,6 @@ header nav .nav-links-row {
 
 header nav .nav-links-list {
   display: flex;
-  flex-wrap: wrap;
   justify-content: flex-end;
   list-style: none;
   margin: 0;
@@ -170,8 +169,8 @@ header nav .nav-dropdown-menu li:last-child a {
 }
 
 header nav .nav-dropdown-menu li a:hover {
-  background-color: var(--sabril-green-text);
-  color: #fff;
+  background-color: #b4cd89;
+  color: var(--sabril-green-text);
 }
 
 /* ---------- MENU toggle (mobile only) ---------- */
@@ -318,11 +317,36 @@ header nav .nav-hamburger-label {
   }
 
   /* Green buttons sit in the right column, flush against the bottom grey
-     border (no gap), and wrap among themselves (3 + 1) when space is tight. */
+     border (no gap). */
   header nav .nav-links-row {
     grid-column: 2;
     grid-row: 2;
     align-self: end;
     padding-bottom: 0;
+  }
+}
+
+/* In the 768–991px range the source keeps all four buttons on a single row by
+   shrinking the font and tightening the padding (it never wraps 3 + 1). The
+   logo is scaled down a touch and the column gap tightened so the buttons fit
+   beside it without overflowing. */
+@media (min-width: 768px) and (max-width: 991px) {
+  header nav {
+    column-gap: 10px;
+  }
+
+  header nav .nav-brand-link img {
+    height: 100px;
+  }
+
+  header nav .nav-links-list .nav-item > a,
+  header nav .nav-links-list .nav-item > p > a {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  header nav .nav-dropdown-menu li a {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }
