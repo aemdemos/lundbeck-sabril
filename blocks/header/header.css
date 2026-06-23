@@ -66,6 +66,7 @@ header nav .nav-utility-link {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
+  white-space: nowrap;
   text-decoration: underline;
 }
 
@@ -73,14 +74,20 @@ header nav .nav-utility-link:hover {
   text-decoration: underline;
 }
 
+/* REMS callout sits on its own line, right-aligned beneath the utility links.
+   The "underline" is a 2px orange rule that hugs the text (matching the
+   source), so we use text-decoration rather than a full-width border. */
 header nav .nav-utility-rems {
+  flex-basis: 100%;
+  margin-top: 8px;
   color: var(--sabril-orange);
   font-size: 16px;
   font-style: italic;
   font-weight: 700;
-  text-decoration: none;
-  /* the "underline" is a 2px orange bottom border, matching the source */
-  border-bottom: 2px solid var(--sabril-orange);
+  text-align: right;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 /* ---------- main green nav bar ---------- */
@@ -347,5 +354,20 @@ header nav .nav-hamburger-label {
   header nav .nav-links-list .nav-item > a,
   header nav .nav-links-list .nav-item > p > a {
     padding: 10px 22px;
+  }
+
+  /* the four utility links always stay on a single row — the source shrinks
+     them rather than letting them wrap */
+  header nav .nav-utility-links {
+    gap: 8px;
+  }
+
+  header nav .nav-utility-link {
+    padding: 6px 0;
+    font-size: 11px;
+  }
+
+  header nav .nav-utility-rems {
+    font-size: 13px;
   }
 }
