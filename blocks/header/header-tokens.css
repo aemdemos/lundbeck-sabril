@@ -1,26 +1,61 @@
-/* header design tokens (layout only; colors/typography use global tokens) */
-:root { /* @boilerplate */
-  --nav-height: 200px;
-  --header-nav-max-width-mobile: 510px;
-  --header-nav-max-width-tablet: 690px;
-  --header-nav-max-width-desktop: 930px;
-  --header-nav-max-width-max: 1110px;
-  --header-white-text-color: #fff;
-  --header-text-color: #484848;
+/* header design tokens */
+:root {
+  /* layout */
+  --header-max-width: 1200px;
+  --header-padding: 16px 15px 0;
+  --header-padding-mobile: 12px 15px;
 
-  /* font */
-  --header-font-weight-xs: 500;
-  --header-font-weight-s: 600;
-  --header-font-weight-medium: 700;
-  --header-font-weight-bold: 800;
-  --header-font-size-xs: 14px;
-  --header-font-size-s: 16px;
-  --header-font-size-m: 18px;
-  --header-padding-container: 15px;
+  /* brand / logo */
+  --header-logo-width: 231px;
+  --header-logo-width-mobile: 160px;
 
-  /* line heights */
-  --header-line-height-xs: 14px;
-  --header-line-height-s: 18px;
-  --header-line-height-m: 22px;
-  --header-line-height-l: 24px;
+  /* utility links */
+  --header-utility-gap: 12px;
+  --header-utility-links-gap: 24px;
+  --header-utility-links-gap-mobile: 8px 20px;
+  --header-utility-link-padding: 6px 16px;
+  --header-utility-link-color: var(--text-color-light);
+  --header-utility-link-font-size: 14.2px;
+  --header-utility-link-font-weight: 400;
+
+  /* REMS link */
+  --header-rems-color: var(--brand-orange-text);
+  --header-rems-font-size: 16px;
+  --header-rems-font-weight: 700;
+  --header-rems-font-style: italic;
+  --header-rems-line-height: 1.43;
+
+  /* main nav (green buttons) */
+  --header-nav-button-padding: 10px 34px;
+  --header-nav-button-bg: var(--brand-green);
+  --header-nav-button-bg-hover: var(--brand-green-dark);
+  --header-nav-button-color: #fff;
+  --header-nav-button-font-size: 16px;
+  --header-nav-button-radius: 13px 13px 0 0;
+  --header-nav-button-transition: background-color 0.2s ease;
+
+  /* dropdown */
+  --header-dropdown-z-index: 1000;
+  --header-dropdown-padding: 5px 0 0;
+  --header-dropdown-bg: #fff;
+  --header-dropdown-shadow: 0 6px 12px rgb(0 0 0 / 17.6%);
+  --header-dropdown-link-padding: 10px 32px;
+  --header-dropdown-link-bg: #d4e3bc;
+  --header-dropdown-link-color: var(--brand-green-dark);
+  --header-dropdown-link-font-size: 16px;
+  --header-dropdown-link-bg-hover: var(--brand-green);
+  --header-dropdown-link-color-hover: #fff;
+
+  /* hamburger (mobile) */
+  --header-hamburger-min-width: 110px;
+  --header-hamburger-padding: 18px 24px;
+  --header-hamburger-bg: #fff;
+  --header-hamburger-border: 2px solid var(--brand-green);
+  --header-hamburger-radius: 4px;
+  --header-hamburger-color: var(--brand-green);
+  --header-hamburger-font-size: 22px;
+  --header-hamburger-font-weight: 700;
+
+  /* breakpoint */
+  --header-mobile-breakpoint: 900px;
 }

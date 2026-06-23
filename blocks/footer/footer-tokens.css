@@ -1,6 +1,31 @@
 /* footer design tokens */
-:root { /* @boilerplate */
-  --footer-max-width: var(--max-width-site); /* @boilerplate */
-  --footer-padding: var(--spacing-xl) var(--spacing-m) var(--spacing-m); /* @boilerplate */
-  --footer-padding-desktop: var(--spacing-xl) var(--spacing-l) var(--spacing-m); /* @boilerplate */
+:root {
+  /* layout */
+  --footer-max-width: 1200px;
+  --footer-main-padding: 5px 15px 0;
+  --footer-main-padding-mobile: 12px 15px 0;
+  --footer-main-gap: 16px 32px;
+  --footer-main-gap-mobile: 16px;
+  --footer-background: transparent;
+
+  /* top border */
+  --footer-border-top-width: 3px;
+  --footer-border-top-color: #eee;
+
+  /* logo */
+  --footer-logo-width: 167px;
+  --footer-logo-width-mobile: 130px;
+
+  /* links */
+  --footer-links-gap: 8px 40px;
+  --footer-links-gap-mobile: 10px 24px;
+  --footer-link-color: var(--brand-purple);
+  --footer-link-font-size: 15px;
+
+  /* bottom decorative color strip */
+  --footer-strip-margin-top: 8px;
+  --footer-strip-height: 9px;
+
+  /* breakpoint */
+  --footer-mobile-breakpoint: 900px;
 }
