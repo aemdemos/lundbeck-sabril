@@ -68,7 +68,7 @@ header nav .nav-utility-link {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 header nav .nav-utility-link:hover {
@@ -192,12 +192,15 @@ header nav .nav-hamburger-label {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 4px 12px;
+    gap: 4px 2px;
     text-align: center;
   }
 
   header nav .nav-utility-link {
-    padding: 4px 6px;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 4px 2px;
+    font-size: 12px;
   }
 
   /* orange REMS callout breaks onto its own centered line below the links */
@@ -251,7 +254,12 @@ header nav .nav-hamburger-label {
     min-width: 0;
   }
 
-  header nav .nav-drop .nav-dropdown-menu {
+  header nav .nav-dropdown-menu li a {
+    text-align: center;
+  }
+
+  /* collapsed by default; reveals only when the item is expanded */
+  header nav .nav-drop[aria-expanded="true"] .nav-dropdown-menu {
     display: block;
   }
 }
