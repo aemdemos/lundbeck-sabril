@@ -55,8 +55,8 @@ footer .footer ul li {
 footer .footer ul li a {
   color: var(--footer-link-color);
   font-size: var(--footer-link-font-size);
-  font-weight: 400;
-  text-decoration: underline;
+  font-weight: var(--footer-link-font-weight);
+  text-decoration: var(--footer-link-decoration);
 }
 
 /* Section 2: decorative bottom border strip image, full width */
@@ -76,7 +76,7 @@ footer .footer .section:last-child img {
 @media (width < 768px) {
   footer .footer .section:first-child > div {
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: var(--footer-mobile-gap);
   }
 
   footer .footer .section:first-child p:has(picture),
@@ -92,12 +92,12 @@ footer .footer .section:last-child img {
     grid-auto-columns: max-content;
     justify-content: start;
     column-gap: var(--footer-link-inset);
-    row-gap: 10px;
+    row-gap: var(--footer-mobile-gap);
     flex: 0 1 auto;
   }
 
   footer .footer ul li {
-    padding: 4px var(--footer-link-inset);
+    padding: var(--footer-mobile-link-padding-block) var(--footer-link-inset);
   }
 
   /* Source drops the Sitemap link on mobile */

@@ -5,9 +5,13 @@
   --footer-top-border: 3px solid #eee;
   --footer-link-color: #652d89;
   --footer-link-font-size: 15px;
+  --footer-link-font-weight: 400;
+  --footer-link-decoration: underline;
   --footer-link-inset: 15px;
   --footer-logo-col-width: 195px;
   --footer-row-padding-block: 5px;
   --footer-strip-height: 9px;
   --footer-mobile-breakpoint: 768px; /* Bootstrap sm — source switches footer layout here */
+  --footer-mobile-gap: 10px;
+  --footer-mobile-link-padding-block: 4px;
 }
