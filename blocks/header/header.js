@@ -127,9 +127,22 @@ function decorateNavLinks(section) {
         li.setAttribute('aria-expanded', 'false');
       });
       li.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
+        // On desktop the dropdown opens on hover; ignore clicks here.
+        if (isDesktop.matches) {
+          if (e.target.closest('a')) return;
+          e.stopPropagation();
+          const expanded = li.getAttribute('aria-expanded') === 'true';
+          li.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          return;
+        }
+        // On mobile/tablet, tapping the parent toggles its submenu
+        // instead of navigating (there is no hover).
+        if (e.target.closest('a') === li.querySelector(':scope > p > a, :scope > a')) {
+          e.preventDefault();
+        }
         e.stopPropagation();
         const expanded = li.getAttribute('aria-expanded') === 'true';
+        if (!expanded) closeAllDropdowns(list);
         li.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
     }
