@@ -144,6 +144,8 @@ header nav .nav-dropdown-menu {
   background-color: #fff;
   border-radius: 0 0 4px 4px;
   box-shadow: 0 6px 12px rgb(0 0 0 / 17.6%);
+  /* white separator between the trigger button and first submenu item */
+  border-top: 2px solid #fff;
   overflow: hidden;
   z-index: 100;
 }
