@@ -198,7 +198,7 @@ header nav .nav-hamburger-label {
 }
 
 /* ---------- mobile layout ---------- */
-@media (max-width: 899px) {
+@media (max-width: 767px) {
   /* utility links + REMS stay visible above the logo on mobile */
   header nav .nav-top {
     flex-direction: column-reverse;
@@ -295,7 +295,7 @@ header nav .nav-hamburger-label {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   header nav .nav-top {
     flex-direction: row;
     align-items: flex-start;
