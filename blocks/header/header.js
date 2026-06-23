@@ -117,27 +117,19 @@ function decorateNavLinks(section) {
       li.setAttribute('aria-expanded', 'false');
       subUl.className = 'nav-dropdown-menu';
 
+      // Open the submenu on hover at every breakpoint.
       li.addEventListener('mouseenter', () => {
-        if (!isDesktop.matches) return;
         closeAllDropdowns(list);
         li.setAttribute('aria-expanded', 'true');
       });
       li.addEventListener('mouseleave', () => {
-        if (!isDesktop.matches) return;
         li.setAttribute('aria-expanded', 'false');
       });
+      // Touch fallback: tapping the parent toggles its submenu instead of
+      // navigating (touch devices have no hover).
       li.addEventListener('click', (e) => {
-        // On desktop the dropdown opens on hover; ignore clicks here.
-        if (isDesktop.matches) {
-          if (e.target.closest('a')) return;
-          e.stopPropagation();
-          const expanded = li.getAttribute('aria-expanded') === 'true';
-          li.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          return;
-        }
-        // On mobile/tablet, tapping the parent toggles its submenu
-        // instead of navigating (there is no hover).
-        if (e.target.closest('a') === li.querySelector(':scope > p > a, :scope > a')) {
+        const parentLink = li.querySelector(':scope > p > a, :scope > a');
+        if (e.target.closest('a') === parentLink) {
           e.preventDefault();
         }
         e.stopPropagation();
