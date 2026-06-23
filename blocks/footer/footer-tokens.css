@@ -1,6 +1,12 @@
-/* footer design tokens */
-:root { /* @boilerplate */
-  --footer-max-width: var(--max-width-site); /* @boilerplate */
-  --footer-padding: var(--spacing-xl) var(--spacing-m) var(--spacing-m); /* @boilerplate */
-  --footer-padding-desktop: var(--spacing-xl) var(--spacing-l) var(--spacing-m); /* @boilerplate */
+/* footer design tokens — extracted from https://www.sabril.net/ */
+:root {
+  --footer-max-width: 1200px;
+  --footer-bg: transparent;
+  --footer-top-border: 3px solid #eee;
+  --footer-link-color: #652d89;
+  --footer-link-font-size: 15px;
+  --footer-link-inset: 15px;
+  --footer-logo-col-width: 195px;
+  --footer-row-padding-block: 5px;
+  --footer-strip-height: 9px;
 }

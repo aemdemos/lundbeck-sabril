@@ -1,22 +1,98 @@
 @import url('./footer-tokens.css');
 
-footer { /* @boilerplate */
-  background-color: var(--light-color); /* @boilerplate */
-  font-size: var(--body-font-size-xs); /* @boilerplate */
+footer {
+  background-color: var(--footer-bg);
+  font-size: var(--footer-link-font-size);
 }
 
-footer .footer > div { /* @boilerplate */
-  margin: auto; /* @boilerplate */
-  max-width: var(--footer-max-width); /* @boilerplate */
-  padding: var(--footer-padding); /* @boilerplate */
+footer .footer > div {
+  margin: auto;
+  max-width: var(--footer-max-width);
+  padding: 0 var(--footer-link-inset);
 }
 
-footer .footer p { /* @boilerplate */
-  margin: 0; /* @boilerplate */
+footer .footer p {
+  margin: 0;
 }
 
-@media (width >= 768px) { /* @boilerplate */
-  footer .footer > div { /* @boilerplate */
-    padding: var(--footer-padding-desktop); /* @boilerplate */
+/* Section 1: logo + legal links row with the top border */
+footer .footer .section:first-child > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-block: var(--footer-row-padding-block);
+  border-top: var(--footer-top-border);
+}
+
+/* Lundbeck logo column */
+footer .footer .section:first-child p:has(picture),
+footer .footer .section:first-child p:has(img) {
+  flex: 0 0 var(--footer-logo-col-width);
+}
+
+footer .footer .section:first-child picture img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Horizontal legal links */
+footer .footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer ul li {
+  padding: 0 var(--footer-link-inset);
+}
+
+footer .footer ul li a {
+  color: var(--footer-link-color);
+  font-size: var(--footer-link-font-size);
+  text-decoration: none;
+}
+
+/* Section 2: decorative bottom border strip image, full width */
+footer .footer .section:last-child > div {
+  padding: 0;
+}
+
+footer .footer .section:last-child picture,
+footer .footer .section:last-child img {
+  display: block;
+  width: 100%;
+  height: var(--footer-strip-height);
+  object-fit: fill;
+}
+
+/* Mobile: stack logo above links */
+@media (width < 600px) {
+  footer .footer .section:first-child > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  footer .footer .section:first-child p:has(picture),
+  footer .footer .section:first-child p:has(img) {
+    flex: 0 0 auto;
+  }
+
+  footer .footer ul {
+    flex-direction: column;
+  }
+
+  footer .footer ul li {
+    padding: 4px var(--footer-link-inset);
+  }
+
+  /* Source drops the Sitemap link on mobile */
+  footer .footer ul li:last-child {
+    display: none;
   }
 }
