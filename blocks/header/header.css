@@ -326,27 +326,26 @@ header nav .nav-hamburger-label {
   }
 }
 
-/* In the 768–991px range the source keeps all four buttons on a single row by
-   shrinking the font and tightening the padding (it never wraps 3 + 1). The
-   logo is scaled down a touch and the column gap tightened so the buttons fit
-   beside it without overflowing. */
+/* In the 768–991px range the source keeps the full-size buttons (16px) and lets
+   them wrap — 3 on the first row, the 4th below — left-aligned to the start of
+   the right column. The logo is scaled down and the column gap tightened so the
+   right column is wide enough to hold three buttons on the first row. */
 @media (min-width: 768px) and (max-width: 991px) {
   header nav {
     column-gap: 10px;
   }
 
   header nav .nav-brand-link img {
-    height: 100px;
+    height: 95px;
+  }
+
+  header nav .nav-links-list {
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   header nav .nav-links-list .nav-item > a,
   header nav .nav-links-list .nav-item > p > a {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  header nav .nav-dropdown-menu li a {
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 10px 22px;
   }
 }
