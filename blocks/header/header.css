@@ -22,9 +22,6 @@ header .header[data-block-status="loaded"] {
 header .nav-wrapper {
   width: 100%;
   background-color: #fff;
-  /* gray strips above and below the header, matching the source */
-  border-top: 10px solid #d1d1d1;
-  border-bottom: 10px solid #d1d1d1;
 }
 
 header nav {
@@ -33,14 +30,13 @@ header nav {
   padding: 0 15px;
   font-family: arial, helvetica, sans-serif;
   font-weight: 400;
+  /* gray strips above and below the header, constrained to the 1200px content
+     width (not the full viewport), matching the source */
+  border-top: 10px solid #d1d1d1;
+  border-bottom: 10px solid #d1d1d1;
 }
 
-/* ---------- top area (brand + utility) ---------- */
-header nav .nav-top {
-  display: flex;
-  flex-direction: column;
-}
-
+/* ---------- brand row (logo + hamburger) ---------- */
 header nav .nav-brand-row {
   display: flex;
   align-items: center;
@@ -96,6 +92,8 @@ header nav .nav-links-row {
 
 header nav .nav-links-list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -199,11 +197,7 @@ header nav .nav-hamburger-label {
 
 /* ---------- mobile layout ---------- */
 @media (max-width: 767px) {
-  /* utility links + REMS stay visible above the logo on mobile */
-  header nav .nav-top {
-    flex-direction: column-reverse;
-  }
-
+  /* DOM order is utility → logo → buttons, which is exactly the mobile stack */
   header nav .nav-utility {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
@@ -296,21 +290,39 @@ header nav .nav-hamburger-label {
 }
 
 @media (min-width: 768px) {
-  header nav .nav-top {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+  /* Logo on the left; utility links and the green buttons stack in a right
+     column. The logo spans both rows so it never sits above/below the nav. */
+  header nav {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 20px;
   }
 
   header nav .nav-brand-row {
-    padding: 18px 0;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    align-items: flex-end;
+    padding: 18px 0 0;
   }
 
   header nav .nav-utility {
+    grid-column: 2;
+    grid-row: 1;
     padding-top: 18px;
   }
 
   header nav .nav-utility-links {
     justify-content: flex-end;
+  }
+
+  /* Green buttons sit in the right column, flush against the bottom grey
+     border (no gap), and wrap among themselves (3 + 1) when space is tight. */
+  header nav .nav-links-row {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    padding-bottom: 0;
   }
 }

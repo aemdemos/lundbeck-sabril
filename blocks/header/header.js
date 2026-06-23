@@ -161,12 +161,11 @@ export default async function decorate(block) {
 
   const [brandSection, utilitySection, navSection] = [...fragment.children];
 
-  const top = document.createElement('div');
-  top.className = 'nav-top';
-  if (brandSection) top.append(decorateBrandRow(brandSection));
-  if (utilitySection) top.append(decorateUtilityBar(utilitySection));
-  nav.append(top);
-
+  // DOM order: utility (top), brand/logo, green nav buttons. On desktop a grid
+  // places the logo on the left and stacks utility + buttons in a right column;
+  // on mobile this same order flows top-to-bottom.
+  if (utilitySection) nav.append(decorateUtilityBar(utilitySection));
+  if (brandSection) nav.append(decorateBrandRow(brandSection));
   if (navSection) nav.append(decorateNavLinks(navSection));
 
   window.addEventListener('keydown', closeOnEscape);
