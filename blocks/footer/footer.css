@@ -55,7 +55,8 @@ footer .footer ul li {
 footer .footer ul li a {
   color: var(--footer-link-color);
   font-size: var(--footer-link-font-size);
-  text-decoration: none;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
 /* Section 2: decorative bottom border strip image, full width */
@@ -71,8 +72,8 @@ footer .footer .section:last-child img {
   object-fit: fill;
 }
 
-/* Mobile: logo stays at left; links form a 2x2 grid (column-first fill) */
-@media (width < 600px) {
+/* Mobile (< 768px, Bootstrap sm — matches source): logo at left; links form a 2x2 grid */
+@media (width < 768px) {
   footer .footer .section:first-child > div {
     flex-wrap: nowrap;
     gap: 10px;

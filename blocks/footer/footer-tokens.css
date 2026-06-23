@@ -9,4 +9,5 @@
   --footer-logo-col-width: 195px;
   --footer-row-padding-block: 5px;
   --footer-strip-height: 9px;
+  --footer-mobile-breakpoint: 768px; /* Bootstrap sm — source switches footer layout here */
 }
