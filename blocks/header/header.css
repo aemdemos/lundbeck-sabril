@@ -189,9 +189,21 @@ header nav .nav-hamburger-label {
   }
 
   header nav .nav-utility-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px 12px;
+    text-align: center;
+  }
+
+  header nav .nav-utility-link {
+    padding: 4px 6px;
+  }
+
+  /* orange REMS callout breaks onto its own centered line below the links */
+  header nav .nav-utility-rems {
+    flex-basis: 100%;
+    margin-top: 8px;
     text-align: center;
   }
 
