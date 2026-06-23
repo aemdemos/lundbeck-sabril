@@ -1,21 +1,36 @@
 /* stylelint-disable max-line-length */
+@font-face { /* @boilerplate */
+  font-family: roboto-condensed; /* @boilerplate */
+  font-style: normal; /* @boilerplate */
+  font-weight: 700; /* @boilerplate */
+  font-display: swap; /* @boilerplate */
+  src: url('../fonts/roboto-condensed-bold.woff2') format('woff2'); /* @boilerplate */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; /* @boilerplate */
+}
 
-/*
- * Fonts for: https://www.sabril.net/
- *
- * The source site loads a license-restricted Monotype "Arial" web font under two
- * family names: "Arial Regular" (weight 400) and "Arial Bold" (weight 700),
- * self-hosted with obfuscated filenames (e.g. a3dac99c-...woff2). These are
- * commercial Monotype files and are NOT redistributable, so they are intentionally
- * NOT re-hosted here.
- *
- * Because the visual target is plain Arial, the EDS implementation resolves
- * --body-font-family / --heading-font-family to the system Arial/Helvetica stack
- * via size-adjusted fallback @font-face declarations defined in styles/styles.css
- * (arial-fallback / arial-bold-fallback). No web-font download is required, so this
- * file contains no @font-face or @import rules.
- *
- * If the licensed Arial web-font files are later provided, add @font-face blocks
- * here for family "Arial Regular" (400) and "Arial Bold" (700) pointing at
- * /fonts/*.woff2 and they will be picked up automatically.
- */
+@font-face { /* @boilerplate */
+  font-family: roboto; /* @boilerplate */
+  font-style: normal; /* @boilerplate */
+  font-weight: 700; /* @boilerplate */
+  font-display: swap; /* @boilerplate */
+  src: url('../fonts/roboto-bold.woff2') format('woff2'); /* @boilerplate */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; /* @boilerplate */
+}
+
+@font-face { /* @boilerplate */
+  font-family: roboto; /* @boilerplate */
+  font-style: normal; /* @boilerplate */
+  font-weight: 500; /* @boilerplate */
+  font-display: swap; /* @boilerplate */
+  src: url('../fonts/roboto-medium.woff2') format('woff2'); /* @boilerplate */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; /* @boilerplate */
+}
+
+@font-face { /* @boilerplate */
+  font-family: roboto; /* @boilerplate */
+  font-style: normal; /* @boilerplate */
+  font-weight: 400; /* @boilerplate */
+  font-display: swap; /* @boilerplate */
+  src: url('../fonts/roboto-regular.woff2') format('woff2'); /* @boilerplate */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; /* @boilerplate */
+}
