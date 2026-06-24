@@ -50,44 +50,83 @@ header nav .nav-brand-link img {
   height: 119px;
 }
 
-/* ---------- utility links (top-right) ---------- */
-header nav .nav-utility-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px;
+/* ---------- generic utility sections ---------- */
+/* These sections (utility links, tools, ISI/social) are rendered from whatever
+   the document authors, so styling is kept light. The first utility section
+   (index 0) is the orange REMS link; the second (index 1) is the grey joined
+   utility button group, matching the source header. */
+header nav .nav-utility {
+  font-size: 14px;
 }
 
-header nav .nav-utility-link {
-  display: inline-block;
+header nav .nav-utility p {
+  margin: 0;
+}
+
+/* REMS link — orange, right-aligned, no underline (matches source) */
+header nav .nav-utility-0 {
+  text-align: right;
+}
+
+header nav .nav-utility-0 a {
+  color: var(--sabril-orange);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+header nav .nav-utility-0 a:hover {
+  text-decoration: underline;
+}
+
+/* Utility button group — grey joined "pill" group (ISI / PI / Med Guide / IFU) */
+header nav .nav-utility-1 ul {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+header nav .nav-utility-1 li {
+  display: flex;
+}
+
+header nav .nav-utility-1 li a {
+  display: block;
   padding: 6px 16px;
   background-color: #fff;
   color: var(--sabril-util-text);
-  font-size: 14px;
+  font-size: 14.2px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 20.28px;
   white-space: nowrap;
-  text-decoration: underline;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-left-width: 0;
 }
 
-header nav .nav-utility-link:hover {
-  text-decoration: underline;
+header nav .nav-utility-1 li:first-child a {
+  border-left-width: 1px;
+  border-radius: 4px 0 0 4px;
 }
 
-/* REMS callout sits on its own line, right-aligned beneath the utility links.
-   The "underline" is a 2px orange rule that hugs the text (matching the
-   source), so we use text-decoration rather than a full-width border. */
-header nav .nav-utility-rems {
-  flex-basis: 100%;
-  margin-top: 8px;
-  color: var(--sabril-orange);
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 700;
-  text-align: right;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+header nav .nav-utility-1 li:last-child a {
+  border-radius: 0 4px 4px 0;
+}
+
+header nav .nav-utility-1 li a:hover {
+  background-color: #f5f5f5;
+  color: var(--sabril-util-text);
+}
+
+header nav .nav-utility img {
+  display: inline-block;
+  width: auto;
+  max-height: 28px;
+  vertical-align: middle;
 }
 
 /* ---------- main green nav bar ---------- */
@@ -139,8 +178,9 @@ header nav .nav-dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
-  left: 2px;
-  min-width: calc(100% - 4px);
+  left: 0;
+  width: auto;
+  min-width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -202,31 +242,46 @@ header nav .nav-hamburger-label {
 
 /* ---------- mobile layout ---------- */
 @media (max-width: 767px) {
-  /* DOM order is utility → logo → buttons, which is exactly the mobile stack */
-  header nav .nav-utility {
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e5e5;
+  /* The right column is just a passthrough wrapper on mobile; it spans the full
+     width (cancelling the nav's 15px side padding) so menu items can run
+     edge-to-edge like the source. */
+  header nav .nav-right {
+    margin: 0 -15px;
   }
 
-  header nav .nav-utility-links {
-    flex-wrap: wrap;
+  /* DOM order is brand → menu → utility sections, which flows as the mobile
+     stack. Utility sections center their content below the menu. */
+  header nav .nav-utility {
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  header nav .nav-utility ul {
     justify-content: center;
-    align-items: flex-start;
-    gap: 4px 2px;
+    gap: 4px 12px;
+  }
+
+  /* utility button group wraps and centers on mobile instead of overflowing */
+  header nav .nav-utility-1 {
     text-align: center;
   }
 
-  header nav .nav-utility-link {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 4px 2px;
-    font-size: 12px;
+  header nav .nav-utility-1 ul {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 0;
+    overflow: visible;
   }
 
-  /* orange REMS callout breaks onto its own centered line below the links */
-  header nav .nav-utility-rems {
-    flex-basis: 100%;
-    margin-top: 8px;
+  header nav .nav-utility-1 li a {
+    border-left-width: 1px;
+    border-radius: 4px;
+  }
+
+  /* REMS link centers on mobile */
+  header nav .nav-utility-0 {
     text-align: center;
   }
 
@@ -245,7 +300,6 @@ header nav .nav-hamburger-label {
   /* nav buttons collapse until MENU is tapped — smooth slide open */
   header nav .nav-links-row {
     display: block;
-    margin: 0 -15px;
     max-height: 0;
     overflow: hidden;
     padding-bottom: 0;
@@ -295,41 +349,51 @@ header nav .nav-hamburger-label {
 }
 
 @media (min-width: 768px) {
-  /* Logo on the left; utility links and the green buttons stack in a right
-     column. The logo spans both rows so it never sits above/below the nav. */
+  /* Logo on the left; the menu and utility sections stack in a right column.
+     Source right-column order (top -> bottom): grey utility button group,
+     orange REMS link, then the green nav tabs. The authored document order is
+     brand -> nav tabs -> REMS (utility-0) -> button group (utility-1), so the
+     right column uses flexbox with explicit `order` to match the source
+     without touching the authored content. */
   header nav {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: start;
+    display: flex;
+    align-items: flex-end;
     column-gap: 20px;
   }
 
   header nav .nav-brand-row {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-    align-self: stretch;
+    flex: 0 0 auto;
     align-items: flex-end;
     padding: 5px 0 0;
   }
 
-  header nav .nav-utility {
-    grid-column: 2;
-    grid-row: 1;
-    /* utility links sit just below the top grey border, matching the source */
+  header nav .nav-right {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  /* right-column visual order */
+  header nav .nav-utility-1 {       /* grey utility button group */
+    order: 1;
     padding-top: 0;
   }
 
-  header nav .nav-utility-links {
-    justify-content: flex-end;
+  header nav .nav-utility-0 {       /* orange REMS link */
+    order: 2;
+    width: 100%;
+    padding: 12px 0;
   }
 
-  /* Green buttons sit in the right column, flush against the bottom grey
-     border (no gap). */
-  header nav .nav-links-row {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: end;
+  header nav .nav-links-row {       /* green nav tabs */
+    order: 3;
+    align-self: flex-end;
     padding-bottom: 0;
+  }
+
+  header nav .nav-utility ul {
+    justify-content: flex-end;
   }
 }
 
@@ -356,18 +420,10 @@ header nav .nav-hamburger-label {
     padding: 10px 22px;
   }
 
-  /* the four utility links always stay on a single row — the source shrinks
-     them rather than letting them wrap */
-  header nav .nav-utility-links {
+  /* utility link rows shrink slightly so they stay on a single line rather
+     than wrapping when the right column narrows */
+  header nav .nav-utility ul {
     gap: 8px;
-  }
-
-  header nav .nav-utility-link {
-    padding: 6px 0;
     font-size: 11px;
-  }
-
-  header nav .nav-utility-rems {
-    font-size: 13px;
   }
 }

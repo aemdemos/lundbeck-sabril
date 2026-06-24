@@ -22,36 +22,20 @@ function closeOnClickOutside(e) {
 }
 
 /**
- * Decorates the utility bar (top-right links + orange REMS link).
- * @param {Element} section The utility section from the nav fragment
- * @returns {HTMLElement} decorated utility bar
+ * Decorates a secondary nav section (utility links, tools, ISI/social, etc.)
+ * generically by preserving its authored content. Used for every section after
+ * the brand row and the main menu, so re-authored documents render without the
+ * header needing to know each section's exact purpose.
+ * @param {Element} section A section from the nav fragment
+ * @param {number} index The section's position (used for a stable class)
+ * @returns {HTMLElement} decorated section
  */
-function decorateUtilityBar(section) {
+function decorateUtilitySection(section, index) {
   const bar = document.createElement('div');
-  bar.className = 'nav-utility';
+  bar.className = `nav-utility nav-utility-${index}`;
 
-  const links = document.createElement('div');
-  links.className = 'nav-utility-links';
+  [...section.children].forEach((child) => bar.append(child.cloneNode(true)));
 
-  const ul = section.querySelector('ul');
-  if (ul) {
-    [...ul.querySelectorAll(':scope > li > a')].forEach((a) => {
-      const link = a.cloneNode(true);
-      link.className = 'nav-utility-link';
-      links.append(link);
-    });
-  }
-
-  // Orange REMS call-out link (lives in a <p> sibling of the list)
-  const remsLink = [...section.querySelectorAll('p a')]
-    .find((a) => a.closest('ul') === null);
-  if (remsLink) {
-    const link = remsLink.cloneNode(true);
-    link.className = 'nav-utility-rems';
-    links.append(link);
-  }
-
-  bar.append(links);
   return bar;
 }
 
@@ -125,9 +109,12 @@ function decorateNavLinks(section) {
       li.addEventListener('mouseleave', () => {
         li.setAttribute('aria-expanded', 'false');
       });
-      // Touch fallback: tapping the parent toggles its submenu instead of
-      // navigating (touch devices have no hover).
+      // Desktop touch fallback only: on a desktop touch device (no hover),
+      // tapping the parent toggles its submenu instead of navigating. On
+      // mobile (< 768px) the source navigates directly on tap, so the link is
+      // left alone there.
       li.addEventListener('click', (e) => {
+        if (!isDesktop.matches) return;
         const parentLink = li.querySelector(':scope > p > a, :scope > a');
         if (e.target.closest('a') === parentLink) {
           e.preventDefault();
@@ -159,14 +146,25 @@ export default async function decorate(block) {
   nav.id = 'nav';
   nav.setAttribute('aria-label', 'Main navigation');
 
-  const [brandSection, utilitySection, navSection] = [...fragment.children];
+  // The nav document is authored as a series of sections. The first is the
+  // brand/logo and the second is the main menu (links with optional dropdowns);
+  // any remaining sections (utility links, tools, ISI/social) are rendered
+  // generically so the header keeps working when the document is re-authored.
+  const [brandSection, navSection, ...utilitySections] = [...fragment.children];
 
-  // DOM order: utility (top), brand/logo, green nav buttons. On desktop a grid
-  // places the logo on the left and stacks utility + buttons in a right column;
-  // on mobile this same order flows top-to-bottom.
-  if (utilitySection) nav.append(decorateUtilityBar(utilitySection));
   if (brandSection) nav.append(decorateBrandRow(brandSection));
-  if (navSection) nav.append(decorateNavLinks(navSection));
+
+  // The logo sits on the left; the main nav and every utility section stack in
+  // a right-hand column (matching the source header). Grouping them in one
+  // flex column keeps them tightly stacked instead of spreading across grid
+  // rows.
+  const rightColumn = document.createElement('div');
+  rightColumn.className = 'nav-right';
+  if (navSection) rightColumn.append(decorateNavLinks(navSection));
+  utilitySections.forEach((section, i) => {
+    rightColumn.append(decorateUtilitySection(section, i));
+  });
+  nav.append(rightColumn);
 
   window.addEventListener('keydown', closeOnEscape);
   document.addEventListener('click', closeOnClickOutside);
