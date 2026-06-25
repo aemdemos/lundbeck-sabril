@@ -313,8 +313,13 @@ header nav .nav-hamburger-label {
     padding: 10px 0;
   }
 
+  /* logo scales with the viewport on mobile, matching the source which keeps a
+     large logo (~157px wide @375, ~220px wide @500) rather than a small fixed
+     height */
   header nav .nav-brand-link img {
-    height: 60px;
+    width: 42vw;
+    max-width: 220px;
+    height: auto;
   }
 
   header nav .nav-hamburger {
