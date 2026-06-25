@@ -281,13 +281,27 @@ header nav .nav-hamburger-label {
     gap: 4px 12px;
   }
 
-  /* utility links wrap and center on mobile */
+  /* ISI links span the full width as an evenly distributed (justified) group,
+     matching the source: four equal-width cells across one row, each link
+     centered in its cell. */
   header nav .nav-utility-1 {
     text-align: center;
   }
 
   header nav .nav-utility-1 ul {
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  header nav .nav-utility-1 li {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+
+  header nav .nav-utility-1 li a {
+    white-space: normal;
   }
 
   /* REMS link centers on mobile */
@@ -419,8 +433,10 @@ header nav .nav-hamburger-label {
     column-gap: 10px;
   }
 
+  /* logo stays at full source height (119px) across the tablet range, matching
+     the source which never scales it down in the side-by-side layout */
   header nav .nav-brand-link img {
-    height: 95px;
+    height: 119px;
   }
 
   header nav .nav-links-row {
@@ -439,13 +455,12 @@ header nav .nav-hamburger-label {
     font-size: 13px;
   }
 
-  /* utility links shrink slightly and stay right-aligned, wrapping if needed
-     rather than forcing the column wider */
+  /* ISI links match the source's 14px utility-link size in the tablet range */
   header nav .nav-utility-1 ul {
     gap: 4px 14px;
   }
 
   header nav .nav-utility-1 li a {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
