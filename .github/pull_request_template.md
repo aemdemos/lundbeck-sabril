@@ -1,5 +1,5 @@
 <!-- Please always provide the [GitHub issue(s)](../issues) your PR is for, as well as test URLs where your change can be observed (before and after): -->
-<!-- Feel free to delete options that are not relevant to your PR. -->
+<!-- Feel free to delete options that are not relevant to your PR -->
 
 ## Issue
 
@@ -23,5 +23,5 @@ Fixes #IssueID
 
 > If applicable, also describe how the PR reviewer can verify your expected changes, including anything that should NOT change.
 
-- Before: https://main--lundbeck-libs--aemdemos.aem.page/
-- After: https://BranchName--lundbeck-libs--aemdemos.aem.page/
+- Before: https://main--lundbeck-sabril--aemdemos.aem.page/
+- After: https://BranchName--lundbeck-sabril--aemdemos.aem.page/
