@@ -46,8 +46,8 @@ header nav .nav-brand-row {
 
 header nav .nav-brand-link img {
   display: block;
-  width: auto;
-  height: 119px;
+  width: 100%;
+  height: auto;
 }
 
 /* ---------- generic utility sections ---------- */
@@ -258,6 +258,10 @@ header nav .nav-hamburger-label {
     order: 2;
   }
 
+  header nav .nav-brand {
+    width: 50%;
+  }
+
   header nav .nav-brand-row {   /* logo + MENU button */
     order: 3;
   }
@@ -316,11 +320,6 @@ header nav .nav-hamburger-label {
   /* logo scales with the viewport on mobile, matching the source which keeps a
      large logo (~157px wide @375, ~220px wide @500) rather than a small fixed
      height */
-  header nav .nav-brand-link img {
-    width: 42vw;
-    max-width: 220px;
-    height: auto;
-  }
 
   header nav .nav-hamburger {
     display: block;
@@ -394,6 +393,11 @@ header nav .nav-hamburger-label {
     flex: 0 0 auto;
     align-items: flex-end;
     padding: 5px 0 0;
+    width: 25%;
+  }
+
+  header nav .nav-brand-link img {
+    height: 119px;
   }
 
   header nav .nav-right {
@@ -440,9 +444,6 @@ header nav .nav-hamburger-label {
 
   /* logo stays at full source height (119px) across the tablet range, matching
      the source which never scales it down in the side-by-side layout */
-  header nav .nav-brand-link img {
-    height: 119px;
-  }
 
   header nav .nav-links-row {
     width: 100%;
