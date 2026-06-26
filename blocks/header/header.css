@@ -18,7 +18,7 @@ header {
 }
 
 header .header:not([data-block-status="loaded"]) {
-  min-height: var(--nav-brand-row-height-mobile);
+  min-height: 258px;
 }
 
 @media (min-width: 768px) {
