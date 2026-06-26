@@ -54,6 +54,13 @@ function decorateBrandRow(section) {
   if (logoLink) {
     const clone = logoLink.cloneNode(true);
     clone.className = 'nav-brand-link';
+    const logoImage = clone.querySelector('img');
+    if (logoImage && !logoImage.getAttribute('title')) {
+      logoImage.setAttribute('title', 'Sabril');
+    }
+    if (!clone.getAttribute('title')) {
+      clone.setAttribute('title', 'Sabril');
+    }
     brand.append(clone);
   }
   row.append(brand);
