@@ -1,0 +1,91 @@
+@import url('./columns-callout-tokens.css');
+
+/*
+ * columns-callout — grey prescriber-callout layout (Sabril homepage).
+ * Side-by-side image + text with a heading above and a CTA button below.
+ * The image column sits left or right depending on which authored column
+ * holds the picture (image column gets order:0 on mobile / source order on
+ * desktop). Purple bullet list and orange CTA mirror the source styling.
+ */
+
+.columns-callout > div { /* @boilerplate */
+  display: flex; /* @boilerplate */
+  flex-direction: column; /* @boilerplate */
+}
+
+.columns-callout > div > div { /* @boilerplate */
+  order: 1; /* @boilerplate */
+}
+
+.columns-callout > div > .columns-callout-img-col { /* @boilerplate */
+  order: 0; /* @boilerplate */
+}
+
+.columns-callout > div > .columns-callout-img-col img { /* @boilerplate */
+  display: block; /* @boilerplate */
+  max-width: 100%;
+  height: auto;
+}
+
+/* heading spans full width above the columns */
+main .columns-callout h2 {
+  color: var(--brand-secondary, #6f2c91);
+}
+
+/* purple bullet list (matches source .bulletlist.purple) */
+main .columns-callout ul {
+  list-style: none;
+  padding-inline-start: 1.25rem;
+}
+
+main .columns-callout ul > li {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+main .columns-callout ul > li::before {
+  content: '\2022';
+  position: absolute;
+  inset-inline-start: -1rem;
+  color: var(--brand-secondary, #6f2c91);
+  font-weight: 700;
+}
+
+/* orange CTA button (matches source .orangeButton) */
+main .columns-callout a:has(> button),
+main .columns-callout p > a {
+  text-decoration: none;
+}
+
+main .columns-callout button {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  background: var(--brand-accent, #f08000);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+main .columns-callout button p {
+  margin: 0;
+}
+
+main .columns-callout button:hover {
+  filter: brightness(0.92);
+}
+
+/* Tablet+: image and text sit side by side */
+@media (width >= 768px) {
+  .columns-callout > div { /* @boilerplate */
+    align-items: center; /* @boilerplate */
+    flex-direction: unset; /* @boilerplate */
+    gap: var(--columns-callout-gap); /* @boilerplate */
+  }
+
+  .columns-callout > div > div { /* @boilerplate */
+    flex: 1; /* @boilerplate */
+    order: unset; /* @boilerplate */
+  }
+}

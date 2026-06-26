@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-callout",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-06-26T03:56:14.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.sabril.net/",
+    "originPage": "Sabril homepage (prescriber info)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "spacious",
+    "purpose": "prescriber-callout",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + image + bullet-list + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "image + text informational callouts with a single CTA",
+      "grey-card promotional/info boxes",
+      "prescriber or HCP information panels"
+    ],
+    "notSuitableFor": [
+      "three-or-more column comparison layouts",
+      "grids of repeating product/feature cards (use cards)",
+      "stats/results callouts (use columns stats-callout)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-26T03:56:14.000Z"
+  }
+}
