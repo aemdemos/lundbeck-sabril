@@ -1,4 +1,0 @@
-/* columns-callout design tokens */
-:root { /* @boilerplate */
-  --columns-callout-gap: var(--spacing-m, 24px); /* @boilerplate */
-}
