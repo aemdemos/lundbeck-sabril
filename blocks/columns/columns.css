@@ -1,20 +1,110 @@
 @import url('./columns-tokens.css');
 
-.columns > div { /* @boilerplate */
-  display: flex; /* @boilerplate */
-  flex-direction: column; /* @boilerplate */
+.columns > div {
+  display: flex;
+  flex-direction: column;
 }
 
-.columns > div > div { /* @boilerplate */
-  order: 1; /* @boilerplate */
+.columns > div > div {
+  order: 1;
 }
 
-.columns > div > .columns-img-col { /* @boilerplate */
-  order: 0; /* @boilerplate */
+.columns > div > .columns-img-col {
+  order: 0;
 }
 
-.columns > div > .columns-img-col img { /* @boilerplate */
-  display: block; /* @boilerplate */
+.columns > div > .columns-img-col img {
+  display: block;
+}
+
+/* sabril.net callout variant — image+text grey card with purple heading,
+   purple bullet list, and centered orange CTA button. Applied to the base
+   .columns block on the prescriber page (not a separate author class).
+   Scoped with :not(.stats-callout) so the vyepti stats variant is untouched. */
+main .columns.columns-2-cols:not(.stats-callout) > div {
+  background-color: var(--columns-callout-card-bg);
+  padding: 10px 25px 25px;
+  gap: 1rem;
+}
+
+/* heading: brand purple, centered, semibold, sits above the columns */
+main .columns.columns-2-cols:not(.stats-callout) h2 {
+  margin: 20px 0 10px;
+  color: var(--columns-callout-purple);
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* purple custom bullets (source ul.bulletlist.purple) */
+main .columns.columns-2-cols:not(.stats-callout) ul {
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+main .columns.columns-2-cols:not(.stats-callout) ul li {
+  position: relative;
+  margin: 0 0 10px;
+  padding-left: 22.5px;
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.15;
+}
+
+main .columns.columns-2-cols:not(.stats-callout) ul li::before {
+  content: "\2022";
+  position: absolute;
+  left: 7px;
+  color: var(--columns-callout-purple);
+  font-size: 15px;
+}
+
+/* image column: keep the source-sized product image, centered on mobile */
+main .columns.columns-2-cols:not(.stats-callout) .columns-img-col {
+  align-self: center;
+}
+
+main .columns.columns-2-cols:not(.stats-callout) .columns-img-col img {
+  width: 100%;
+  max-width: 273px;
+  margin: 0 auto;
+}
+
+/* CTA: the prescriber link renders as a plain <a> inside a <p>; style it as
+   the source .orangeButton (filled orange pill-ish button, white bold text),
+   centered like the source buttonCenter column. Excludes the image column
+   (whose <p><a> wraps only the product picture). */
+main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child {
+  text-align: center;
+}
+
+main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a {
+  display: inline-block;
+  margin: 4% 0;
+  padding: 8px 27px;
+  border: 0;
+  border-radius: 10px;
+  background-color: var(--columns-callout-cta-bg);
+  color: #fff;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a strong {
+  font-weight: var(--font-weight-bold);
+}
+
+main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a:hover,
+main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a:focus {
+  background-color: var(--columns-callout-cta-hover-bg);
+  color: #fff;
+  outline: 0;
 }
 
 /* stats-callout variant — vyepti study/survey results callouts.
@@ -86,15 +176,28 @@ main .columns.stats-callout:has(img) > div > div:not(.columns-img-col) > p:first
    The base columns block only flips to a row at 900px, so the variant flips
    its own flex-direction here to match the source. */
 @media (width >= 768px) {
-  .columns > div { /* @boilerplate */
-    align-items: center; /* @boilerplate */
-    flex-direction: unset; /* @boilerplate */
-    gap: var(--columns-gap); /* @boilerplate */
+  .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: var(--columns-gap);
   }
 
-  .columns > div > div { /* @boilerplate */
-    flex: 1; /* @boilerplate */
-    order: unset; /* @boilerplate */
+  .columns > div > div {
+    flex: 1;
+    order: unset;
+  }
+
+  /* callout desktop: image column is the source ~273px fixed-ish width, text
+     column takes the rest. DOM order gives image-left for section 1 and
+     image-right for section 2 (no order overrides needed). */
+  main .columns.columns-2-cols:not(.stats-callout) > div {
+    align-items: flex-start;
+  }
+
+  main .columns.columns-2-cols:not(.stats-callout) .columns-img-col {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    max-width: 273px;
   }
 
   .columns.divider.columns-2-cols > div {

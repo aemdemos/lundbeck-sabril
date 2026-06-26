@@ -1,7 +1,13 @@
 /* columns design tokens */
-:root { /* @boilerplate */
-  --columns-gap: var(--spacing-m, 24px); /* @boilerplate */
+:root {
+  --columns-gap: var(--spacing-m, 24px);
   --columns-divider-width: 1px;
   --columns-divider-spacing: var(--spacing-l, 32px);
   --columns-divider-color: #7ebcc6;
+
+  /* sabril.net callout (image+text grey card) */
+  --columns-callout-purple: #652d89;
+  --columns-callout-card-bg: #e1e1e1;
+  --columns-callout-cta-bg: #ee8a21;
+  --columns-callout-cta-hover-bg: #d97817;
 }
