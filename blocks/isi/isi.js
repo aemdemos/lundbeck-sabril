@@ -12,6 +12,22 @@
  *
  * @param {HTMLElement} block
  */
+const ISI_TITLE = 'IMPORTANT SAFETY INFORMATION';
+
+/**
+ * Build a purple "IMPORTANT SAFETY INFORMATION" title bar (block chrome).
+ * @returns {HTMLDivElement}
+ */
+function createTitleBar() {
+  const titleBar = document.createElement('div');
+  titleBar.className = 'isi-isi-title';
+  const titleText = document.createElement('span');
+  titleText.className = 'isi-isi-title-text';
+  titleText.textContent = ISI_TITLE;
+  titleBar.append(titleText);
+  return titleBar;
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length < 2) return;
@@ -22,6 +38,14 @@ export default function decorate(block) {
 
   /* Mark the inline row so CSS can control its visibility */
   inlineRow.classList.add('isi-inline');
+
+  /* ── In-page title bar: insert directly above the WARNING box ── */
+  const warningHeading = [...inlineRow.querySelectorAll('h3')].find(
+    (h) => /WARNING:\s*PERMANENT VISION LOSS/i.test(h.textContent),
+  );
+  if (warningHeading) {
+    warningHeading.before(createTitleBar());
+  }
 
   /* ── 2. Build the fixed bottom bar ──────────────────────────── */
   const bar = document.createElement('div');
@@ -49,8 +73,12 @@ export default function decorate(block) {
   icon.className = 'isi-bar-toggle-icon';
   toggle.append(icon);
 
+  /* Title-bar header for the fixed bar (purple, with toggle on the right) */
+  const barHeader = createTitleBar();
+  barHeader.append(toggle);
+
+  bar.append(barHeader);
   bar.append(barContent);
-  bar.append(toggle);
 
   /* Remove the now-empty abbreviated row from the block */
   abbreviatedRow.remove();

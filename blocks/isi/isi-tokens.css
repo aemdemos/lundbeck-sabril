@@ -2,6 +2,16 @@
 :root { /* @boilerplate */
   /* sabril.net in-page ISI palette + warning box */
   --isi-text-color: #000; /* sabril: pure black body text */
+  --isi-link-color: #652d89; /* sabril purple links inside ISI body */
+  --isi-link-hover-color: #4d2168; /* slightly darker purple on hover */
+  --isi-link-font-weight: 500; /* sabril ISI link weight */
+  --isi-external-link-color: #337ab7; /* "leaving site" registry link stays blue */
+  --isi-title-bar-background: #652d89; /* sabril purple title bar */
+  --isi-title-bar-color: #fff; /* white title text */
+  --isi-title-bar-font-size: 16px;
+  --isi-title-bar-font-weight: 400;
+  --isi-title-bar-line-height: 22.86px;
+  --isi-title-bar-padding: 0 10px;
   --isi-warning-box-border-color: #652d89; /* sabril purple */
   --isi-warning-box-border-width: 2px;
   --isi-warning-box-padding-x: 20px;
@@ -17,6 +27,12 @@
   --isi-inline-body-font-size: 16px;
   --isi-inline-line-height: 1.43;
   --isi-inline-li-padding-left: 14.4px;
+  --isi-inline-body-margin: 0 0 10px; /* sabril: paragraph + list-item spacing */
+  --isi-inline-later-h4-margin: 10px 0; /* sabril: FDA + "more information" headings */
+  --isi-inline-later-h4-padding-top: 14px; /* sabril: gap above the FDA heading */
+  --isi-inline-legal-font-size: 14px; /* sabril: small legal/copyright text */
+  --isi-inline-legal-line-height: 16px;
+  --isi-product-name-color: #652d89; /* sabril: purple SABRIL product-name lines */
   --isi-line-height: 1.5; /* @boilerplate */
   --isi-list-line-height: 1.7; /* @boilerplate */
   --isi-list-item-margin-bottom: 10px; /* @boilerplate */
@@ -33,8 +49,10 @@
   --isi-section-border-color: #d1d1d1; /* @boilerplate */
   --isi-bar-border-width: var(--isi-section-border-width); /* @boilerplate */
   --isi-bar-border-color: var(--isi-section-border-color); /* @boilerplate */
-  --isi-bar-height: 90px; /* @boilerplate */
-  --isi-bar-padding: 13px 13px 8px; /* @boilerplate */
+  --isi-bar-height: 110px; /* sabril: room for purple header + abbreviated content */
+  --isi-bar-padding-top: 0px; /* purple header sits flush at top */
+  --isi-bar-padding-x: 13px;
+  --isi-bar-padding: var(--isi-bar-padding-top) var(--isi-bar-padding-x) 8px; /* sabril */
   --isi-bar-height-transition-duration: 0.3s; /* @boilerplate */
   --isi-bar-height-transition-easing: ease-in-out; /* @boilerplate */
   --isi-bar-expanded-max-height: 70vh; /* @boilerplate */

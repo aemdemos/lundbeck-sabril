@@ -23,11 +23,11 @@ main .isi .isi-inline li { /* sabril: black 16px body text */
   color: var(--isi-text-color);
   line-height: var(--isi-inline-line-height);
   text-align: left;
+  margin: var(--isi-inline-body-margin);
 }
 
 main .isi .isi-inline li { /* sabril: disc bullets, tight indent */
   list-style: disc;
-  margin: 0;
   padding-left: var(--isi-inline-li-padding-left);
 }
 
@@ -95,18 +95,70 @@ main .isi .isi-inline > div > h4:first-of-type {
 main .isi .isi-inline > div > h4:not(:first-of-type) {
   color: var(--isi-text-color);
   font-size: var(--isi-inline-body-font-size);
-  font-weight: 700;
+  font-weight: 500;
   line-height: var(--isi-inline-line-height);
   text-align: left;
-  margin: 0 0 1em;
+  margin: var(--isi-inline-later-h4-margin);
 }
 
-main .isi a { /* @boilerplate */
-  text-decoration: underline; /* @boilerplate */
+/* the FDA reporting heading has extra space above it in the source */
+main .isi .isi-inline > div > h4:nth-of-type(2) {
+  padding-top: var(--isi-inline-later-h4-padding-top);
 }
 
-main .isi a:hover { /* @boilerplate */
-  text-decoration: underline; /* @boilerplate */
+/* small legal / copyright paragraphs at the very end of the ISI content */
+main .isi .isi-inline > div > p:nth-last-of-type(-n+3) {
+  font-size: var(--isi-inline-legal-font-size);
+  line-height: var(--isi-inline-legal-line-height);
+}
+
+/* the two SABRIL product-name lines ("SABRIL® … tablets…" / "… for oral
+   solution") render purple in the source. They are the only intro paragraphs
+   whose bold text carries the ® superscript, so target strong:has(sup). */
+main .isi-container .default-content-wrapper p strong:has(sup) {
+  color: var(--isi-product-name-color);
+}
+
+/* ── sabril.net ISI body links: purple, weight 500, underline ──── */
+main .isi a,
+.isi-bar a { /* sabril purple ISI links */
+  color: var(--isi-link-color);
+  font-weight: var(--isi-link-font-weight);
+  text-decoration: underline;
+}
+
+main .isi a:hover,
+.isi-bar a:hover {
+  color: var(--isi-link-hover-color);
+  text-decoration: underline;
+}
+
+/* external "leaving site" registry link stays blue, no underline */
+main .isi a[href^="http://www.aed"],
+main .isi a[href^="https://www.aed"],
+.isi-bar a[href^="http://www.aed"],
+.isi-bar a[href^="https://www.aed"] {
+  color: var(--isi-external-link-color);
+  font-weight: var(--isi-link-font-weight);
+  text-decoration: none;
+}
+
+/* ── sabril.net purple "IMPORTANT SAFETY INFORMATION" title bar ── */
+.isi-isi-title { /* purple chrome bar above the warning box */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--isi-title-bar-background);
+  color: var(--isi-title-bar-color);
+  font-size: var(--isi-title-bar-font-size);
+  font-weight: var(--isi-title-bar-font-weight);
+  line-height: var(--isi-title-bar-line-height);
+  padding: var(--isi-title-bar-padding);
+  text-align: left;
+}
+
+main .isi .isi-inline > div > .isi-isi-title { /* in-page bar: full content width */
+  margin: 0 0 10px;
 }
 
 /* ── Fixed bottom bar (abbreviated content – Row 1) ──────────── */
@@ -198,10 +250,9 @@ main .isi a:hover { /* @boilerplate */
 }
 
 /* ── Toggle button (+/−) ─────────────────────────────────────── */
-.isi-bar-toggle { /* @boilerplate */
-  position: absolute; /* @boilerplate */
-  right: var(--isi-toggle-right); /* @boilerplate */
-  top: var(--isi-toggle-top); /* @boilerplate */
+.isi-bar-toggle { /* sits at right of the purple bar header */
+  position: relative;
+  flex: 0 0 auto;
   background: none; /* @boilerplate */
   border: var(--isi-toggle-border-width) solid var(--isi-toggle-color); /* @boilerplate */
   border-radius: 50%; /* @boilerplate */
@@ -212,15 +263,23 @@ main .isi a:hover { /* @boilerplate */
   display: flex; /* @boilerplate */
   align-items: center; /* @boilerplate */
   justify-content: center; /* @boilerplate */
-  color: var(--isi-toggle-color); /* @boilerplate */
+  color: var(--isi-title-bar-color); /* white toggle on purple header */
+  border-color: var(--isi-title-bar-color);
   transition: color var(--isi-toggle-transition-duration), border-color var(--isi-toggle-transition-duration); /* @boilerplate */
   z-index: var(--isi-toggle-z-index); /* @boilerplate */
 }
 
 .isi-bar-toggle:hover { /* @boilerplate */
-  color: var(--isi-toggle-hover-color); /* @boilerplate */
-  border-color: var(--isi-toggle-hover-color); /* @boilerplate */
+  color: var(--isi-title-bar-color);
+  border-color: var(--isi-title-bar-color);
   background: none; /* @boilerplate */
+}
+
+/* fixed-bar purple header holds the title text + toggle, full-bleed */
+.isi-bar > .isi-isi-title {
+  margin: calc(-1 * var(--isi-bar-padding-top)) calc(-1 * var(--isi-bar-padding-x)) 8px;
+  padding: 4px var(--isi-bar-padding-x);
+  box-sizing: border-box;
 }
 
 /* Plus icon (collapsed) */
