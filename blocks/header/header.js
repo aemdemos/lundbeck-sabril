@@ -36,6 +36,23 @@ function decorateUtilitySection(section, index) {
 
   [...section.children].forEach((child) => bar.append(child.cloneNode(true)));
 
+  // Live header wraps REMS text in <span><i>...</i></span>.
+  if (index === 0) {
+    bar.querySelectorAll('a').forEach((link) => {
+      const existingItalic = link.querySelector('i');
+      if (existingItalic) return;
+      const text = link.textContent.trim();
+      if (!text) return;
+
+      const span = document.createElement('span');
+      const italic = document.createElement('i');
+      italic.textContent = text;
+      span.append(italic);
+      link.textContent = '';
+      link.append(span);
+    });
+  }
+
   return bar;
 }
 

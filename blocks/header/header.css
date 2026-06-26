@@ -77,22 +77,28 @@ header nav .nav-utility p {
   margin: 0;
 }
 
-/* REMS link — bold orange with an orange underline, right-aligned (matches
-   source: `.navMenu a.txtOrange span { border-bottom: 2px solid #ef8922 }`,
-   Arial Bold). */
+/* REMS link styling matches live values across breakpoints. */
 header nav .nav-utility-0 {
   text-align: right;
 }
 
 header nav .nav-utility-0 a {
   display: inline;
+  font-family: 'Arial Regular', arial, helvetica, sans-serif;
   color: var(--sabril-orange);
   font-size: 16px;
   font-weight: 400;
   line-height: 22.8571px;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration: none;
+}
+
+header nav .nav-utility-0 a span {
+  border-bottom: 2px solid var(--sabril-orange);
+}
+
+header nav .nav-utility-0 a i {
+  font-style: italic;
+  font-weight: inherit;
 }
 
 /* Utility links (ISI / PI / Med Guide / IFU) — plain text links, spaced apart,
@@ -165,7 +171,7 @@ header nav .nav-links-list .nav-item > p {
 header nav .nav-links-list .nav-item > a,
 header nav .nav-links-list .nav-item > p > a {
   display: block;
-  padding: 10px 34px;
+  padding: 10px 38px;
   background-color: var(--sabril-green);
   color: #fff;
   font-size: 16px;
@@ -293,19 +299,22 @@ header nav .nav-hamburger-label {
   }
 
   header nav .nav-utility-1 ul {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 0;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
   }
 
   header nav .nav-utility-1 li {
-    flex: 1 1 0;
-    min-width: 0;
+    display: table-cell;
+    float: none;
+    vertical-align: middle;
     text-align: center;
   }
 
   header nav .nav-utility-1 li a {
-    padding: 6px 12px;
+    font-family: 'Arial Regular', arial, helvetica, sans-serif;
+    padding: 6px 8px;
     font-size: 12px;
     line-height: 17.1429px;
     white-space: normal;
@@ -316,30 +325,38 @@ header nav .nav-hamburger-label {
   }
 
   header nav .nav-utility-1 li:nth-child(3) a {
-    padding: 6px 15px;
+    padding: 6px 10px;
   }
 
   header nav .nav-utility-0 {
     order: 2;
-    padding: 10px 15px 15px;
+    padding: 15px 0 0;
     text-align: center;
   }
 
   header nav .nav-utility-0 a {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
     font-size: 19px;
     font-weight: 700;
-    line-height: 1.2;
-    padding-bottom: 0;
+    line-height: 27.1429px;
+    text-decoration: none;
+    padding-bottom: 15px;
   }
 
   header nav .nav-brand {
     width: 50%;
   }
 
+  header nav .nav-brand-link {
+    display: block;
+    width: 89.5%;
+  }
+
   header nav .nav-brand-row {
     order: 3;
-    padding: 15px;
+    padding: 0 15px 3px;
   }
 
   header nav .nav-links-row {
@@ -355,6 +372,15 @@ header nav .nav-hamburger-label {
 
   header nav .nav-hamburger {
     display: block;
+    min-width: 91px;
+    margin-top: 9px;
+    margin-right: 22px;
+    padding: 10px 19px;
+    border-width: 2px;
+    font-family: 'Arial Bold', arial, helvetica, sans-serif;
+    line-height: 16px;
+    position: relative;
+    top: -1px;
   }
 
   header nav.nav-mobile-open .nav-links-row {
@@ -409,6 +435,7 @@ header nav .nav-hamburger-label {
     display: flex;
     align-items: flex-end;
     column-gap: 20px;
+    padding: 0 0 0 15px;
   }
 
   header nav .nav-brand-row {
@@ -426,6 +453,7 @@ header nav .nav-hamburger-label {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     align-self: flex-start;
     margin-top: 0;
   }
@@ -439,7 +467,13 @@ header nav .nav-hamburger-label {
   header nav .nav-utility-0 {       /* orange REMS link */
     order: 2;
     width: 100%;
-    padding: 0;
+    padding: 22px 0 0;
+  }
+
+  header nav .nav-utility-0 a {
+    display: inline-block;
+    margin-right: 30px;
+    line-height: 17.6px;
   }
 
   header nav .nav-links-row {       /* green nav tabs */
@@ -461,9 +495,22 @@ header nav .nav-hamburger-label {
    tabs on the first row, the fourth below) — they do NOT stretch to equal width
    or shrink onto a single row. Tabs are left-aligned to the start of the right
    column, like the source. */
-@media (width >= 768px) and (width <= 1199px) {
+@media (width >= 768px) and (width <= 992px) {
   header nav {
+    align-items: flex-start;
     column-gap: 10px;
+  }
+
+  header nav .nav-brand-row {
+    align-items: flex-start;
+    padding-top: 29px;
+    width: 23%;
+  }
+
+  header nav .nav-utility-0 a {
+    margin-right: 34px;
+    font-size: 15px;
+    white-space: nowrap;
   }
 
   /* logo stays at full source height (119px) across the tablet range, matching
@@ -498,5 +545,48 @@ header nav .nav-hamburger-label {
     padding: 6px 12px;
     white-space: nowrap;
     font-size: 14px;
+  }
+}
+
+@media (width >= 900px) and (width <= 992px) {
+  header nav .nav-brand-row {
+    width: 25.5%;
+  }
+}
+
+@media (width >= 768px) and (width <= 899px) {
+  header nav .nav-brand-row {
+    width: 22.4%;
+  }
+
+  header nav .nav-utility-0 a {
+    margin-right: 44px;
+  }
+}
+
+@media (width >= 1201px) {
+  header nav .nav-utility-0 a {
+     white-space: nowrap;
+  }
+}
+
+@media (width >= 993px) {
+  header nav .nav-brand-row {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  header nav .nav-utility-0 {
+    padding-top: 15px;
+  }
+
+  header nav .nav-utility-0 a {
+    font-size: 17px;
+    position: relative;
+    top: 9px;
+  }
+
+  header nav .nav-links-row {
+    padding-top: 31px;
   }
 }
