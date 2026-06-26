@@ -1,6 +1,22 @@
 /* isi design tokens */
 :root { /* @boilerplate */
-  --isi-text-color: #484848; /* @boilerplate */
+  /* sabril.net in-page ISI palette + warning box */
+  --isi-text-color: #000; /* sabril: pure black body text */
+  --isi-warning-box-border-color: #652d89; /* sabril purple */
+  --isi-warning-box-border-width: 2px;
+  --isi-warning-box-padding-x: 20px;
+  --isi-warning-box-padding-top: 18px;
+  --isi-warning-heading-color: #77a22f; /* sabril green */
+  --isi-warning-h3-font-size: 22px;
+  --isi-warning-h3-line-height: 1.1;
+  --isi-warning-h3-margin: 5px 0 0;
+  --isi-warning-h4-font-size: 16px;
+  --isi-warning-h4-line-height: 1.1;
+  --isi-warning-h4-margin: 1px 0 10px;
+  --isi-warning-heading-font-weight: 500;
+  --isi-inline-body-font-size: 16px;
+  --isi-inline-line-height: 1.43;
+  --isi-inline-li-padding-left: 14.4px;
   --isi-line-height: 1.5; /* @boilerplate */
   --isi-list-line-height: 1.7; /* @boilerplate */
   --isi-list-item-margin-bottom: 10px; /* @boilerplate */

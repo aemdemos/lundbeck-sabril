@@ -8,6 +8,9 @@
   /* sabril.net callout (image+text grey card) */
   --columns-callout-purple: #652d89;
   --columns-callout-card-bg: #e1e1e1;
+  --columns-callout-card-radius: 10px;
+  --columns-callout-card-margin: 20px 0;
+  --columns-callout-card-shadow: 3px 3px 10px 0 rgba(101, 45, 137, 0.4);
   --columns-callout-cta-bg: #ee8a21;
   --columns-callout-cta-hover-bg: #d97817;
 }

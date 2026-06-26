@@ -26,4 +26,30 @@ export default function decorate(block) {
       }
     });
   });
+
+  // sabril.net callout variant only (image+text grey card). Hoist the heading
+  // and the CTA out of the text cell so they render as full-width bands above
+  // and below the image+bullets row, matching the source layout. Scoped to the
+  // base 2-col block, excludes the stats-callout variant, and only runs when an
+  // <h2> heading is present in the text cell — the callout signal. This skips
+  // the footer columns block (no heading) even when the footer fragment is
+  // decorated before being attached under <footer>, so other columns
+  // blocks/pages are untouched.
+  if (block.classList.contains('columns-2-cols') && !block.classList.contains('stats-callout')) {
+    const row = block.firstElementChild;
+    const textCol = row && [...row.children].find((col) => !col.classList.contains('columns-img-col'));
+    const heading = textCol && textCol.querySelector(':scope > h2');
+    if (heading) {
+      // hoist heading to be the first full-width band of the card
+      heading.classList.add('columns-callout-heading');
+      row.prepend(heading);
+      // hoist the CTA paragraph (last <p> in the text cell) to a bottom band
+      const ctaPara = [...textCol.children].filter((el) => el.tagName === 'P').pop();
+      if (ctaPara) {
+        ctaPara.classList.add('columns-callout-cta');
+        row.append(ctaPara);
+      }
+      block.classList.add('columns-callout');
+    }
+  }
 }

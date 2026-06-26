@@ -15,24 +15,90 @@ main .isi .isi-inline > div { /* @boilerplate */
   padding: 0; /* @boilerplate */
 }
 
-main .isi p,
-main .isi li { /* @boilerplate */
-  font-size: var(--body-font-size-s); /* @boilerplate */
-  color: var(--isi-text-color); /* @boilerplate */
-  line-height: var(--isi-line-height); /* @boilerplate */
+/* ── sabril.net in-page ISI body text (intro paragraphs + warning content) ─ */
+main .isi-container .default-content-wrapper p,
+main .isi .isi-inline p,
+main .isi .isi-inline li { /* sabril: black 16px body text */
+  font-size: var(--isi-inline-body-font-size);
+  color: var(--isi-text-color);
+  line-height: var(--isi-inline-line-height);
+  text-align: left;
 }
 
-main .isi li { /* @boilerplate */
-  line-height: var(--isi-list-line-height); /* @boilerplate */
-  margin-bottom: var(--isi-list-item-margin-bottom); /* @boilerplate */
+main .isi .isi-inline li { /* sabril: disc bullets, tight indent */
+  list-style: disc;
+  margin: 0;
+  padding-left: var(--isi-inline-li-padding-left);
 }
 
-main .isi h3 { /* @boilerplate */
-  color: var(--isi-heading-color); /* @boilerplate */
-  font-size: var(--isi-heading-font-size); /* @boilerplate */
-  font-weight: var(--isi-heading-font-weight); /* @boilerplate */
-  line-height: var(--isi-heading-line-height); /* @boilerplate */
-  margin-bottom: var(--isi-heading-margin-bottom); /* @boilerplate */
+main .isi .isi-inline ul { /* sabril: bullets hang outside the box content edge */
+  margin: 0 0 1em;
+  padding-left: 1em;
+}
+
+/* ── sabril.net purple WARNING box ────────────────────────────────────────
+   The source wraps only the WARNING h3, the "See Medication Guide" h4, the
+   "All people who take SABRIL:" paragraph and the first 3-bullet list in a
+   2px purple bordered <article>. Our backend delivers those as the first four
+   flat siblings (h3, h4:first-of-type, p:first-of-type, ul:first-of-type) of
+   the inline cell with no wrapper element. Since isi.js must not change, the
+   continuous box is reconstructed by applying matching side borders +
+   horizontal padding to each member, the top edge to the h3, and the bottom
+   edge to the first ul. */
+main .isi .isi-inline > div > h3,
+main .isi .isi-inline > div > h4:first-of-type,
+main .isi .isi-inline > div > p:first-of-type,
+main .isi .isi-inline > div > ul:first-of-type {
+  border-left: var(--isi-warning-box-border-width) solid var(--isi-warning-box-border-color);
+  border-right: var(--isi-warning-box-border-width) solid var(--isi-warning-box-border-color);
+  padding-left: var(--isi-warning-box-padding-x);
+  padding-right: var(--isi-warning-box-padding-x);
+}
+
+main .isi .isi-inline > div > h3 { /* top edge of the box */
+  border-top: var(--isi-warning-box-border-width) solid var(--isi-warning-box-border-color);
+  padding-top: var(--isi-warning-box-padding-top);
+  margin: var(--isi-warning-h3-margin);
+}
+
+main .isi .isi-inline > div > ul:first-of-type { /* bottom edge of the box */
+  border-bottom: var(--isi-warning-box-border-width) solid var(--isi-warning-box-border-color);
+  padding-bottom: var(--isi-warning-box-padding-top);
+  margin: 0 0 5px;
+}
+
+/* keep the first ul bullets indented inside the padded box */
+main .isi .isi-inline > div > ul:first-of-type {
+  padding-left: calc(var(--isi-warning-box-padding-x) + 1em);
+}
+
+/* ── sabril.net green centered warning headings (only inside the box) ────── */
+main .isi .isi-inline > div > h3 {
+  color: var(--isi-warning-heading-color);
+  font-size: var(--isi-warning-h3-font-size);
+  font-weight: var(--isi-warning-heading-font-weight);
+  line-height: var(--isi-warning-h3-line-height);
+  text-align: center;
+}
+
+main .isi .isi-inline > div > h4:first-of-type {
+  color: var(--isi-warning-heading-color);
+  font-size: var(--isi-warning-h4-font-size);
+  font-weight: var(--isi-warning-heading-font-weight);
+  line-height: var(--isi-warning-h4-line-height);
+  text-align: center;
+  margin: var(--isi-warning-h4-margin);
+}
+
+/* ── later h4 headings ("You are encouraged…", "For more information…") ───
+   These are plain black, left-aligned body headings in the source. */
+main .isi .isi-inline > div > h4:not(:first-of-type) {
+  color: var(--isi-text-color);
+  font-size: var(--isi-inline-body-font-size);
+  font-weight: 700;
+  line-height: var(--isi-inline-line-height);
+  text-align: left;
+  margin: 0 0 1em;
 }
 
 main .isi a { /* @boilerplate */

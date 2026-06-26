@@ -22,19 +22,47 @@
    .columns block on the prescriber page (not a separate author class).
    Scoped with :not(.stats-callout) so the vyepti stats variant is untouched. */
 main .columns.columns-2-cols:not(.stats-callout) > div {
+  flex-wrap: wrap;
   background-color: var(--columns-callout-card-bg);
+  border-radius: var(--columns-callout-card-radius);
+  box-shadow: var(--columns-callout-card-shadow);
+  margin: var(--columns-callout-card-margin);
   padding: 10px 25px 25px;
   gap: 1rem;
 }
 
-/* heading: brand purple, centered, semibold, sits above the columns */
+/* Section 2 (image on the RIGHT) is transparent in the source. The grey card
+   is only used when the image is on the LEFT (Section 1). After hoisting, the
+   image column directly follows the heading in Section 1; in Section 2 the
+   bullets div sits between the heading and the image column, so the image
+   column is preceded by a plain div sibling. */
+main .columns.columns-2-cols:not(.stats-callout):has(> div > div:not(.columns-img-col) + .columns-img-col) > div {
+  background-color: transparent;
+}
+
+/* heading: brand purple, centered, medium weight, full-width band on top */
 main .columns.columns-2-cols:not(.stats-callout) h2 {
   margin: 20px 0 10px;
   color: var(--columns-callout-purple);
   font-size: 22px;
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   line-height: 1.1;
   text-align: center;
+}
+
+/* hoisted heading band: spans the full card width above the image+text row */
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-heading {
+  order: 0;
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* hoisted CTA band: spans the full card width below the image+text row */
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta {
+  order: 3;
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 /* purple custom bullets (source ul.bulletlist.purple) */
@@ -72,15 +100,15 @@ main .columns.columns-2-cols:not(.stats-callout) .columns-img-col img {
   margin: 0 auto;
 }
 
-/* CTA: the prescriber link renders as a plain <a> inside a <p>; style it as
-   the source .orangeButton (filled orange pill-ish button, white bold text),
-   centered like the source buttonCenter column. Excludes the image column
-   (whose <p><a> wraps only the product picture). */
-main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child {
+/* CTA: the prescriber link renders as a plain <a> inside a <p>; the <p> has
+   been hoisted to a full-width band (.columns-callout-cta) below the row.
+   Style the link as the source .orangeButton (filled orange pill, white bold
+   text), horizontally centered. */
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta {
   text-align: center;
 }
 
-main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a {
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta > a {
   display: inline-block;
   margin: 4% 0;
   padding: 8px 27px;
@@ -96,12 +124,12 @@ main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-co
   transition: background-color 0.2s ease-in-out;
 }
 
-main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a strong {
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta > a strong {
   font-weight: var(--font-weight-bold);
 }
 
-main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a:hover,
-main .columns.columns-2-cols:not(.stats-callout) > div > div:not(.columns-img-col) > p:last-child > a:focus {
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta > a:hover,
+main .columns.columns-2-cols:not(.stats-callout) > div > .columns-callout-cta > a:focus {
   background-color: var(--columns-callout-cta-hover-bg);
   color: #fff;
   outline: 0;
