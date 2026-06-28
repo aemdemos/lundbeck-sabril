@@ -29,20 +29,20 @@
  *     grep -rn  '/\* @boilerplate' styles/ blocks/   (every untouched line)
  *     grep -rc  '/\* @boilerplate' styles/ blocks/   (remaining count per file)
  */
-:root { /* @libs */
-  /* vyepti.com brand colors */
-  --brand-teal: #046183; /* @libs */
-  --brand-teal-light: #7ebcc6; /* @libs */
-  --brand-teal-muted: #41748d; /* @libs */
-  --brand-rose: #c02c57; /* @libs */
-  --brand-rose-dark: #9a2346; /* @libs */
+ :root { /* @libs */
+  /* sabril brand colors */
+  --brand-purple: #652d89;
+  --brand-green-light: #77a22f;
+  --brand-green-dark: #4b7602;
+  --brand-orange: #ee8a21;
+  --brand-orange-dark: #d97817; /* @libs */
   
   /* libs brand colors */
-  --brand-primary: var(--brand-teal);
-  --brand-primary-light: var(--brand-teal-light);
-  --brand-primary-dark: var(--brand-teal-muted);
-  --brand-secondary: var(--brand-rose);
-  --brand-secondary-dark: var(--brand-rose-dark);
+  --brand-primary: var(--brand-purple);
+  --brand-primary-light: var(--brand-green-light);
+  --brand-primary-dark: var(--brand-green-dark);
+  --brand-secondary: var(--brand-orange);
+  --brand-secondary-dark: var(--brand-orange-dark);
   --accent-bg: #e1f0f6; /* @libs */
   --card-bg-light: #eff6f9; /* @libs */
 
@@ -50,19 +50,19 @@
   --background-color: #fff; /* @libs */
   --light-color: #e1f0f6; /* @libs */
   --dark-color: #046183; /* @libs */
-  --text-color: #333; /* @libs */
+  --text-color: #000; /* @libs */
   --text-color-light: #666; /* @libs */
-  --link-color: #046183; /* @libs */
+  --link-color: #337ab7; /* @libs */
   --link-hover-color: #7ebcc6; /* @libs */
   --overlay-background-color: #e1f0f6; /* @libs */
   --error-color: #c02c57; /* @boilerplate */
-  --section-divider-width: 1px; /* @libs */
-  --section-divider-color: var(--link-hover-color); /* @libs */
+  --section-divider-width: 4px; /* @libs */
+  --section-divider-color: #d1d1d1;
   --section-padding: 24px;
   
   /* fonts */
-  --body-font-family: proxima-nova, proxima-nova-fallback, sans-serif; /* @libs */
-  --heading-font-family: proxima-nova, proxima-nova-fallback, sans-serif; /* @libs */
+  --body-font-family: arial, sans-serif; /* @libs */
+  --heading-font-family: arial, sans-serif; /* @libs */
   --body-line-height: 1.4; /* @libs */
   --heading-font-weight: 800; /* @libs */
   --heading-line-height: 1.2; /* @libs */
@@ -80,8 +80,8 @@
   --heading-font-size-xxl: 32px; /* @libs */
   --heading-font-size-xl: 24px; /* @libs */
   --heading-font-size-l: 20px; /* @libs */
-  --heading-font-size-m: 18px; /* @libs */
-  --heading-font-size-s: 18px; /* @libs */
+  --heading-font-size-m: 19px; /* @libs */
+  --heading-font-size-s: 17px; /* @libs */
   --heading-font-size-xs: 16px; /* @libs */
 
   /* layout */
@@ -101,12 +101,11 @@
 
   /* button tokens — shared */
   --button-margin: 0; /* @libs */
-  --button-border-radius: 100px; /* @libs */
+  --button-border-radius: 10px; /* @libs */
   --button-border-width: 2px; /* @libs */
-  --button-padding: 19px 25px; /* @libs */
-  --button-font-size: 18px; /* @libs */
-  --button-font-weight: 700; /* @libs */
-  --button-line-height: 1.25; /* @libs */
+  --button-padding: 8px 15px; /* @libs */
+  --button-font-size: 15px; /* @libs */
+  --button-line-height: 1.5; /* @libs */
   --button-transition: 0.2s ease-in-out; /* @libs */
 
   /* button icon (arrow on link buttons) */
@@ -221,7 +220,7 @@ h6 { /* @libs */
   font-weight: var(--heading-font-weight); /* @libs */
   line-height: var(--heading-line-height); /* @libs */
   scroll-margin: 40px; /* @libs */
-  color: var(--text-color); /* @libs */
+  color: var(--brand-primary); /* @libs */
 }
 
 h1 { /* @libs */
@@ -233,16 +232,15 @@ h1 { /* @libs */
 }
 
 h2 { /* @libs */
-  font-size: var(--heading-font-size-xl); /* @libs */
+  font-size: var(--heading-font-size-m); /* @libs */
   line-height: var(--heading-line-height); /* @libs */
-  color: var(--brand-primary); /* @libs */
+
 }
 
 h3 { /* @libs */
-  font-size: var(--heading-font-size-l); /* @libs */
+  font-size: var(--heading-font-size-s); /* @libs */
   font-weight: var(--font-weight-bold); /* @libs */
   line-height: 1.6; /* @libs */
-  color: var(--text-color); /* @libs */
   margin-bottom: 0; /* @libs */
 }
 
@@ -256,7 +254,6 @@ h5 { /* @libs */
   font-size: var(--heading-font-size-s); /* @libs */
   font-weight: var(--font-weight-bold); /* @libs */
   line-height: 1.22; /* @libs */
-  color: var(--brand-primary-dark); /* @libs */
 }
 
 h6 { /* @libs */
@@ -274,6 +271,11 @@ blockquote { /* @libs */
   margin-bottom: var(--block-margin-bottom); /* @libs */
 }
 
+p.button-wrapper {
+  margin-top: 24px;
+  padding-left: 15px;
+}
+
 code,
 pre { /* @libs */
   font-family: var(--fixed-font-family); /* @libs */
@@ -286,6 +288,10 @@ pre { /* @libs */
   background-color: var(--light-color); /* @libs */
   overflow-x: auto; /* @libs */
   white-space: pre; /* @libs */
+}
+
+main {
+  padding: 0 15px;
 }
 
 main > div { /* @libs */
@@ -313,7 +319,8 @@ a:hover { /* @libs */
 }
 
 /* buttons — shared structure */
-a.button,
+main a.button,
+main span.button a,
 button { /* @libs */
   box-sizing: border-box; /* @libs */
   display: inline-block; /* @libs */
@@ -329,11 +336,11 @@ button { /* @libs */
   line-height: var(--button-line-height); /* @libs */
   text-align: center; /* @libs */
   text-decoration: none; /* @libs */
-  white-space: nowrap; /* @libs */
   cursor: pointer; /* @libs */
-  overflow: hidden; /* @libs */
-  text-overflow: ellipsis; /* @libs */
   transition: var(--button-transition); /* @libs */
+  background-color: var(--button-primary-background); /* @libs */
+  border-color: var(--button-primary-border-color); /* @libs */
+  color: var(--button-primary-color); /* @libs */
 }
 
 a.button:focus { /* @libs */
@@ -342,6 +349,7 @@ a.button:focus { /* @libs */
 
 /* primary — filled CTA (native button elements default here) */
 a.button.primary,
+main span.button a,
 button { /* @libs */
   background-color: var(--button-primary-background); /* @libs */
   border-color: var(--button-primary-border-color); /* @libs */
@@ -350,6 +358,7 @@ button { /* @libs */
 
 a.button.primary:hover,
 a.button.primary:focus,
+span.button a:hover,
 button:hover,
 button:focus { /* @libs */
   background-color: var(--button-primary-hover-background); /* @libs */
@@ -374,7 +383,6 @@ button:disabled:hover { /* @libs */
 
 /* secondary — outline / ghost (default for unclassified link buttons) */
 a.button.secondary,
-a.button:not(.primary, .accent),
 button.secondary { /* @libs */
   background-color: var(--button-secondary-background); /* @libs */
   border-color: var(--button-secondary-border-color); /* @libs */
@@ -383,8 +391,6 @@ button.secondary { /* @libs */
 
 a.button.secondary:hover,
 a.button.secondary:focus,
-a.button:not(.primary, .accent):hover,
-a.button:not(.primary, .accent):focus,
 button.secondary:hover,
 button.secondary:focus { /* @libs */
   background-color: var(--button-secondary-hover-background); /* @libs */
@@ -408,22 +414,6 @@ a.button.accent:focus { /* @libs */
   color: var(--button-accent-hover-color); /* @libs */
   text-decoration: none; /* @libs */
   cursor: pointer; /* @libs */
-}
-
-/* arrow icon on link buttons */
-a.button::after { /* @libs */
-  content: ""; /* @libs */
-  display: inline-block; /* @libs */
-  width: var(--button-icon-width); /* @libs */
-  height: var(--button-icon-height); /* @libs */
-  margin-left: var(--button-icon-gap); /* @libs */
-  vertical-align: middle; /* @libs */
-  background-color: currentcolor; /* @libs */
-  mask-image: var(--button-icon-url); /* @libs */
-  mask-size: contain; /* @libs */
-  mask-repeat: no-repeat; /* @libs */
-  mask-position: center; /* @libs */
-  transition: var(--button-transition); /* @libs */
 }
 
 a.button:hover::after,
@@ -467,6 +457,23 @@ main img { /* @libs */
   object-fit: contain; /* @libs */
 }
 
+main ul {
+list-style: none;
+padding-left: 15px;
+}
+
+main li {
+  padding-left: .8em;
+  text-indent: -1em;
+  margin-bottom: 8px;
+}
+
+main li::before {
+  content: "\2022";
+  padding-right: .5em;
+  color: var(--brand-primary);
+}
+
 /* icon bullet lists — :has() prevents FOUC before JS adds .icon-bullets */
 main ul:has(> li > .icon, > li > :is(strong, em, a) > .icon) { /* @libs */
   list-style: none; /* @libs */
@@ -497,11 +504,58 @@ main .icon.icon-bullet { /* @libs */
   &.columns > div > div {
     justify-content: center;
   }
+
+  img {
+    margin: auto;
+  }
+}
+
+.right {
+  text-align: right;
+
+  &.columns > div > div {
+    justify-content: right;
+  }
+}
+
+.left {
+  text-align: left;
+
+  &.columns > div > div {
+    justify-content: left;
+  }
+}
+
+.shadow {
+  &.columns-img-col {
+    margin: 0 15px 10px;
+    box-shadow: 4px 3px 25px #919191;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.shadow-purple {
+  box-shadow: 3px 3px 10px 0 rgb(101 45 137 / 40%);
+}
+
+.smalltext {
+  padding-bottom: 20px;
+
+ p {
+  display: inline-block;
+  font-size: 15px;
+    line-height: 1.3em;
+    padding-right: 4%;
+}
 }
 
 /* sections */
 main > .section { /* @libs */
   margin: 0; /* @libs */
+  border-radius: 10px;
 }
 
 main > .section > div:not(.bg-image) { /* @boilerplate */
@@ -543,9 +597,12 @@ main > .section:first-of-type { /* @boilerplate */
   margin-top: 0; /* @boilerplate */
 }
 
-main > .section.divider > div:last-child { /* @libs */
+main > .section.divider { /* @libs */
   border-bottom: var(--section-divider-width) solid var(--section-divider-color); /* @libs */
-  padding-bottom: var(--section-padding);
+  padding-bottom: 10px;
+  border-radius: 0;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 main > .section > div { /* @libs */
@@ -679,6 +736,11 @@ main .section.stats-callout > div:not(.bg-image) {
 main .section.stats-callout h2,
 main .section.stats-callout h4 {
   color: var(--brand-primary);
+}
+
+main .section[data-background-color] {
+padding: 15px;
+margin-top: 20px;
 }
 
 @media (width >= 576px) {
