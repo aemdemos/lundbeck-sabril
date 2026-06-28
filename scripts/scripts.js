@@ -1,5 +1,6 @@
 import {
   buildBlock,
+  createOptimizedPicture,
   decorateBlock,
   loadBlock,
   loadHeader,
@@ -139,17 +140,6 @@ function autolinkModals(doc) {
   });
 }
 
-/**
- * Autoblocks injected during loadLazy (non-critical, not authored in DA).
- */
-async function buildLazyAutoBlocks() {
-  if (!document.querySelector('.back-to-top')) {
-    const block = buildBlock('back-to-top', '');
-    document.body.append(block);
-    decorateBlock(block);
-    await loadBlock(block);
-  }
-}
 
 /**
  * Builds all synthetic blocks in a container element.
@@ -216,7 +206,7 @@ export function decorateButtons(main) {
     // require authored formatting for buttonization
     const strong = a.closest('strong');
     const em = a.closest('em');
-    if (!strong && !em) return;
+    // if (!strong && !em) return;
 
     p.className = 'button-wrapper';
     a.className = 'button';
@@ -227,9 +217,11 @@ export function decorateButtons(main) {
     } else if (strong) {
       a.classList.add('primary');
       strong.replaceWith(a);
-    } else {
+    } else if (em) {
       a.classList.add('secondary');
       em.replaceWith(a);
+    } else {
+      return;
     }
   });
 }
@@ -276,7 +268,8 @@ function metaStringValue(value) {
 
 /**
  * Sets inline background-color and optionally prepends a decorative .bg-image layer.
- * Keys match section model fields and {@link readBlockConfig}: `background-color`, `background-image`.
+ * Keys match section model fields and {@link readBlockConfig}: `background-color`,
+ * `background-image` … `background-image-5` (art-direction renditions).
  * @param {HTMLElement} section
  * @param {Record<string, unknown>} meta
  */
@@ -286,23 +279,31 @@ function applySectionBackgroundDecorations(section, meta = {}) {
     section.style.setProperty('background', color);
   }
 
-  const imageUrl = metaStringValue(meta['background-image']).trim();
-  if (!imageUrl || !isAllowedBackgroundImageUrl(imageUrl)) return;
+  // background-image may be a comma-separated list when multiple images share one doc cell;
+  // background-image-2…5 are individual UE reference fields.
+  const bgImageStr = String(meta['background-image'] || '');
+  const rawUrls = [
+    ...bgImageStr.split(',').map((s) => s.trim()),
+    metaStringValue(meta['background-image-2']).trim(),
+    metaStringValue(meta['background-image-3']).trim(),
+    metaStringValue(meta['background-image-4']).trim(),
+    metaStringValue(meta['background-image-5']).trim(),
+  ].slice(0, 5).filter((url) => url && isAllowedBackgroundImageUrl(url));
+
+  if (!rawUrls.length) return;
 
   // localhost never has a valid TLS cert; downgrade https → http so the request succeeds
-  const parsedUrl = new URL(imageUrl.trim(), window.location.href);
-  if (parsedUrl.hostname === 'localhost') parsedUrl.protocol = 'http:';
-  const safeImageUrl = parsedUrl.href;
+  const sources = rawUrls.map((url) => {
+    const parsed = new URL(url, window.location.href);
+    if (parsed.hostname === 'localhost') parsed.protocol = 'http:';
+    return { src: parsed.href, alt: '' };
+  });
 
   const bg = document.createElement('div');
   bg.className = 'bg-image';
-  const picture = document.createElement('picture');
-  const img = document.createElement('img');
-  img.src = safeImageUrl;
-  img.alt = 'decorative background';
-  img.loading = 'lazy';
-  img.decoding = 'async'; // prevent blocking the main thread
-  picture.append(img);
+  const picture = sources.length === 1
+    ? createOptimizedPicture(sources[0].src, '', false, DEFAULT_BLOCK_SINGLE_PICTURE_BREAKPOINTS)
+    : createArtDirectionPicture(sources, false);
   bg.append(picture);
   section.prepend(bg);
 }
@@ -370,6 +371,10 @@ export function decorateSections(main) {
       background: section.getAttribute('data-background') || '',
       'background-color': section.getAttribute('data-background-color') || '',
       'background-image': section.getAttribute('data-background-image') || '',
+      'background-image-2': section.getAttribute('data-background-image-2') || '',
+      'background-image-3': section.getAttribute('data-background-image-3') || '',
+      'background-image-4': section.getAttribute('data-background-image-4') || '',
+      'background-image-5': section.getAttribute('data-background-image-5') || '',
     });
   }
 }
@@ -521,6 +526,8 @@ export function decorateIconsAndBullets(element, prefix = '') {
  * Bracket syntax: [[class1,class2]text] → <span class="class1 class2">text</span>
  * Only alphanumeric, hyphen, and underscore are allowed in class names.
  * Malformed patterns (empty class list, invalid chars) are left unchanged.
+ * Alignment classes (center, left, right) are hoisted to the containing element
+ * instead of applied to a span.
  */
 
 function parseClasses(raw) {
@@ -537,11 +544,16 @@ function parseSplitClasses(raw) {
 
 const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR']);
 
+const ALIGNMENT_CLASSES = new Set(['center', 'left', 'right']);
+
 // eslint-disable-next-line sonarjs/slow-regex
 const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]\s*$/;
 
 // eslint-disable-next-line sonarjs/slow-regex
 const BRACKET_RE = /\[\[[^\]]+\]([^\]]*)\]/g;
+
+// eslint-disable-next-line sonarjs/slow-regex
+const TOOLTIP_OPEN_RE = /\[\[tooltip\]\s*$/;
 
 function applySplitBoundaryPass(el) {
   const children = [...el.childNodes];
@@ -557,17 +569,40 @@ function applySplitBoundaryPass(el) {
     const isNextText = next.nodeType === Node.TEXT_NODE;
 
     if (isPrevText && isMidInline && isNextText) {
-      // Pattern A: "prefix[[classes]" <inline>content</inline> "]suffix"
-      const openMatch = prev.nodeValue.match(SPLIT_OPEN_RE);
-      const classes = openMatch ? parseSplitClasses(openMatch[1]) : [];
-      const closeMatch = openMatch && classes.length ? next.nodeValue.match(/^\s*\]/) : null;
-      if (closeMatch) {
+      // tooltip branch: [[tooltip]<a href="#" title="...">text</a>]
+      // The <a> is replaced entirely — not wrapped — with a <span data-tooltip="...">.
+      const isTooltipAnchor = mid.nodeName === 'A'
+        && mid.getAttribute('href') === '#'
+        && mid.getAttribute('title');
+      const tooltipCloseMatch = isTooltipAnchor && TOOLTIP_OPEN_RE.test(prev.nodeValue)
+        ? next.nodeValue.match(/^\s*\]/) : null;
+      if (tooltipCloseMatch) {
         const span = document.createElement('span');
-        span.className = classes.join(' ');
-        span.appendChild(mid);
-        el.insertBefore(span, next);
-        prev.nodeValue = prev.nodeValue.slice(0, -openMatch[0].length);
-        next.nodeValue = next.nodeValue.slice(closeMatch[0].length);
+        span.className = 'tooltip';
+        span.dataset.tooltip = mid.getAttribute('title');
+        span.textContent = mid.textContent;
+        el.insertBefore(span, mid);
+        el.removeChild(mid);
+        prev.nodeValue = prev.nodeValue.replace(TOOLTIP_OPEN_RE, '');
+        next.nodeValue = next.nodeValue.slice(tooltipCloseMatch[0].length);
+      } else {
+        // Pattern A: "prefix[[classes]" <inline>content</inline> "]suffix"
+        const openMatch = prev.nodeValue.match(SPLIT_OPEN_RE);
+        const classes = openMatch ? parseSplitClasses(openMatch[1]) : [];
+        const closeMatch = openMatch && classes.length ? next.nodeValue.match(/^\s*\]/) : null;
+        if (closeMatch) {
+          const alignClasses = classes.filter((c) => ALIGNMENT_CLASSES.has(c));
+          const regularClasses = classes.filter((c) => !ALIGNMENT_CLASSES.has(c));
+          if (alignClasses.length) el.classList.add(...alignClasses);
+          prev.nodeValue = prev.nodeValue.slice(0, -openMatch[0].length);
+          next.nodeValue = next.nodeValue.slice(closeMatch[0].length);
+          if (regularClasses.length) {
+            const span = document.createElement('span');
+            span.className = regularClasses.join(' ');
+            span.appendChild(mid);
+            el.insertBefore(span, next);
+          }
+        }
       }
     } else if (!isPrevText && mid.nodeType === Node.TEXT_NODE && !isNextText && next.children.length === 0) {
       // Pattern B: <inline>prefix[[</inline> "classes" <inline>]content]</inline>
@@ -580,12 +615,17 @@ function applySplitBoundaryPass(el) {
       const classes = parseSplitClasses(mid.nodeValue);
       if (isPrevInline && isNextInline && openerText.endsWith('[[') && classes.length
         && closerText.startsWith(']') && closerText.endsWith(']')) {
-        const insertRef = next.nextSibling;
-        const span = document.createElement('span');
-        span.className = classes.join(' ');
+        const alignClasses = classes.filter((c) => ALIGNMENT_CLASSES.has(c));
+        const regularClasses = classes.filter((c) => !ALIGNMENT_CLASSES.has(c));
+        if (alignClasses.length) el.classList.add(...alignClasses);
         next.textContent = closerText.slice(1, -1);
-        span.appendChild(next);
-        el.insertBefore(span, insertRef);
+        if (regularClasses.length) {
+          const insertRef = next.nextSibling;
+          const span = document.createElement('span');
+          span.className = regularClasses.join(' ');
+          span.appendChild(next);
+          el.insertBefore(span, insertRef);
+        }
         if (openerText === '[[') el.removeChild(prev);
         else prev.textContent = openerText.slice(0, -2);
         el.removeChild(mid);
@@ -610,7 +650,7 @@ export function applySpanTags(text) {
   });
 }
 
-function replaceTextNode(textNode) {
+function replaceTextNode(textNode, containingEl) {
   const text = textNode.nodeValue;
   const frag = document.createDocumentFragment();
   let lastIndex = 0;
@@ -631,10 +671,17 @@ function replaceTextNode(textNode) {
     if (!classes.length) {
       frag.appendChild(document.createTextNode(full));
     } else {
-      const span = document.createElement('span');
-      span.className = classes.join(' ');
-      span.textContent = content;
-      frag.appendChild(span);
+      const alignClasses = classes.filter((c) => ALIGNMENT_CLASSES.has(c));
+      const regularClasses = classes.filter((c) => !ALIGNMENT_CLASSES.has(c));
+      if (alignClasses.length && containingEl) containingEl.classList.add(...alignClasses);
+      if (regularClasses.length) {
+        const span = document.createElement('span');
+        span.className = regularClasses.join(' ');
+        span.textContent = content;
+        frag.appendChild(span);
+      } else {
+        frag.appendChild(document.createTextNode(content));
+      }
     }
 
     lastIndex = match.index + full.length;
@@ -674,8 +721,51 @@ function cleanAttributes(element) {
   });
 }
 
+function hoistAlignmentAcrossInlines(el) {
+  // Handles [[alignment-class]content] where content spans inline elements,
+  // causing the opening [[class] and closing ] to land in different text nodes.
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let n = walker.nextNode();
+  while (n) { textNodes.push(n); n = walker.nextNode(); }
+
+  for (let i = 0; i < textNodes.length - 1; i += 1) {
+    const node = textNodes[i];
+    const text = node.nodeValue;
+    const openIdx = text.lastIndexOf('[[');
+    if (openIdx === -1) continue; // eslint-disable-line no-continue
+
+    const tail = text.slice(openIdx);
+    // If the bracket expression is fully contained in this node, replaceTextNode handles it
+    if (/^\[\[[^\]]+\][^\]]*\]/.test(tail)) continue; // eslint-disable-line no-continue
+
+    // eslint-disable-next-line sonarjs/slow-regex
+    const classMatch = tail.match(/^\[\[([a-zA-Z0-9_,-]+)\]/);
+    if (!classMatch) continue; // eslint-disable-line no-continue
+
+    const classes = parseClasses(classMatch[1]);
+    const alignClasses = classes.filter((c) => ALIGNMENT_CLASSES.has(c));
+    // Only handle pure-alignment spanning patterns; mixed (alignment + span classes) needs Range API
+    if (!alignClasses.length || classes.length !== alignClasses.length) continue; // eslint-disable-line no-continue
+
+    for (let j = i + 1; j < textNodes.length; j += 1) {
+      const closeNode = textNodes[j];
+      const closeText = closeNode.nodeValue;
+      const closeIdx = closeText.indexOf(']');
+      if (closeIdx === -1) continue; // eslint-disable-line no-continue
+
+      el.classList.add(...alignClasses);
+      node.nodeValue = text.slice(0, openIdx) + tail.slice(classMatch[0].length);
+      closeNode.nodeValue = closeText.slice(0, closeIdx) + closeText.slice(closeIdx + 1);
+      break;
+    }
+  }
+}
+
 export function decorateSpanTags(element) {
   element.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li').forEach((el) => {
+    if (el.textContent.includes('[[')) hoistAlignmentAcrossInlines(el);
+
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const nodes = [];
     let node = walker.nextNode();
@@ -683,7 +773,7 @@ export function decorateSpanTags(element) {
       if (node.nodeValue.includes('[[')) nodes.push(node);
       node = walker.nextNode();
     }
-    nodes.forEach(replaceTextNode);
+    nodes.forEach((n) => replaceTextNode(n, el));
     applySplitBoundaryPass(el);
   });
 
@@ -691,6 +781,7 @@ export function decorateSpanTags(element) {
 }
 
 /* === END SPAN TAGS === */
+
 
 /**
  * Decorates the main element.
@@ -864,7 +955,6 @@ async function loadLazy(doc) {
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
-  await buildLazyAutoBlocks();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
