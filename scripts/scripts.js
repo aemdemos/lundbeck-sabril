@@ -1,8 +1,5 @@
 import {
-  buildBlock,
   createOptimizedPicture,
-  decorateBlock,
-  loadBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -17,6 +14,10 @@ import {
   toClassName,
   loadScript,
 } from './aem.js';
+import {
+  createArtDirectionPicture,
+  DEFAULT_BLOCK_SINGLE_PICTURE_BREAKPOINTS,
+} from './utils.js';
 /** Max sections/children to process (CWE-770). */
 const MAX_SECTIONS = 100;
 const MAX_SECTION_CHILDREN = 200;
@@ -140,7 +141,6 @@ function autolinkModals(doc) {
   });
 }
 
-
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -220,8 +220,6 @@ export function decorateButtons(main) {
     } else if (em) {
       a.classList.add('secondary');
       em.replaceWith(a);
-    } else {
-      return;
     }
   });
 }
@@ -781,7 +779,6 @@ export function decorateSpanTags(element) {
 }
 
 /* === END SPAN TAGS === */
-
 
 /**
  * Decorates the main element.

@@ -61,8 +61,8 @@
   --section-padding: 24px;
   
   /* fonts */
-  --body-font-family: Arial, sans-serif; /* @libs */
-  --heading-font-family: Arial, sans-serif; /* @libs */
+  --body-font-family: arial, sans-serif; /* @libs */
+  --heading-font-family: arial, sans-serif; /* @libs */
   --body-line-height: 1.4; /* @libs */
   --heading-font-weight: 800; /* @libs */
   --heading-line-height: 1.2; /* @libs */
@@ -468,7 +468,7 @@ main li {
   margin-bottom: 8px;
 }
 
-main li:before {
+main li::before {
   content: "\2022";
   padding-right: .5em;
   color: var(--brand-primary);
@@ -538,7 +538,7 @@ main .icon.icon-bullet { /* @libs */
 }
 
 .shadow-purple {
-  box-shadow: 3px 3px 10px 0 rgba(101, 45, 137, .4);
+  box-shadow: 3px 3px 10px 0 rgb(101 45 137 / 40%);
 }
 
 .smalltext {
