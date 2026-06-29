@@ -47,8 +47,6 @@
   --isi-toggle-right-mobile: 16px; /* @boilerplate */
   --isi-toggle-right-desktop: 40px; /* @boilerplate */
   --isi-bar-heading-color: white; /* @boilerplate */
-  --button-primary-hover-background: transparent;
-  --button-primary-hover-color: var(--brand-secondary);
 }
 
 main .isi .isi-bar ul > li {

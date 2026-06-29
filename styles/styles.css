@@ -52,7 +52,7 @@
   --dark-color: #046183; /* @libs */
   --text-color: #000; /* @libs */
   --text-color-light: #666; /* @libs */
-  --link-color: #337ab7; /* @libs */
+  --link-color: var(--brand-secondary); /* @libs */
   --link-hover-color: #7ebcc6; /* @libs */
   --overlay-background-color: #e1f0f6; /* @libs */
   --error-color: #c02c57; /* @boilerplate */
@@ -67,8 +67,8 @@
   --heading-font-weight: 800; /* @libs */
   --heading-line-height: 1.2; /* @libs */
   --font-weight-bold: 700; /* @libs */
-  --block-margin-top: 0.8em; /* @libs */
-  --block-margin-bottom: 0.25em; /* @libs */
+  --block-margin-top: 20px; /* @libs */
+  --block-margin-bottom: 10px; /* @libs */
 
   /* body sizes */
   --body-font-size-m: 24px; /* @libs */
@@ -77,7 +77,7 @@
   --body-font-size-xs: 14px; /* @libs */
 
   /* heading sizes (mobile-first) */
-  --heading-font-size-xxl: 32px; /* @libs */
+  --heading-font-size-xxl: 23px; /* @libs */
   --heading-font-size-xl: 24px; /* @libs */
   --heading-font-size-l: 20px; /* @libs */
   --heading-font-size-m: 19px; /* @libs */
@@ -88,7 +88,7 @@
   --max-width-site: 1120px; /* @libs */
   --section-padding-vertical: 40px; /* @libs */
   --icon-size: 24px; /* @libs */
-  --h1-max-width: 14em; /* @libs */
+  --h1-max-width: 100%; /* @libs */
 
   /* nav heights */
   --nav-height: 200px; /* @libs */
@@ -227,8 +227,8 @@ h1 { /* @libs */
   font-size: var(--heading-font-size-xxl); /* @libs */
   line-height: 1.125; /* @libs */
   color: var(--brand-primary); /* @libs */
-  margin-top: 0; /* @libs */
   max-width: var(--h1-max-width); /* @libs */
+  margin: .67em 0;
 }
 
 h2 { /* @libs */
@@ -240,8 +240,7 @@ h2 { /* @libs */
 h3 { /* @libs */
   font-size: var(--heading-font-size-s); /* @libs */
   font-weight: var(--font-weight-bold); /* @libs */
-  line-height: 1.6; /* @libs */
-  margin-bottom: 0; /* @libs */
+  line-height: 1.2;
 }
 
 h4 { /* @libs */
@@ -267,7 +266,7 @@ ol,
 ul,
 pre,
 blockquote { /* @libs */
-  margin-top: var(--block-margin-top); /* @libs */
+  margin-top: var(--block-margin-bottom); /* @libs */
   margin-bottom: var(--block-margin-bottom); /* @libs */
 }
 
@@ -462,13 +461,24 @@ list-style: none;
 padding-left: 15px;
 }
 
-main li {
+main ol {
+  list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+main ol > li {
+  margin: 0;
+  padding: 0;
+}
+
+main ul > li {
   padding-left: .8em;
   text-indent: -1em;
   margin-bottom: 8px;
 }
 
-main li::before {
+main ul > li::before {
   content: "\2022";
   padding-right: .5em;
   color: var(--brand-primary);
@@ -552,11 +562,27 @@ main .icon.icon-bullet { /* @libs */
 }
 }
 
+.purple {
+  color: var(--brand-primary);
+}
+
+.references {
+  p strong, li strong {
+    color: var(--brand-primary);
+  }
+
+  a:not(.button) {
+    color: var(--brand-primary);
+    font-weight: unset;
+    text-decoration: underline;
+  }
+}
+
 /* sections */
 main > .section { /* @libs */
   border-radius: 10px;
   max-width: var(--max-width-site); /* @boilerplate */
-  margin: 0 auto; /* @boilerplate */
+  margin: 24px auto 0; /* @boilerplate */
 }
 
 main > .section > div:not(.bg-image) { /* @boilerplate */
@@ -594,16 +620,23 @@ main > .section > .bg-image img { /* @boilerplate */
   object-fit: cover; /* @boilerplate */
 }
 
-main > .section:first-of-type { /* @boilerplate */
-  margin-top: 0; /* @boilerplate */
+/*
+main > .section:first-of-type {
+  margin-top: 0;
 }
+  */
 
-main > .section.divider { /* @libs */
-  border-bottom: var(--section-divider-width) solid var(--section-divider-color); /* @libs */
+main > .section.divider {
+  border-bottom: var(--section-divider-width) solid var(--section-divider-color);
   padding-bottom: 10px;
   border-radius: 0;
   margin-left: -15px;
   margin-right: -15px;
+
+  &.green {
+    border-bottom: 2px solid var(--brand-green-light);
+    margin: 15px auto 0;
+  }
 }
 
 main > .section > div { /* @libs */
@@ -740,7 +773,7 @@ main .section.stats-callout h4 {
 }
 
 main .section[data-background-color] {
-padding: 15px;
+padding: 10px 25px 25px;
 margin-top: 24px;
 }
 
@@ -756,7 +789,7 @@ margin-top: 24px;
     --body-font-size-m: 16px; /* @libs */
     --body-font-size-s: 16px; /* @libs */
     --body-font-size-xs: 14px; /* @libs */
-    --heading-font-size-xxl: 56px; /* @libs */
+    --heading-font-size-xxl: 30px; /* @libs */
     --heading-font-size-xl: 24px; /* @libs */
     --heading-font-size-l: 24px; /* @libs */
     --heading-font-size-m: 22px; /* @libs */
@@ -771,6 +804,10 @@ margin-top: 24px;
     .hide-mobile {
       display: revert;
     }
+
+    main > .section.divider:not(.green) {
+      border-width: 0;
+      }
 
     main .section.stats-callout {
       padding: var(--section-padding-vertical) 0;

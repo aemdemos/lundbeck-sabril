@@ -5,3 +5,81 @@
   --columns-divider-spacing: var(--spacing-l, 32px);
   --columns-divider-color: #7ebcc6;
 }
+
+main .columns.links p.button-wrapper {
+  margin-top: unset;
+
+  a.button.primary {
+color: var(--brand-secondary);
+background-color: transparent;
+border-color: transparent;
+margin: unset;
+padding: unset;
+font-style: unset;
+font-weight: 700;
+ }
+}
+
+main .columns-img-col img {
+  margin: auto;
+}
+
+.columns.symptoms {
+  &.columns-2-cols {
+    margin: 20px auto;
+  }
+
+ > div {
+  display: flex;
+  margin: 7.5px auto;
+
+> div {
+  background-color: #f5f5f5;
+  padding: 25px 50px 50px;
+  border-radius: 10px;
+  margin:10px 0;
+}
+
+h3 {
+  color: var(--brand-primary-light);
+  font-size: 16px;
+  }
+ }
+}
+
+@media (width >= 768px) {
+  main .columns > div {
+    align-items: start;
+  }
+
+.columns > div > div.width-75 {
+  flex:none;
+  width: 72%;
+}
+
+.columns.symptoms {
+  &.columns-2-cols {
+    width: 66%;
+    margin: 0 auto;
+  }
+
+ > div {
+  width: 83%;
+  display: flex;
+  margin: 7.5px auto;
+
+> div {
+  background-color: #f5f5f5;
+  padding: 15px 25px;
+  border-radius: 10px;
+  height: stretch;
+  }
+ }
+
+h3 {
+  color: var(--brand-primary-light);
+  font-size: 16px;
+}
+}
+
+}
