@@ -247,7 +247,8 @@ footer .footer a[href^="tel:"] {
   footer .columns > div {
     display: flex;
     flex-direction: row;
-    gap: 36px;
+    gap: 50px;
+    align-items: center;
 }
 
 /* Top rule + content padding, applied to the centered wrapper so the

@@ -98,7 +98,7 @@ header nav .nav-utility-0 a span {
 
 header nav .nav-utility-0 a i {
   font-style: italic;
-  font-weight: inherit;
+  font-weight: 400;
 }
 
 /* Utility links (ISI / PI / Med Guide / IFU) — plain text links, spaced apart,
@@ -175,8 +175,8 @@ header nav .nav-links-list .nav-item > p > a {
   background-color: var(--sabril-green);
   color: #fff;
   font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
+  font-weight: 700;
+  line-height: 18.5px;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
@@ -271,6 +271,8 @@ header nav .nav-hamburger-label {
   header nav {
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 20;
     padding: 0;
     border-top: 0;
     border-bottom: 4px solid #d1d1d1;
@@ -356,18 +358,27 @@ header nav .nav-hamburger-label {
 
   header nav .nav-brand-row {
     order: 3;
-    padding: 0 15px 3px;
+    padding: 0 15px 20px;
   }
 
   header nav .nav-links-row {
+    --nav-mobile-menu-height: 0px;
+
     order: 4;
     display: block;
-    max-height: 0;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 0;
     overflow: hidden;
-    padding-bottom: 0;
-    opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.35s ease;
-    margin: 12px 0 0;
+    padding-bottom: 11px;
+    visibility: hidden;
+    transition:
+      height .5s ease,
+      visibility 0s linear .5s;
+    margin: 0;
   }
 
   header nav .nav-hamburger {
@@ -384,13 +395,31 @@ header nav .nav-hamburger-label {
   }
 
   header nav.nav-mobile-open .nav-links-row {
-    max-height: 1000px;
-    opacity: 1;
+    height: var(--nav-mobile-menu-height);
+    visibility: visible;
+    transition:
+      height .5s ease,
+      visibility 0s linear 0s;
+  }
+
+  header nav.nav-mobile-closing .nav-links-row {
+    height: 0;
+    visibility: visible;
+    transition:
+      height .5s ease,
+      visibility 0s linear 0s;
   }
 
   header nav .nav-links-list {
     flex-direction: column;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: white;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
   }
 
   header nav .nav-links-list .nav-item {
@@ -447,6 +476,7 @@ header nav .nav-hamburger-label {
 
   header nav .nav-brand-link img {
     height: 119px;
+    width: auto;
   }
 
   header nav .nav-right {
@@ -462,6 +492,7 @@ header nav .nav-hamburger-label {
   header nav .nav-utility-1 {       /* grey utility button group */
     order: 1;
     padding-top: 0;
+    margin-left: -70px;
   }
 
   header nav .nav-utility-0 {       /* orange REMS link */
@@ -474,6 +505,10 @@ header nav .nav-hamburger-label {
     display: inline-block;
     margin-right: 30px;
     line-height: 17.6px;
+  }
+  
+  header nav .nav-utility-0 a i {
+      font-weight: 700;
   }
 
   header nav .nav-links-row {       /* green nav tabs */
