@@ -49,18 +49,18 @@
   --footer-linkbar-padding: 0;
   --footer-linkbar-inner-padding: 0 15px; /* @boilerplate */
   --footer-link-text-align: left;
-  --footer-link-color: #652d89; /* Sabril purple */
+  --footer-link-color: var(--brand-primary); /* Sabril purple */
   --footer-link-hover-color: #652d89;
-  --footer-link-decoration: underline; /* live links carry a persistent purple underline */
-  --footer-link-hover-decoration: underline;
-  --footer-link-font-size: 15px;
+  --footer-link-decoration: none;
+  --footer-link-hover-decoration: none;
+  --footer-link-font-size: 12px;
   --footer-link-font-size-desktop: 15px;
   --footer-link-font-size-mobile: 12px; /* live mobile links shrink to 12px */
   --footer-link-font-weight: 400;
   --footer-link-line-height: 21px;
   --footer-link-line-height-mobile: 17px; /* live mobile link line-height */
   --footer-link-gap: 30px; /* horizontal space between links (desktop row) */
-  --footer-link-mobile-gap: 8px; /* vertical gap when stacked on mobile */
+  --footer-link-mobile-gap: 2px; /* vertical gap when stacked on mobile */
   --footer-transition: 0.2s ease; /* @boilerplate */
 
   /* ---- body section (logo + links) ----------------------------------
@@ -87,7 +87,7 @@
   --footer-assist-font-size-mobile: inherit;
   --footer-assist-line-height: normal;
   --footer-assist-font-weight: inherit;
-  --footer-assist-margin-right: var(--footer-link-gap); /* even spacing before 1st link */
+  --footer-assist-margin-right: 30px; /* even spacing before 1st link */
   --footer-mobile-assist-gap: 0;
   --footer-assist-mobile-margin-bottom: 0;
 
@@ -115,7 +115,7 @@
 
   /* ---- Sabril-specific tokens (consumed in the overrides block) ------ */
   --footer-divider: 3px solid #eee; /* light-grey rule above the footer row */
-  --footer-content-padding: 5px 15px 2px; /* tight vertical padding inside the wrapper, matching the live .footerTopBorder (5px top / 2px bottom) */
+  --footer-content-padding: 0 15px; /* tight vertical padding inside the wrapper, matching the live .footerTopBorder (5px top / 2px bottom) */
   --footer-bar-height: 9px; /* decorative brand stripe height */
 
   /* purple / grey / green / light-grey stripe. The live site stretches a
@@ -160,43 +160,36 @@ footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) {
   padding-inline-start: 0;
 }
 
-/* Top rule + content padding, applied to the centered wrapper so the
-   3px line spans the max-width content (mirrors the live .footerTopBorder
-   border-top: 3px solid #eee). */
-footer .footer .columns-container .columns-wrapper {
-  border-top: var(--footer-divider);
-  padding: var(--footer-content-padding);
-}
-
 /* The logo PNG carries the starfish; render it at its natural size and
    keep it left-aligned in column 1. */
 footer .footer .columns.columns-2-cols > div > .columns-img-col img {
   width: var(--footer-logo-width);
 }
 
-@media (width >= 768px) {
-  /* logo and links share one row, vertically centred (live behaviour).
-     `.divider` adds specificity to win over footer.css's flex-start rule
-     (footer.css is @imported first, so it would otherwise cascade later). */
-  footer .footer .columns.divider.columns-2-cols > div {
-    align-items: center;
-  }
+footer a.button {
+  border-bottom: 1px solid var(--brand-primary);
+  text-decoration: none;
+  min-height: 20px;
+}
 
-  /* links flow left-to-right right after the logo (footer.css defaults to
-     flex-end / right-aligned, which Sabril does not use) */
-  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) {
-    justify-content: flex-start;
-  }
+/* Decorative multicolour brand bar — CSS-only, intentionally NOT authored
+   in the DA document. Spans the full wrapper box (content max-width + the
+   wrapper's two 15px side gutters), so it aligns edge-to-edge with the
+   grey top rule rather than stopping 30px short inside the gutters. */
+footer .footer::after {
+  content: '';
+  display: block;
+  max-width: calc(var(--footer-max-width) + 30px);
+  height: var(--footer-bar-height);
+  margin-inline: auto;
+  background: var(--footer-bar-gradient);
+}
 
-  /* live site spreads the links into equal-width slots across the column
-     (each ~174px, left-aligned within its slot). Make every link <p> an
-     equal flex item and drop footer.css's fixed inter-link margin so the
-     distribution is even rather than tightly left-packed. */
-  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) > p {
-    flex: 1;
-    margin-right: 0;
-    text-align: left;
-  }
+/* Defensive: Sabril uses no phone pill or social icons. They are absent
+   from the DA doc, but hide them outright should any be authored, so the
+   nulled phone/social tokens never render unexpectedly. */
+footer .footer a[href^="tel:"] {
+  display: none;
 }
 
 /* ===== Mobile (< 768px) =================================================
@@ -206,12 +199,15 @@ footer .footer .columns.columns-2-cols > div > .columns-img-col img {
    splits the row 5/12 (logo) and 7/12 (links) and renders 12px purple
    underlined links. */
 @media (width < 768px) {
+  footer .footer .columns p {
+    text-align: left !important;
+  }
+
   /* keep logo + links on one row, vertically centred (columns.css defaults
      to flex-direction: column on mobile). `.divider` wins specificity over
      the @imported columns.css / footer.css base rules. */
   footer .footer .columns.divider.columns-2-cols > div {
     flex-direction: row;
-    align-items: center;
   }
 
   /* logo column ~5/12; links column ~7/12 (live col-xs-5 / col-xs-7) */
@@ -243,34 +239,74 @@ footer .footer .columns.columns-2-cols > div > .columns-img-col img {
     font-size: var(--footer-link-font-size-mobile);
     line-height: var(--footer-link-line-height-mobile);
   }
-}
 
-/* Decorative multicolour brand bar — CSS-only, intentionally NOT authored
-   in the DA document. Spans the full wrapper box (content max-width + the
-   wrapper's two 15px side gutters), so it aligns edge-to-edge with the
-   grey top rule rather than stopping 30px short inside the gutters. */
-footer .footer::after {
-  content: '';
-  display: block;
-  max-width: calc(var(--footer-max-width) + 30px);
-  height: var(--footer-bar-height);
-  margin-inline: auto;
-  background: var(--footer-bar-gradient);
-}
-
-/* Mobile: single 4-colour repeat (live swaps to mobileborderimage.png).
-   Declared after the base ::after rule so it wins on equal specificity. */
-@media (width < 768px) {
   footer .footer::after {
     background: var(--footer-bar-gradient-mobile);
   }
+
+  footer .columns > div {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
 }
 
-/* Defensive: Sabril uses no phone pill or social icons. They are absent
-   from the DA doc, but hide them outright should any be authored, so the
-   nulled phone/social tokens never render unexpectedly. */
-footer .footer a[href^="tel:"] {
-  display: none;
+/* Top rule + content padding, applied to the centered wrapper so the
+   3px line spans the max-width content (mirrors the live .footerTopBorder
+   border-top: 3px solid #eee). */
+footer .footer .columns-container .columns-wrapper {
+  border-top: 1px solid #eee;
+  box-shadow: 0 -6px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  padding: var(--footer-content-padding);
+}
+}
+
+@media (width >= 768px) {
+  /* logo and links share one row, vertically centred (live behaviour).
+     `.divider` adds specificity to win over footer.css's flex-start rule
+     (footer.css is @imported first, so it would otherwise cascade later). */
+
+  footer p.button-wrapper {
+    padding-left: 0;
+  }
+
+  footer .footer .columns-container .columns-wrapper {
+    border-top: 2px solid #eee;
+    padding: var(--footer-content-padding);
+  }
+
+  footer .footer .columns.divider.columns-2-cols > div {
+    align-items: center;
+  }
+
+  footer .columns > div {
+    gap: 16px;
+}
+
+footer .footer .columns.columns-2-cols > div > :nth-child(2) {
+  padding-top: 1.5%;
+  justify-content: space-between !important;
+  max-width: 800px;
+}
+
+footer .footer .columns.columns-2-cols > div > .columns-img-col img {
+  margin-top: 3px;
+}
+
+  /* links flow left-to-right right after the logo (footer.css defaults to
+     flex-end / right-aligned, which Sabril does not use) */
+  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) {
+    justify-content: flex-start;
+  }
+
+  /* live site spreads the links into equal-width slots across the column
+     (each ~174px, left-aligned within its slot). Make every link <p> an
+     equal flex item and drop footer.css's fixed inter-link margin so the
+     distribution is even rather than tightly left-packed. */
+  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) > p {
+    flex: 1;
+    margin-right: 0;
+    text-align: left;
+  }
 }
 
 /* =====================================================================
