@@ -85,7 +85,7 @@
   --heading-font-size-xs: 16px; /* @libs */
 
   /* layout */
-  --max-width-site: 1140px; /* @libs */
+  --max-width-site: 1120px; /* @libs */
   --section-padding-vertical: 40px; /* @libs */
   --icon-size: 24px; /* @libs */
   --h1-max-width: 14em; /* @libs */
@@ -271,7 +271,7 @@ blockquote { /* @libs */
   margin-bottom: var(--block-margin-bottom); /* @libs */
 }
 
-p.button-wrapper {
+main p.button-wrapper {
   margin-top: 24px;
   padding-left: 15px;
 }
@@ -554,8 +554,9 @@ main .icon.icon-bullet { /* @libs */
 
 /* sections */
 main > .section { /* @libs */
-  margin: 0; /* @libs */
   border-radius: 10px;
+  max-width: var(--max-width-site); /* @boilerplate */
+  margin: 0 auto; /* @boilerplate */
 }
 
 main > .section > div:not(.bg-image) { /* @boilerplate */
