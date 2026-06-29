@@ -1,27 +1,27 @@
 /* isi design tokens */
 :root { /* @boilerplate */
-  --isi-text-color: #484848; /* @boilerplate */
+  --isi-text-color: var(--text-color);
   --isi-line-height: 1.5; /* @boilerplate */
-  --isi-list-line-height: 1.7; /* @boilerplate */
+  --isi-list-line-height: 1.5; /* @boilerplate */
   --isi-list-item-margin-bottom: 10px; /* @boilerplate */
-  --isi-inline-padding-bottom: 64px; /* @boilerplate */
-  --isi-heading-color: var(--brand-teal-muted); /* @boilerplate */
-  --isi-heading-font-size: 18px; /* @boilerplate */
+  --isi-inline-padding-bottom: 30px; /* @boilerplate */
+  --isi-heading-color: white;
+  --isi-heading-font-size: 16px; /* @boilerplate */
   --isi-heading-font-weight: 700; /* @boilerplate */
   --isi-heading-line-height: 22px; /* @boilerplate */
   --isi-heading-margin-bottom: 0; /* @boilerplate */
-  --isi-bar-z-index: 5; /* @boilerplate */
-  --isi-bar-expanded-z-index: 10; /* @boilerplate */
+  --isi-bar-z-index: 2; /* @boilerplate */
+  --isi-bar-expanded-z-index: 21; /* @boilerplate */
   --isi-bar-background: var(--background-color); /* @boilerplate */
-  --isi-section-border-width: 1px; /* @boilerplate */
+  --isi-section-border-width: 0;
   --isi-section-border-color: #d1d1d1; /* @boilerplate */
-  --isi-bar-border-width: var(--isi-section-border-width); /* @boilerplate */
+  --isi-bar-border-width: 0; /* @boilerplate */
   --isi-bar-border-color: var(--isi-section-border-color); /* @boilerplate */
-  --isi-bar-height: 90px; /* @boilerplate */
-  --isi-bar-padding: 13px 13px 8px; /* @boilerplate */
+  --isi-bar-height: 185px; /* @boilerplate */
+  --isi-bar-padding: 0; /* @boilerplate */
   --isi-bar-height-transition-duration: 0.3s; /* @boilerplate */
   --isi-bar-height-transition-easing: ease-in-out; /* @boilerplate */
-  --isi-bar-expanded-max-height: 70vh; /* @boilerplate */
+  --isi-bar-expanded-max-height: 100%; /* @boilerplate */
   --isi-content-max-width: var(--max-width-site); /* @boilerplate */
   --isi-bar-content-gap: 0 24px; /* @boilerplate */
   --isi-bar-col-flex-basis: 45%; /* @boilerplate */
@@ -31,36 +31,176 @@
   --isi-bar-list-padding-left: 20px; /* @boilerplate */
   --isi-bar-list-margin-bottom: 8px; /* @boilerplate */
   --isi-bar-link-font-weight: 600; /* @boilerplate */
-  --isi-toggle-right: 15px; /* @boilerplate */
-  --isi-toggle-top: 13px; /* @boilerplate */
+  --isi-toggle-right: 50px; /* @boilerplate */
+  --isi-toggle-top: 24px; /* @boilerplate */
   --isi-toggle-border-width: 2px; /* @boilerplate */
   --isi-toggle-size: 24px; /* @boilerplate */
-  --isi-toggle-color: var(--brand-teal-muted); /* @boilerplate */
-  --isi-toggle-hover-color: var(--link-hover-color); /* @boilerplate */
+  --isi-toggle-color: var(--brand-secondary);
+  --isi-toggle-hover-color: var(--brand-secondary);
   --isi-toggle-transition-duration: 0.2s; /* @boilerplate */
-  --isi-toggle-z-index: 2; /* @boilerplate */
+  --isi-toggle-z-index: 21; /* @boilerplate */
   --isi-toggle-icon-size: 12px; /* @boilerplate */
   --isi-toggle-icon-bar-thickness: 2px; /* @boilerplate */
   --isi-toggle-icon-bar-radius: 1px; /* @boilerplate */
-  --isi-bar-content-padding-x-mobile: 16px; /* @boilerplate */
-  --isi-bar-content-padding-x-desktop: 32px; /* @boilerplate */
+  --isi-bar-content-padding-x-mobile: 16px;
+  --isi-bar-content-padding-x-desktop: 24px; /* @boilerplate */
   --isi-toggle-right-mobile: 16px; /* @boilerplate */
-  --isi-toggle-right-desktop: 32px; /* @boilerplate */
+  --isi-toggle-right-desktop: 40px; /* @boilerplate */
+  --isi-bar-heading-color: white; /* @boilerplate */
+  --button-primary-hover-background: transparent;
+  --button-primary-hover-color: var(--brand-secondary);
 }
 
-@media (width <= 768px) { /* @boilerplate */
-  :root { /* @boilerplate */
-    --isi-bar-height: 109px; /* @boilerplate */
-    --isi-bar-padding: 0; /* @boilerplate */
-    --isi-bar-heading-color: var(--brand-teal); /* @boilerplate */
-    --isi-bar-heading-padding-bottom: 8px; /* @boilerplate */
-    --isi-bar-paragraph-padding-bottom: 16px; /* @boilerplate */
-    --isi-toggle-right: var(--isi-toggle-right-mobile); /* @boilerplate */
+main .isi .isi-bar ul > li {
+  color: var(--text-color);
+}
+
+.isi blockquote,
+.isi-bar blockquote {
+  border: 2px solid var(--brand-primary);
+  margin-left: 0;
+  margin-right: 0;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 36px;
+}
+
+.isi-bar blockquote {
+  padding-top: 10px;
+  margin-top: 16px;
+}
+
+.isi-bar blockquote p,
+.isi-bar blockquote li {
+  font-size: var(--body-font-size-s);
+  margin-bottom: 0;
+}
+
+.isi li > p,
+.isi li > ul {
+  margin-top: unset;
+  margin-bottom: unset;
+}
+
+.isi-bar h4,
+.isi-inline h4 {
+  font-size: var(--heading-font-size-s);
+  margin-bottom: 0;
+  color: var(--text-color);
+  line-height: 1.2;
+
+  a {
+    color: var(--brand-primary);
   }
+}
+
+.isi-inline blockquote h4,
+.isi-bar blockquote h4,
+.isi-inline blockquote h5,
+.isi-bar blockquote h5 {
+  text-align: center;
+  color: var(--brand-primary);
+  padding: 0 18px;
+}
+
+.isi-inline blockquote h4,
+.isi-bar blockquote h4 {
+  font-size: var(--heading-font-size-m);
+  margin-top: 8px;
+}
+
+.isi-inline blockquote h5,
+.isi-bar blockquote h5 {
+  line-height: 1;
+  font-size: var(--heading-font-size-xs);
+  margin-top: 3px;
+}
+
+.isi-bar-col h3:first-of-type,
+.isi-inline h3:first-of-type {
+  vertical-align: middle;
+  padding: 24px 16px;
+  line-height: inherit;
+  margin-left: -16px;
+  margin-right: -16px;
+
+  span {
+    display: inline-block;
+    width: 170px;
+  }
+}
+
+.isi-bar .isi-bar-col > h3:first-of-type {
+  background-color: var(--brand-primary);
+}
+
+.isi-inline h3:first-of-type {
+  background-color: var(--brand-primary);
+}
+
+main .isi p:has(sub) {
+  line-height: 1;
+}
+
+main .isi sub {
+  vertical-align: middle;
+}
+
+main .isi .isi-inline blockquote p.center,
+blockquote p.center  {
+  margin-bottom:20px;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::after {
+content: 'CONTRACT' !important;
+}
+
+main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::before {
+  content: 'EXPAND' !important;
+}
+  
+
+@media (width >= 768px) {
+  :root {
+    --isi-bar-height: 190px;
+    --isi-toggle-top: 10px;
+    }
+
+  .isi-bar h4 {
+    font-size: var(--heading-font-size-l);
+  }
+
+main .isi .isi-inline p,
+main .isi .isi-inline li {
+  font-size: var(--body-font-size-m);
+}
+
+.isi-bar-content {
+  flex-direction: column;
+  padding: 0 var(--isi-bar-content-padding-x-mobile);
+}
+
+.isi-bar-col h3:first-of-type,
+.isi-inline h3:first-of-type {
+  padding: 10px 16px;
+
+  span {
+    width: unset;
+  }
+}
 }
 
 @media (width >= 992px) { /* @boilerplate */
   :root { /* @boilerplate */
     --isi-toggle-right: var(--isi-toggle-right-desktop); /* @boilerplate */
   }
+}
+
+@media (width >= 1150px) {
+  :root {
+  --isi-toggle-right-desktop: calc((50% - 540px));
+}
 }

@@ -741,7 +741,7 @@ main .section.stats-callout h4 {
 
 main .section[data-background-color] {
 padding: 15px;
-margin-top: 20px;
+margin-top: 24px;
 }
 
 @media (width >= 576px) {
@@ -753,15 +753,14 @@ margin-top: 20px;
 @media (width >= 768px) { /* @libs */
   :root { /* @libs */
     /* heading sizes scale up on desktop */
-    --body-font-size-m: 24px; /* @libs */
-    --body-font-size-ms: 18px; /* @libs */
+    --body-font-size-m: 16px; /* @libs */
     --body-font-size-s: 16px; /* @libs */
     --body-font-size-xs: 14px; /* @libs */
     --heading-font-size-xxl: 56px; /* @libs */
     --heading-font-size-xl: 24px; /* @libs */
     --heading-font-size-l: 24px; /* @libs */
-    --heading-font-size-m: 18px; /* @libs */
-    --heading-font-size-s: 18px; /* @libs */
+    --heading-font-size-m: 22px; /* @libs */
+    --heading-font-size-s: 16px; /* @libs */
     --heading-font-size-xs: 16px; /* @libs */
   }
 
