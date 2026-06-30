@@ -124,7 +124,7 @@ main .isi .isi-bar ul > li {
   margin-left: -16px;
   margin-right: -16px;
 
-  span {
+  span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
     display: inline-block;
     width: 170px;
   }
