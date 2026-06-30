@@ -72,26 +72,14 @@ export default function decorate(block) {
   toggle.addEventListener('click', scrollToInline);
   bar.addEventListener('click', scrollToInline);
 
-  /* ── 3b. In-page COLLAPSE / EXPAND control ──────────────────── */
+  /* ── 3b. In-page COLLAPSE control – scrolls back to top of page ── */
   const inlineInner = inlineRow.querySelector(':scope > div') || inlineRow;
   const inlineHeading = inlineInner.querySelector('h3');
   if (inlineHeading) {
-    /* Wrap everything after the heading in a collapsible body so its
-       height can be animated (matches the source site's collapse). */
-    const body = document.createElement('div');
-    body.className = 'isi-inline-body';
-    let node = inlineHeading.nextSibling;
-    while (node) {
-      const next = node.nextSibling;
-      body.append(node);
-      node = next;
-    }
-    inlineInner.append(body);
-
     const inlineToggle = document.createElement('button');
     inlineToggle.className = 'isi-inline-toggle';
     inlineToggle.type = 'button';
-    inlineToggle.setAttribute('aria-expanded', 'true');
+    inlineToggle.setAttribute('aria-label', 'Back to top');
     const inlineLabel = document.createElement('span');
     inlineLabel.className = 'isi-inline-toggle-label';
     inlineLabel.textContent = 'COLLAPSE';
@@ -102,20 +90,7 @@ export default function decorate(block) {
 
     inlineToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      const collapsed = inlineRow.classList.toggle('isi-collapsed');
-      inlineToggle.setAttribute('aria-expanded', String(!collapsed));
-      inlineLabel.textContent = collapsed ? 'EXPAND' : 'COLLAPSE';
-      if (collapsed) {
-        /* animate from current height down to 0 */
-        body.style.maxHeight = `${body.scrollHeight}px`;
-        requestAnimationFrame(() => { body.style.maxHeight = '0px'; });
-      } else {
-        body.style.maxHeight = `${body.scrollHeight}px`;
-        body.addEventListener('transitionend', function clear() {
-          body.style.maxHeight = '';
-          body.removeEventListener('transitionend', clear);
-        });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 

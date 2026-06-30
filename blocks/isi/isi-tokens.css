@@ -209,28 +209,13 @@ blockquote p.center  {
   line-height: 1;
 }
 
-/* Orange downward arrow when expanded (collapse); flips up when collapsed */
+/* Orange downward arrow (matches source glyphicon-triangle-bottom) */
 .isi-inline .isi-inline-toggle-icon {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 7px solid var(--brand-secondary);
-  transition: transform 0.3s ease;
-}
-
-.isi-inline.isi-collapsed .isi-inline-toggle-icon {
-  transform: rotate(180deg);
-}
-
-/* Collapsible body – animates height between expanded and collapsed */
-.isi-inline .isi-inline-body {
-  overflow: hidden;
-  transition: max-height 0.35s ease;
-}
-
-.isi-inline.isi-collapsed .isi-inline-body {
-  max-height: 0;
 }
 
 
