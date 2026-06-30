@@ -64,9 +64,27 @@ export default function decorate(block) {
   const section = block.closest('.section');
   if (!section) return;
 
+  /* Animate the page scroll over a fixed duration (matches the source
+     site's 2s jQuery animate; native smooth scroll is too fast). */
+  const SCROLL_DURATION = 2000;
+  const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  const animateScrollTo = (targetY) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const startTime = performance.now();
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / SCROLL_DURATION, 1);
+      window.scrollTo(0, startY + distance * easeInOut(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
   const scrollToInline = (e) => {
     e.stopPropagation();
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const targetY = section.getBoundingClientRect().top + window.scrollY;
+    animateScrollTo(targetY);
   };
 
   toggle.addEventListener('click', scrollToInline);
@@ -90,7 +108,7 @@ export default function decorate(block) {
 
     inlineToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      animateScrollTo(0);
     });
   }
 

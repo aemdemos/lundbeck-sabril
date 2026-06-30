@@ -184,10 +184,10 @@ blockquote p.center  {
   content: none;
 }
 
-/* ── In-page purple header bar – match source (14px / 500 / ~36px) ── */
+/* ── In-page purple header bar – match source (mobile 15px / desktop 14px, 500) ── */
 .isi-inline h3:first-of-type {
   position: relative;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 20px;
   padding: 8px 15px;
@@ -227,6 +227,21 @@ blockquote p.center  {
   border-top: 7px solid var(--brand-secondary);
 }
 
+/* Mobile: wrap the title to two lines and use the source's taller padding so
+   the bar height matches (~89px: "IMPORTANT" / "SAFETY INFORMATION"). */
+@media (width < 768px) {
+  .isi-inline h3:first-of-type {
+    padding-top: 24px;
+    padding-bottom: 25px;
+  }
+
+  .isi-inline h3:first-of-type
+    span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
+    display: inline-block;
+    max-width: 55%;
+  }
+}
+
 
 @media (width >= 768px) {
   :root {
@@ -255,6 +270,10 @@ main .isi .isi-inline li {
   span {
     width: unset;
   }
+}
+
+.isi-inline h3:first-of-type {
+  font-size: 14px;
 }
 }
 
