@@ -152,30 +152,30 @@ blockquote p.center  {
   margin-top: 0;
 }
 
-/* ── EXPAND control: text label + upward arrow (scrolls to in-page ISI) ── */
+/* ── Fixed-bar EXPAND control: white "EXPAND" + orange up-arrow ── */
 .isi-bar .isi-bar-toggle {
   border: 0;
   border-radius: 0;
   width: auto;
   height: auto;
-  gap: 6px;
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  gap: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .isi-bar .isi-bar-toggle-label {
   line-height: 1;
 }
 
-/* Upward arrow (replaces the old plus/minus icon) */
+/* Orange upward arrow (replaces the old plus/minus icon) */
 .isi-bar .isi-bar-toggle-icon {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 7px solid currentcolor;
+  border-bottom: 7px solid var(--brand-secondary);
+  transition: transform 0.3s ease;
 }
 
 .isi-bar .isi-bar-toggle-icon::before,
@@ -190,20 +190,18 @@ blockquote p.center  {
 
 .isi-inline .isi-inline-toggle {
   position: absolute;
-  right: 16px;
+  right: 15px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background: none;
   border: 0;
   padding: 0;
   color: white;
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -211,23 +209,28 @@ blockquote p.center  {
   line-height: 1;
 }
 
-/* Downward arrow when expanded (collapse), flips up when collapsed */
+/* Orange downward arrow when expanded (collapse); flips up when collapsed */
 .isi-inline .isi-inline-toggle-icon {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 7px solid currentcolor;
-  transition: transform 0.2s;
+  border-top: 7px solid var(--brand-secondary);
+  transition: transform 0.3s ease;
 }
 
 .isi-inline.isi-collapsed .isi-inline-toggle-icon {
   transform: rotate(180deg);
 }
 
-/* Collapsed: hide everything in the inline content except the heading */
-.isi-inline.isi-collapsed > div > *:not(h3:first-of-type) {
-  display: none;
+/* Collapsible body – animates height between expanded and collapsed */
+.isi-inline .isi-inline-body {
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.isi-inline.isi-collapsed .isi-inline-body {
+  max-height: 0;
 }
 
 

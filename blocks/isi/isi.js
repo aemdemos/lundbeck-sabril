@@ -73,8 +73,21 @@ export default function decorate(block) {
   bar.addEventListener('click', scrollToInline);
 
   /* ── 3b. In-page COLLAPSE / EXPAND control ──────────────────── */
-  const inlineHeading = inlineRow.querySelector('h3');
+  const inlineInner = inlineRow.querySelector(':scope > div') || inlineRow;
+  const inlineHeading = inlineInner.querySelector('h3');
   if (inlineHeading) {
+    /* Wrap everything after the heading in a collapsible body so its
+       height can be animated (matches the source site's collapse). */
+    const body = document.createElement('div');
+    body.className = 'isi-inline-body';
+    let node = inlineHeading.nextSibling;
+    while (node) {
+      const next = node.nextSibling;
+      body.append(node);
+      node = next;
+    }
+    inlineInner.append(body);
+
     const inlineToggle = document.createElement('button');
     inlineToggle.className = 'isi-inline-toggle';
     inlineToggle.type = 'button';
@@ -92,6 +105,17 @@ export default function decorate(block) {
       const collapsed = inlineRow.classList.toggle('isi-collapsed');
       inlineToggle.setAttribute('aria-expanded', String(!collapsed));
       inlineLabel.textContent = collapsed ? 'EXPAND' : 'COLLAPSE';
+      if (collapsed) {
+        /* animate from current height down to 0 */
+        body.style.maxHeight = `${body.scrollHeight}px`;
+        requestAnimationFrame(() => { body.style.maxHeight = '0px'; });
+      } else {
+        body.style.maxHeight = `${body.scrollHeight}px`;
+        body.addEventListener('transitionend', function clear() {
+          body.style.maxHeight = '';
+          body.removeEventListener('transitionend', clear);
+        });
+      }
     });
   }
 
