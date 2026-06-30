@@ -12,7 +12,7 @@ main .section:has(.isi),
 main .section:has(.isi) > .default-content-wrapper,
 main .section.isi-container,
 main .section.isi-container > .default-content-wrapper {
-  max-width: 1170px;
+  max-width: var(--isi-section-max-width);
 }
 
 /* ── In-page inline content (Row 2) ───────────────────────────── */

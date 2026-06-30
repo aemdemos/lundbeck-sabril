@@ -23,6 +23,7 @@
   --isi-bar-height-transition-easing: ease-in-out; /* @boilerplate */
   --isi-bar-expanded-max-height: 100%; /* @boilerplate */
   --isi-content-max-width: var(--max-width-site); /* @boilerplate */
+  --isi-section-max-width: 1170px;
   --isi-bar-content-gap: 0 24px; /* @boilerplate */
   --isi-bar-col-flex-basis: 45%; /* @boilerplate */
   --isi-bar-heading-padding-bottom: 18px; /* @boilerplate */
