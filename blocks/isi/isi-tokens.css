@@ -189,8 +189,11 @@ blockquote p.center  {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 15px;
+
+  /* Full-bleed to the viewport edges: cancel main's 15px side padding */
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .isi-inline .isi-inline-toggle {
