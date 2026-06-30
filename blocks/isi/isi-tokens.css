@@ -183,9 +183,14 @@ blockquote p.center  {
   content: none;
 }
 
-/* ── In-page COLLAPSE / EXPAND control (inside purple heading) ── */
+/* ── In-page purple header bar – match source (14px / 500 / ~36px) ── */
 .isi-inline h3:first-of-type {
   position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .isi-inline .isi-inline-toggle {
