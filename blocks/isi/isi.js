@@ -72,6 +72,29 @@ export default function decorate(block) {
   toggle.addEventListener('click', scrollToInline);
   bar.addEventListener('click', scrollToInline);
 
+  /* ── 3b. In-page COLLAPSE / EXPAND control ──────────────────── */
+  const inlineHeading = inlineRow.querySelector('h3');
+  if (inlineHeading) {
+    const inlineToggle = document.createElement('button');
+    inlineToggle.className = 'isi-inline-toggle';
+    inlineToggle.type = 'button';
+    inlineToggle.setAttribute('aria-expanded', 'true');
+    const inlineLabel = document.createElement('span');
+    inlineLabel.className = 'isi-inline-toggle-label';
+    inlineLabel.textContent = 'COLLAPSE';
+    const inlineIcon = document.createElement('span');
+    inlineIcon.className = 'isi-inline-toggle-icon';
+    inlineToggle.append(inlineLabel, inlineIcon);
+    inlineHeading.append(inlineToggle);
+
+    inlineToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const collapsed = inlineRow.classList.toggle('isi-collapsed');
+      inlineToggle.setAttribute('aria-expanded', String(!collapsed));
+      inlineLabel.textContent = collapsed ? 'EXPAND' : 'COLLAPSE';
+    });
+  }
+
   /* ── 4. IntersectionObserver – show/hide the bar ────────────── */
   const observer = new IntersectionObserver(
     ([entry]) => {

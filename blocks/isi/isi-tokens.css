@@ -183,6 +183,53 @@ blockquote p.center  {
   content: none;
 }
 
+/* ── In-page COLLAPSE / EXPAND control (inside purple heading) ── */
+.isi-inline h3:first-of-type {
+  position: relative;
+}
+
+.isi-inline .isi-inline-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: white;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.isi-inline .isi-inline-toggle-label {
+  line-height: 1;
+}
+
+/* Downward arrow when expanded (collapse), flips up when collapsed */
+.isi-inline .isi-inline-toggle-icon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid currentcolor;
+  transition: transform 0.2s;
+}
+
+.isi-inline.isi-collapsed .isi-inline-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Collapsed: hide everything in the inline content except the heading */
+.isi-inline.isi-collapsed > div > *:not(h3:first-of-type) {
+  display: none;
+}
+
 
 @media (width >= 768px) {
   :root {
