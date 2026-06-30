@@ -116,25 +116,19 @@ main .isi .isi-bar ul > li {
   margin-top: 3px;
 }
 
-.isi-bar-col h3:first-of-type,
-.isi-inline h3:first-of-type {
+.isi-bar-col h3:first-of-type {
   vertical-align: middle;
   padding: 24px 16px;
   line-height: inherit;
   margin-left: -16px;
   margin-right: -16px;
 
-  span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
     display: inline-block;
-    width: 170px;
   }
 }
 
 .isi-bar .isi-bar-col > h3:first-of-type {
-  background-color: var(--brand-primary);
-}
-
-.isi-inline h3:first-of-type {
   background-color: var(--brand-primary);
 }
 
@@ -186,6 +180,7 @@ blockquote p.center  {
 
 /* ── In-page purple header bar – match source (mobile 15px / desktop 14px, 500) ── */
 .isi-inline h3:first-of-type {
+  background-color: var(--brand-primary);
   position: relative;
   font-size: 15px;
   font-weight: 500;
@@ -195,11 +190,20 @@ blockquote p.center  {
   /* Full-bleed to the viewport edges: cancel main's 15px side padding */
   margin-left: -15px;
   margin-right: -15px;
+
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
+    display: inline-block;
+  }
+}
+
+.isi-bar-toggle {
+  top: 50%;
+  right: 35px;
 }
 
 .isi-inline .isi-inline-toggle {
   position: absolute;
-  right: 15px;
+  right: 35px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-flex;
@@ -230,15 +234,38 @@ blockquote p.center  {
 /* Mobile: wrap the title to two lines and use the source's taller padding so
    the bar height matches (~89px: "IMPORTANT" / "SAFETY INFORMATION"). */
 @media (width < 768px) {
+  :root {
+    --isi-toggle-right: 35px;
+  }
+
+  .isi-bar .isi-bar-col > h3:first-of-type {
+    line-height: 1.15;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    padding-right: 84px;
+  }
+
+  .isi-bar .isi-bar-col > h3:first-of-type .isi-bar-title,
+  .isi-bar .isi-bar-col > h3:first-of-type .isi-bar-title .br {
+    display: inline-block;
+    max-inline-size: 190px;
+    text-wrap: balance;
+  }
+
+  .isi-inline .isi-inline-toggle {
+    right: 35px;
+  }
+
   .isi-inline h3:first-of-type {
     padding-top: 24px;
     padding-bottom: 25px;
   }
 
   .isi-inline h3:first-of-type
-    span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
+    span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
     display: inline-block;
-    max-width: 55%;
+    max-width: 190px;
+    text-wrap: balance;
   }
 }
 
@@ -274,7 +301,7 @@ main .isi .isi-inline li {
 
 /* Desktop/tablet: title stays on one line (override the mobile 55% cap). */
 .isi-inline h3:first-of-type
-  span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
   max-width: none;
   width: auto;
 }

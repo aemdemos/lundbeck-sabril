@@ -161,6 +161,7 @@ main .isi a:hover { /* @boilerplate */
   z-index: var(--isi-toggle-z-index); /* @boilerplate */
 }
 
+
 .isi-bar-toggle:hover { /* @boilerplate */
   color: var(--isi-toggle-hover-color); /* @boilerplate */
   border-color: var(--isi-toggle-hover-color); /* @boilerplate */

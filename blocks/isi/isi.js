@@ -39,6 +39,15 @@ export default function decorate(block) {
     barContent.append(cell);
   });
 
+  barContent.querySelectorAll('.isi-bar-col > h3:first-of-type').forEach((heading) => {
+    if (heading.querySelector('.isi-bar-title')) return;
+
+    const title = document.createElement('span');
+    title.className = 'isi-bar-title';
+    title.append(...heading.childNodes);
+    heading.append(title);
+  });
+
   /* Expand control: "EXPAND" label + arrow that scrolls to the in-page ISI */
   const toggle = document.createElement('button');
   toggle.className = 'isi-bar-toggle';
