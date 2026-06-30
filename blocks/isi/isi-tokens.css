@@ -272,6 +272,13 @@ main .isi .isi-inline li {
   }
 }
 
+/* Desktop/tablet: title stays on one line (override the mobile 55% cap). */
+.isi-inline h3:first-of-type
+  span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon) {
+  max-width: none;
+  width: auto;
+}
+
 .isi-inline h3:first-of-type {
   font-size: 14px;
 }
