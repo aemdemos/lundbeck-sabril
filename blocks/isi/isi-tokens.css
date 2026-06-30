@@ -152,14 +152,37 @@ blockquote p.center  {
   margin-top: 0;
 }
 
-main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::after {
-content: 'CONTRACT' !important;
+/* ── EXPAND control: text label + upward arrow (scrolls to in-page ISI) ── */
+.isi-bar .isi-bar-toggle {
+  border: 0;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  gap: 6px;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::before {
-  content: 'EXPAND' !important;
+.isi-bar .isi-bar-toggle-label {
+  line-height: 1;
 }
-  
+
+/* Upward arrow (replaces the old plus/minus icon) */
+.isi-bar .isi-bar-toggle-icon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid currentcolor;
+}
+
+.isi-bar .isi-bar-toggle-icon::before,
+.isi-bar .isi-bar-toggle-icon::after {
+  content: none;
+}
+
 
 @media (width >= 768px) {
   :root {
