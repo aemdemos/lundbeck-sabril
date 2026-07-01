@@ -206,7 +206,7 @@ export function decorateButtons(main) {
     // require authored formatting for buttonization
     const strong = a.closest('strong');
     const em = a.closest('em');
-    // if (!strong && !em) return;
+    if (!strong && !em) return;
 
     p.className = 'button-wrapper';
     a.className = 'button';
