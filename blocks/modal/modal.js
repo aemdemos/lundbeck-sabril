@@ -74,6 +74,7 @@ export async function openModal(fragmentUrl, targetUrl) {
   if (targetUrl) {
     block.classList.add('exit');
     const dialog = block.querySelector('dialog');
+    const actionWrappers = [];
     block.querySelectorAll('.modal-content a').forEach((a) => {
       const label = (a.title || a.textContent).trim().toLowerCase();
       a.classList.remove('primary', 'secondary', 'accent');
@@ -83,14 +84,24 @@ export async function openModal(fragmentUrl, targetUrl) {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.addEventListener('click', () => dialog.close());
+        actionWrappers.push(a.closest('.button-wrapper') || a);
       } else if (label === 'cancel') {
         a.classList.add('cancel');
         a.addEventListener('click', (e) => {
           e.preventDefault();
           dialog.close();
         });
+        actionWrappers.push(a.closest('.button-wrapper') || a);
       }
     });
+
+    // group Ok/Cancel into a centered action row
+    if (actionWrappers.length) {
+      const actions = document.createElement('div');
+      actions.className = 'modal-actions';
+      actionWrappers[0].before(actions);
+      actions.append(...actionWrappers);
+    }
   }
 
   showModal();

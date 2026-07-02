@@ -107,7 +107,8 @@ body.modal-open { /* @boilerplate */
 }
 
 .modal.exit dialog h2 {
-  margin: 0 0 15px;
+  margin: 0 0 var(--modal-exit-heading-margin-bottom);
+  padding-right: var(--modal-exit-heading-padding-right);
   color: var(--modal-exit-heading-color);
   font-size: var(--modal-exit-heading-size);
 }
@@ -139,9 +140,16 @@ body.modal-open { /* @boilerplate */
   border-radius: 3px;
 }
 
+.modal.exit dialog .modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--modal-exit-button-gap);
+  margin-top: var(--modal-exit-button-row-margin-top);
+  margin-right: -10px;
+}
+
 .modal.exit dialog .button-wrapper {
-  display: inline-block;
-  margin: var(--modal-exit-button-row-margin-top) var(--modal-exit-button-gap) 0 0;
+  margin: 0;
   padding: 0;
   text-align: center;
 }

@@ -31,5 +31,7 @@
   --modal-exit-button-font-size: 14px;
   --modal-exit-close-font-size: 25px;
   --modal-exit-content-padding: 25px 35px 25px 25px;
+  --modal-exit-heading-padding-right: 55px;
+  --modal-exit-heading-margin-bottom: 30px;
   --modal-exit-offset-top: 105px;
 }
