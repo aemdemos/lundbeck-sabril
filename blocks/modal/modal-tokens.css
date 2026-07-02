@@ -34,6 +34,7 @@
   --modal-exit-heading-padding-right: 55px;
   --modal-exit-heading-margin-bottom: 30px;
   --modal-exit-offset-top: 105px;
+  --modal-exit-bottom-gap: 40px;
 }
 
 /* exit interstitial — mobile overrides (matches source below tablet:
@@ -48,6 +49,7 @@
     --modal-exit-heading-padding-right: 20px;
     --modal-exit-heading-margin-bottom: 20px;
     --modal-exit-offset-top: 55px;
+    --modal-exit-bottom-gap: 20px;
   }
 }
 
@@ -55,6 +57,7 @@
 .modal.exit dialog {
   width: var(--modal-exit-width);
   max-width: var(--modal-exit-max-width);
+  max-height: calc(100dvh - var(--modal-exit-offset-top) - var(--modal-exit-bottom-gap));
   margin-top: var(--modal-exit-offset-top);
   margin-bottom: auto;
   border: none;
@@ -64,6 +67,7 @@
 }
 
 .modal.exit dialog .modal-content {
+  max-height: calc(100dvh - var(--modal-exit-offset-top) - var(--modal-exit-bottom-gap));
   padding: var(--modal-exit-content-padding);
   margin-top: 0;
 }
