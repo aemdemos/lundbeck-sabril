@@ -911,16 +911,27 @@ main > .section:first-of-type {
   */
 
 main>.section.divider {
-  border-bottom: var(--section-divider-width) solid var(--section-divider-color);
+  position: relative;
   padding-bottom: 10px;
   border-radius: 0;
-  margin-left: -15px;
-  margin-right: -15px;
 
   &.green {
     border-bottom: 2px solid var(--brand-green-light);
     margin: 15px auto 0;
   }
+}
+
+/* Full-bleed divider line without widening the section (keeps content aligned) */
+main>.section.divider:not(.green)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: var(--section-divider-width);
+  background-color: var(--section-divider-color);
+  pointer-events: none;
 }
 
 main>.section>div {
@@ -1153,8 +1164,8 @@ main .section[data-background-color] {
     display: revert;
   }
 
-  main>.section.divider:not(.green) {
-    border-width: 0;
+  main>.section.divider:not(.green)::after {
+    display: none;
   }
 
   main .section.stats-callout {
