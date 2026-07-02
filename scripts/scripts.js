@@ -22,6 +22,12 @@ import {
 const MAX_SECTIONS = 100;
 const MAX_SECTION_CHILDREN = 200;
 
+/** Third-party hosts that trigger the "leaving site" interstitial. */
+const INTERSTITIAL_HOSTS = [
+  'vigabatrinrems.com',
+  'aedpregnancyregistry.org',
+];
+
 /** Keys that must not be used for object/dataset assignment (CWE-915). */
 const UNSAFE_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
@@ -142,14 +148,15 @@ function autolinkModals(doc) {
       return;
     }
 
-    // external links show a "leaving site" interstitial before navigating away,
+    // only a curated set of third-party links show a "leaving site" interstitial,
     // except links inside the interstitial itself (e.g. its own "Ok" action)
     if (origin.closest('.modal')) return;
-    let external = false;
+    let gated = false;
     try {
-      external = new URL(origin.href, window.location).hostname !== window.location.hostname;
-    } catch { external = false; }
-    if (external && origin.protocol.startsWith('http')) {
+      const { hostname } = new URL(origin.href, window.location);
+      gated = INTERSTITIAL_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
+    } catch { gated = false; }
+    if (gated && origin.protocol.startsWith('http')) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
       openModal('/modals/exit', origin.href);
