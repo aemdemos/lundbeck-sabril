@@ -20,11 +20,13 @@
   --modal-exit-heading-size: 22px;
   --modal-exit-body-size: 16px;
   --modal-exit-close-background: var(--brand-green-light);
-  --modal-exit-close-size: 44px;
+  --modal-exit-close-width: 66px;
+  --modal-exit-close-height: 75px;
   --modal-exit-button-ok-background: var(--brand-orange);
   --modal-exit-button-cancel-background: #999;
   --modal-exit-button-radius: 8px;
   --modal-exit-button-padding: 8px 60px;
   --modal-exit-button-font-size: 14px;
   --modal-exit-close-font-size: 25px;
+  --modal-exit-offset-top: 30px;
 }

@@ -142,7 +142,9 @@ function autolinkModals(doc) {
       return;
     }
 
-    // external links show a "leaving site" interstitial before navigating away
+    // external links show a "leaving site" interstitial before navigating away,
+    // except links inside the interstitial itself (e.g. its own "Ok" action)
+    if (origin.closest('.modal')) return;
     let external = false;
     try {
       external = new URL(origin.href, window.location).hostname !== window.location.hostname;
