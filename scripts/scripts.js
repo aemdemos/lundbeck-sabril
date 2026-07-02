@@ -22,10 +22,15 @@ import {
 const MAX_SECTIONS = 100;
 const MAX_SECTION_CHILDREN = 200;
 
-/** Third-party hosts that trigger the "leaving site" interstitial. */
-const INTERSTITIAL_HOSTS = [
-  'vigabatrinrems.com',
-  'aedpregnancyregistry.org',
+/**
+ * Hosts exempt from the "leaving site" interstitial: the site's own domains
+ * (incl. links authored as absolute URLs) plus approved external domains.
+ */
+const INTERSTITIAL_EXEMPT_HOSTS = [
+  'sabril.net',
+  'aem.page',
+  'aem.live',
+  'lundbeck.com',
 ];
 
 /** Keys that must not be used for object/dataset assignment (CWE-915). */
@@ -148,13 +153,15 @@ function autolinkModals(doc) {
       return;
     }
 
-    // only a curated set of third-party links show a "leaving site" interstitial,
-    // except links inside the interstitial itself (e.g. its own "Ok" action)
+    // external links show a "leaving site" interstitial before navigating away,
+    // except same-site links, exempt hosts, and links inside the interstitial itself
     if (origin.closest('.modal')) return;
     let gated = false;
     try {
       const { hostname } = new URL(origin.href, window.location);
-      gated = INTERSTITIAL_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
+      const isSameSite = hostname === window.location.hostname;
+      const isExempt = INTERSTITIAL_EXEMPT_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
+      gated = !isSameSite && !isExempt;
     } catch { gated = false; }
     if (gated && origin.protocol.startsWith('http')) {
       e.preventDefault();
