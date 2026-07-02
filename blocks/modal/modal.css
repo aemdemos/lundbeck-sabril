@@ -126,6 +126,7 @@ body.modal-open { /* @boilerplate */
   color: var(--background-color);
   font-size: var(--modal-exit-close-font-size);
   font-weight: var(--font-weight-bold);
+  transition: none;
 }
 
 .modal.exit .close-button .icon.icon-close {
