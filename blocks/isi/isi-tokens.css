@@ -50,6 +50,21 @@
   --isi-bar-heading-color: white; /* @boilerplate */
 }
 
+/* Widen the ISI section to the source site's 1170px content width
+   (purple bar then bleeds 15px each side to reach the source's 1200px).
+   The constraining wrappers are ancestors of the .isi block. */
+main .section:has(.isi),
+main .section:has(.isi) > .default-content-wrapper,
+main .section.isi-container,
+main .section.isi-container > .default-content-wrapper {
+  max-width: var(--isi-section-max-width);
+}
+
+/* Match the fixed-bar inner wrapper to the same widened content width. */
+.isi-bar .isi-bar-content {
+  max-width: var(--isi-section-max-width);
+}
+
 main .isi .isi-bar ul > li {
   color: var(--text-color);
 }
