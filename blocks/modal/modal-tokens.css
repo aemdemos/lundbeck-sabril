@@ -10,4 +10,18 @@
   --modal-close-button-size: 44px; /* @boilerplate */
   --modal-close-icon-size: var(--icon-size); /* @boilerplate */
   --modal-close-icon-thickness: 2px; /* @boilerplate */
+
+  /* exit interstitial ("Leaving www.Sabril.net") */
+  --modal-exit-width: 600px;
+  --modal-exit-radius: 15px;
+  --modal-exit-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+  --modal-exit-padding: 25px;
+  --modal-exit-heading-color: var(--brand-purple);
+  --modal-exit-heading-size: 22px;
+  --modal-exit-body-size: 16px;
+  --modal-exit-close-background: var(--brand-green-light);
+  --modal-exit-close-size: 44px;
+  --modal-exit-button-ok-background: var(--brand-orange);
+  --modal-exit-button-cancel-background: #999;
+  --modal-exit-button-radius: 8px;
 }

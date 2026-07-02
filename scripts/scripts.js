@@ -133,10 +133,24 @@ async function loadFonts() {
 function autolinkModals(doc) {
   doc.addEventListener('click', async (e) => {
     const origin = e.target.closest('a');
-    if (origin && origin.href && origin.href.includes('/modals/')) {
+    if (!origin || !origin.href) return;
+
+    if (origin.href.includes('/modals/')) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
       openModal(origin.href);
+      return;
+    }
+
+    // external links show a "leaving site" interstitial before navigating away
+    let external = false;
+    try {
+      external = new URL(origin.href, window.location).hostname !== window.location.hostname;
+    } catch { external = false; }
+    if (external && origin.protocol.startsWith('http')) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal('/modals/exit', origin.href);
     }
   });
 }

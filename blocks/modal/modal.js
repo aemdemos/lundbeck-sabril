@@ -62,12 +62,36 @@ export async function createModal(contentNodes) {
   };
 }
 
-export async function openModal(fragmentUrl) {
+export async function openModal(fragmentUrl, targetUrl) {
   const path = fragmentUrl.startsWith('http')
     ? new URL(fragmentUrl, window.location).pathname
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  const { showModal } = await createModal(fragment.childNodes);
+  const { block, showModal } = await createModal(fragment.childNodes);
+
+  // interstitial: wire the Ok/Cancel actions to the outgoing link
+  if (targetUrl) {
+    block.classList.add('exit');
+    const dialog = block.querySelector('dialog');
+    block.querySelectorAll('.modal-content a[href="#"]').forEach((a) => {
+      const label = (a.title || a.textContent).trim().toLowerCase();
+      a.classList.remove('primary', 'secondary', 'accent');
+      if (label === 'ok') {
+        a.classList.add('ok');
+        a.href = targetUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.addEventListener('click', () => dialog.close());
+      } else {
+        a.classList.add('cancel');
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          dialog.close();
+        });
+      }
+    });
+  }
+
   showModal();
 }

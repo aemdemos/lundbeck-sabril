@@ -84,3 +84,68 @@ body.modal-open { /* @boilerplate */
     padding-top: 0; /* @boilerplate */
   }
 }
+
+/* exit interstitial variant */
+.modal.exit dialog {
+  width: var(--modal-exit-width);
+  max-width: calc(100vw - 30px);
+  border: none;
+  border-radius: var(--modal-exit-radius);
+  box-shadow: var(--modal-exit-shadow);
+  overflow: hidden;
+}
+
+.modal.exit dialog .modal-content {
+  padding: var(--modal-exit-padding);
+  margin-top: 0;
+}
+
+.modal.exit dialog .section > .default-content-wrapper {
+  padding: 0;
+}
+
+.modal.exit dialog h2 {
+  margin: 0 0 15px;
+  color: var(--modal-exit-heading-color);
+  font-size: var(--modal-exit-heading-size);
+}
+
+.modal.exit dialog p {
+  font-size: var(--modal-exit-body-size);
+  line-height: var(--body-line-height);
+}
+
+.modal.exit .close-button {
+  width: var(--modal-exit-close-size);
+  height: var(--modal-exit-close-size);
+  border-radius: 0 var(--modal-exit-radius) 0 0;
+  background-color: var(--modal-exit-close-background);
+  color: var(--background-color);
+}
+
+.modal.exit dialog .button-wrapper {
+  display: inline-block;
+  margin: 15px 5px 0 0;
+  text-align: center;
+}
+
+.modal.exit dialog a.button {
+  margin: 0;
+  border: none;
+  border-radius: var(--modal-exit-button-radius);
+  color: var(--background-color);
+}
+
+.modal.exit dialog a.button.ok {
+  background-color: var(--modal-exit-button-ok-background);
+}
+
+.modal.exit dialog a.button.cancel {
+  background-color: var(--modal-exit-button-cancel-background);
+}
+
+@media (width >= 992px) {
+  .modal.exit dialog {
+    width: var(--modal-exit-width);
+  }
+}
