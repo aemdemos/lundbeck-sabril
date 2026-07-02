@@ -98,7 +98,7 @@ body.modal-open { /* @boilerplate */
 }
 
 .modal.exit dialog .modal-content {
-  padding: var(--modal-exit-padding);
+  padding: var(--modal-exit-content-padding);
   margin-top: 0;
 }
 
@@ -127,9 +127,22 @@ body.modal-open { /* @boilerplate */
   font-weight: var(--font-weight-bold);
 }
 
+.modal.exit .close-button .icon.icon-close {
+  width: var(--modal-exit-close-font-size);
+  height: var(--modal-exit-close-font-size);
+}
+
+.modal.exit .close-button .icon.icon-close::before,
+.modal.exit .close-button .icon.icon-close::after {
+  width: var(--modal-exit-close-font-size);
+  height: 3px;
+  border-radius: 3px;
+}
+
 .modal.exit dialog .button-wrapper {
   display: inline-block;
-  margin: 15px 5px 0 0;
+  margin: var(--modal-exit-button-row-margin-top) var(--modal-exit-button-gap) 0 0;
+  padding: 0;
   text-align: center;
 }
 

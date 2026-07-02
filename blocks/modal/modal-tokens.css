@@ -25,8 +25,11 @@
   --modal-exit-button-ok-background: var(--brand-orange);
   --modal-exit-button-cancel-background: #999;
   --modal-exit-button-radius: 8px;
-  --modal-exit-button-padding: 8px 60px;
+  --modal-exit-button-padding: 6px 74px;
+  --modal-exit-button-gap: 5px;
+  --modal-exit-button-row-margin-top: 15px;
   --modal-exit-button-font-size: 14px;
   --modal-exit-close-font-size: 25px;
-  --modal-exit-offset-top: 30px;
+  --modal-exit-content-padding: 25px 35px 25px 25px;
+  --modal-exit-offset-top: 105px;
 }
