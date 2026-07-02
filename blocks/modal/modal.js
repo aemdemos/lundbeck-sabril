@@ -74,7 +74,7 @@ export async function openModal(fragmentUrl, targetUrl) {
   if (targetUrl) {
     block.classList.add('exit');
     const dialog = block.querySelector('dialog');
-    block.querySelectorAll('.modal-content a[href="#"]').forEach((a) => {
+    block.querySelectorAll('.modal-content a').forEach((a) => {
       const label = (a.title || a.textContent).trim().toLowerCase();
       a.classList.remove('primary', 'secondary', 'accent');
       if (label === 'ok') {
@@ -83,7 +83,7 @@ export async function openModal(fragmentUrl, targetUrl) {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.addEventListener('click', () => dialog.close());
-      } else {
+      } else if (label === 'cancel') {
         a.classList.add('cancel');
         a.addEventListener('click', (e) => {
           e.preventDefault();

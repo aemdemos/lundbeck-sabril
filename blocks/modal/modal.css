@@ -121,6 +121,7 @@ body.modal-open { /* @boilerplate */
   border-radius: 0 var(--modal-exit-radius) 0 0;
   background-color: var(--modal-exit-close-background);
   color: var(--background-color);
+  font-size: var(--modal-exit-close-font-size);
 }
 
 .modal.exit dialog .button-wrapper {
@@ -133,7 +134,9 @@ body.modal-open { /* @boilerplate */
   margin: 0;
   border: none;
   border-radius: var(--modal-exit-button-radius);
+  padding: var(--modal-exit-button-padding);
   color: var(--background-color);
+  font-size: var(--modal-exit-button-font-size);
 }
 
 .modal.exit dialog a.button.ok {
