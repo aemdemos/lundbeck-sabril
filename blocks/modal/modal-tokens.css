@@ -37,16 +37,17 @@
   --modal-exit-offset-top: 105px;
 }
 
-/* exit interstitial — mobile overrides (matches source below tablet) */
+/* exit interstitial — mobile overrides (matches source below tablet:
+   full-width dialog, smaller close button, same content padding) */
 @media (width < 768px) {
   :root {
+    --modal-exit-width: calc(100vw - 20px);
+    --modal-exit-max-width: calc(100vw - 20px);
     --modal-exit-close-width: 43px;
     --modal-exit-close-height: 50px;
     --modal-exit-close-font-size: 20px;
-    --modal-exit-content-padding: 20px 25px 20px 20px;
     --modal-exit-heading-padding-right: 20px;
     --modal-exit-heading-margin-bottom: 20px;
     --modal-exit-offset-top: 55px;
-    --modal-exit-max-width: calc(100vw - 20px);
   }
 }
