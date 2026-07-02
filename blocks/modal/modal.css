@@ -88,7 +88,7 @@ body.modal-open { /* @boilerplate */
 /* exit interstitial variant */
 .modal.exit dialog {
   width: var(--modal-exit-width);
-  max-width: calc(100vw - 30px);
+  max-width: var(--modal-exit-max-width);
   margin-top: var(--modal-exit-offset-top);
   margin-bottom: auto;
   border: none;
