@@ -23,6 +23,7 @@
   --isi-bar-height-transition-easing: ease-in-out; /* @boilerplate */
   --isi-bar-expanded-max-height: 100%; /* @boilerplate */
   --isi-content-max-width: var(--max-width-site); /* @boilerplate */
+  --isi-section-max-width: 1180px;
   --isi-bar-content-gap: 0 24px; /* @boilerplate */
   --isi-bar-col-flex-basis: 45%; /* @boilerplate */
   --isi-bar-heading-padding-bottom: 18px; /* @boilerplate */
@@ -47,6 +48,21 @@
   --isi-toggle-right-mobile: 16px; /* @boilerplate */
   --isi-toggle-right-desktop: 40px; /* @boilerplate */
   --isi-bar-heading-color: white; /* @boilerplate */
+}
+
+/* Widen the ISI section to the source site's 1170px content width
+   (purple bar then bleeds 15px each side to reach the source's 1200px).
+   The constraining wrappers are ancestors of the .isi block. */
+main .section:has(.isi),
+main .section:has(.isi) > .default-content-wrapper,
+main .section.isi-container,
+main .section.isi-container > .default-content-wrapper {
+  max-width: var(--isi-section-max-width);
+}
+
+/* Match the fixed-bar inner wrapper to the same widened content width. */
+.isi-bar .isi-bar-content {
+  max-width: var(--isi-section-max-width);
 }
 
 main .isi .isi-bar ul > li {
@@ -115,25 +131,19 @@ main .isi .isi-bar ul > li {
   margin-top: 3px;
 }
 
-.isi-bar-col h3:first-of-type,
-.isi-inline h3:first-of-type {
+.isi-bar-col h3:first-of-type {
   vertical-align: middle;
   padding: 24px 16px;
   line-height: inherit;
   margin-left: -16px;
   margin-right: -16px;
 
-  span {
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
     display: inline-block;
-    width: 170px;
   }
 }
 
 .isi-bar .isi-bar-col > h3:first-of-type {
-  background-color: var(--brand-primary);
-}
-
-.isi-inline h3:first-of-type {
   background-color: var(--brand-primary);
 }
 
@@ -152,14 +162,128 @@ blockquote p.center  {
   margin-top: 0;
 }
 
-main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::after {
-content: 'CONTRACT' !important;
+/* ── Fixed-bar EXPAND control: white "EXPAND" + orange up-arrow ── */
+.isi-bar .isi-bar-toggle {
+  border: 0;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  gap: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
 }
 
-main .isi-bar button.isi-toggle span.isi-bar-toggle-icon::before {
-  content: 'EXPAND' !important;
+.isi-bar .isi-bar-toggle-label {
+  line-height: 1;
 }
-  
+
+/* Orange upward arrow (replaces the old plus/minus icon) */
+.isi-bar .isi-bar-toggle-icon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid var(--brand-secondary);
+  transition: transform 0.3s ease;
+}
+
+.isi-bar .isi-bar-toggle-icon::before,
+.isi-bar .isi-bar-toggle-icon::after {
+  content: none;
+}
+
+/* ── In-page purple header bar – match source (mobile 15px / desktop 14px, 500) ── */
+.isi-inline h3:first-of-type {
+  background-color: var(--brand-primary);
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 8px 15px;
+
+  /* Full-bleed to the viewport edges: cancel main's 15px side padding */
+  margin-left: -15px;
+  margin-right: -15px;
+
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
+    display: inline-block;
+  }
+}
+
+.isi-bar-toggle {
+  top: 50%;
+  right: 35px;
+}
+
+.isi-inline .isi-inline-toggle {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.isi-inline .isi-inline-toggle-label {
+  line-height: 1;
+}
+
+/* Orange downward arrow (matches source glyphicon-triangle-bottom) */
+.isi-inline .isi-inline-toggle-icon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--brand-secondary);
+}
+
+/* Mobile: wrap the title to two lines and use the source's taller padding so
+   the bar height matches (~89px: "IMPORTANT" / "SAFETY INFORMATION"). */
+@media (width < 768px) {
+  :root {
+    --isi-toggle-right: 35px;
+  }
+
+  .isi-bar .isi-bar-col > h3:first-of-type {
+    line-height: 1.15;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    padding-right: 84px;
+  }
+
+  .isi-bar .isi-bar-col > h3:first-of-type .isi-bar-title,
+  .isi-bar .isi-bar-col > h3:first-of-type .isi-bar-title .br {
+    display: inline-block;
+    max-inline-size: 190px;
+    text-wrap: balance;
+  }
+
+  .isi-inline .isi-inline-toggle {
+    right: 35px;
+  }
+
+  .isi-inline h3:first-of-type {
+    padding-top: 24px;
+    padding-bottom: 25px;
+  }
+
+  .isi-inline h3:first-of-type
+    span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
+    display: inline-block;
+    max-width: 190px;
+    text-wrap: balance;
+  }
+}
+
 
 @media (width >= 768px) {
   :root {
@@ -188,6 +312,17 @@ main .isi .isi-inline li {
   span {
     width: unset;
   }
+}
+
+/* Desktop/tablet: title stays on one line (override the mobile 55% cap). */
+.isi-inline h3:first-of-type
+  span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
+  max-width: none;
+  width: auto;
+}
+
+.isi-inline h3:first-of-type {
+  font-size: 14px;
 }
 }
 

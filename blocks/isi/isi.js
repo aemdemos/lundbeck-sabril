@@ -7,7 +7,7 @@
  *
  * Behaviour:
  *   • When the ISI **section** is outside the viewport the fixed bar is visible.
- *   • Clicking the "+" expands the bar (adds `.full`); clicking "−" collapses it.
+ *   • Clicking the bar (or its "EXPAND" control) smooth-scrolls to the in-page ISI content.
  *   • Once the section scrolls into view the bar hides and the inline content displays.
  *
  * @param {HTMLElement} block
@@ -39,15 +39,26 @@ export default function decorate(block) {
     barContent.append(cell);
   });
 
-  /* Toggle button (+/−) */
+  barContent.querySelectorAll('.isi-bar-col > h3:first-of-type').forEach((heading) => {
+    if (heading.querySelector('.isi-bar-title')) return;
+
+    const title = document.createElement('span');
+    title.className = 'isi-bar-title';
+    title.append(...heading.childNodes);
+    heading.append(title);
+  });
+
+  /* Expand control: "EXPAND" label + arrow that scrolls to the in-page ISI */
   const toggle = document.createElement('button');
   toggle.className = 'isi-bar-toggle';
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'Expand safety information');
+  toggle.setAttribute('aria-label', 'View full safety information');
   toggle.type = 'button';
+  const label = document.createElement('span');
+  label.className = 'isi-bar-toggle-label';
+  label.textContent = 'EXPAND';
   const icon = document.createElement('span');
   icon.className = 'isi-bar-toggle-icon';
-  toggle.append(icon);
+  toggle.append(label, icon);
 
   bar.append(barContent);
   bar.append(toggle);
@@ -58,36 +69,63 @@ export default function decorate(block) {
   /* Append bar to <body> so it sits outside the page flow */
   document.body.append(bar);
 
-  /* ── 3. Expand / collapse toggle ────────────────────────────── */
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const expanded = bar.classList.toggle('full');
-    toggle.setAttribute('aria-expanded', String(expanded));
-    toggle.setAttribute(
-      'aria-label',
-      expanded ? 'Collapse safety information' : 'Expand safety information',
-    );
-  });
-
-  /* Clicking anywhere on the collapsed bar also expands it */
-  bar.addEventListener('click', () => {
-    if (!bar.classList.contains('full')) {
-      bar.classList.add('full');
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Collapse safety information');
-    }
-  });
-
-  /* ── 4. IntersectionObserver – show/hide the bar ────────────── */
+  /* ── 3. Scroll to in-page ISI content ───────────────────────── */
   const section = block.closest('.section');
   if (!section) return;
 
+  /* Animate the page scroll over a fixed duration (matches the source
+     site's 2s jQuery animate; native smooth scroll is too fast). */
+  const SCROLL_DURATION = 2000;
+  const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  const animateScrollTo = (targetY) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const startTime = performance.now();
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / SCROLL_DURATION, 1);
+      window.scrollTo(0, startY + distance * easeInOut(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const scrollToInline = (e) => {
+    e.stopPropagation();
+    const targetY = section.getBoundingClientRect().top + window.scrollY;
+    animateScrollTo(targetY);
+  };
+
+  toggle.addEventListener('click', scrollToInline);
+  bar.addEventListener('click', scrollToInline);
+
+  /* ── 3b. In-page COLLAPSE control – scrolls back to top of page ── */
+  const inlineInner = inlineRow.querySelector(':scope > div') || inlineRow;
+  const inlineHeading = inlineInner.querySelector('h3');
+  if (inlineHeading) {
+    const inlineToggle = document.createElement('button');
+    inlineToggle.className = 'isi-inline-toggle';
+    inlineToggle.type = 'button';
+    inlineToggle.setAttribute('aria-label', 'Back to top');
+    const inlineLabel = document.createElement('span');
+    inlineLabel.className = 'isi-inline-toggle-label';
+    inlineLabel.textContent = 'COLLAPSE';
+    const inlineIcon = document.createElement('span');
+    inlineIcon.className = 'isi-inline-toggle-icon';
+    inlineToggle.append(inlineLabel, inlineIcon);
+    inlineHeading.append(inlineToggle);
+
+    inlineToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      animateScrollTo(0);
+    });
+  }
+
+  /* ── 4. IntersectionObserver – show/hide the bar ────────────── */
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
         bar.classList.add('isi-bar-hidden');
-        bar.classList.remove('full');
-        toggle.setAttribute('aria-expanded', 'false');
       } else {
         bar.classList.remove('isi-bar-hidden');
       }
