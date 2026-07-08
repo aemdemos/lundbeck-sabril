@@ -1,13 +1,6 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
-import expandDecorate from '../accordion-expand/accordion-expand.js';
 
 export default function decorate(block) {
-  if (block.classList.contains('expand')) {
-    block.classList.remove('accordion', 'expand');
-    block.classList.add('accordion-expand');
-    return expandDecorate(block);
-  }
-
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
