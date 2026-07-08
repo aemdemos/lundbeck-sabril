@@ -1,5 +1,4 @@
-/* accordion design tokens — mobile-first defaults; tablet+ overrides live in the
-   width >= 768px block of accordion.css */
+/* accordion design tokens — mobile-first defaults; tablet+ overrides below */
 :root { /* @libs */
   /* item card */
   --accordion-item-bg: var(--card-bg-light); /* @libs */
@@ -16,7 +15,7 @@
   --accordion-label-line-height: 1.1; /* @libs */
   --accordion-label-padding-right: 34px; /* @libs */
 
-  /* expand/collapse chevron */
+  /* expand/collapse chevron (default accordion items) */
   --accordion-icon-size: 15px; /* @libs */
   --accordion-icon-thickness: 2px; /* @libs */
   --accordion-icon-color: var(--brand-primary); /* @libs */
