@@ -111,7 +111,7 @@ function scheduleTabsRowResyncIfNeeded(mutation) {
 }
 
 const setupObservers = () => {
-  const mutatingBlocks = document.querySelectorAll('div.cards, div.carousel, div.accordion, div.accordion-expand, div.tabs');
+  const mutatingBlocks = document.querySelectorAll('div.cards, div.carousel, div.accordion, div.tabs');
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'childList' && mutation.target.tagName === 'DIV') {
@@ -158,17 +158,6 @@ const setupObservers = () => {
               const addedLabel = added.querySelector('.accordion-item-label');
               const addedBody = added.querySelector('.accordion-item-body');
               if (removed.children[0] && addedLabel) moveInstrumentation(removed.children[0], addedLabel);
-              if (removed.children[1] && addedBody) moveInstrumentation(removed.children[1], addedBody);
-            }
-            break;
-          case 'accordion-expand':
-            if (addedElements.length === 1 && addedElements[0].matches('li.accordion-expand-item')) {
-              const removed = removedElements[0];
-              const added = addedElements[0];
-              moveInstrumentation(removed, added);
-              const addedToggle = added.querySelector('.accordion-expand-item-toggle');
-              const addedBody = added.querySelector('.accordion-expand-item-body');
-              if (removed.children[0] && addedToggle) moveInstrumentation(removed.children[0], addedToggle);
               if (removed.children[1] && addedBody) moveInstrumentation(removed.children[1], addedBody);
             }
             break;

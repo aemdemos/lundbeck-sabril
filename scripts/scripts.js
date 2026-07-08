@@ -968,6 +968,19 @@ function decorateNestedSections(main) {
 /* === END BRACKET TAGS === */
 
 /**
+ * Legacy authored content uses the Accordion (expand) variant, which renders
+ * as `.accordion.expand`. Remap to the dedicated accordion-expand block before
+ * block decoration picks the first class name as the block id.
+ * @param {Element} main The main element
+ */
+function remapAccordionExpandBlocks(main) {
+  main.querySelectorAll('.accordion.expand').forEach((block) => {
+    block.classList.remove('accordion', 'expand');
+    block.classList.add('accordion-expand');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -977,6 +990,7 @@ export function decorateMain(main) {
   decorateIconsAndBullets(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  remapAccordionExpandBlocks(main);
   decorateBlocks(main);
   decorateNestedSections(main);
   decorateButtons(main);
