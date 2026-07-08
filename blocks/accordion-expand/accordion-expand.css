@@ -92,8 +92,7 @@ main .section[data-background-color]:has(.accordion-expand) .default-content-wra
   }
 }
 
-main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wrapper,
-main .section[data-background-color]:has(.accordion-expand) .accordion-wrapper {
+main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wrapper {
   display: flow-root;
 }
 
