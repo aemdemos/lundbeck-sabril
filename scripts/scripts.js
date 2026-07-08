@@ -970,6 +970,18 @@ function decorateNestedSections(main) {
 /* === END BRACKET TAGS === */
 
 /**
+ * Authored "Accordion (expand)" renders as `.accordion.expand`; normalize to the
+ * accordion-expand block before decoration picks the first class as the block id.
+ * @param {Element} main The main element
+ */
+function normalizeAccordionExpandBlocks(main) {
+  main.querySelectorAll('.accordion.expand').forEach((block) => {
+    block.classList.remove('accordion', 'expand');
+    block.classList.add('accordion-expand');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -979,6 +991,7 @@ export function decorateMain(main) {
   decorateIconsAndBullets(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  normalizeAccordionExpandBlocks(main);
   decorateBlocks(main);
   decorateNestedSections(main);
   decorateButtons(main);

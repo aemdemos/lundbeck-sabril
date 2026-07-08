@@ -1,26 +1,49 @@
 {
   "definitions": [
+
     {
-      "title": "Accordion Expand",
-      "id": "accordion-expand",
+      "title": "Accordion Expand Item",
+      "id": "accordion-expand-item",
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Accordion Expand",
-              "filter": "accordion-expand"
+              "name": "Accordion Expand Item",
+              "model": "accordion-expand-item",
+              "summary": "Lorem Ipsum",
+              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat consequat dui, sit amet ...</p>"
             }
           }
         }
       }
     }
   ],
-  "models": [],
+  "models": [
+    {
+      "id": "accordion-expand-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "summary",
+          "value": "",
+          "label": "Summary"
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
   "filters": [
     {
       "id": "accordion-expand",
-      "components": ["accordion-item"]
+      "components": ["accordion-expand-item"]
     }
   ]
 }

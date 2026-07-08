@@ -30,7 +30,7 @@
   {
     "id": "accordion-expand",
     "components": [
-      "accordion-item"
+      "accordion-expand-item"
     ]
   },
   {

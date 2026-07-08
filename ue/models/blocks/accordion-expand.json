@@ -12,14 +12,53 @@
           "columns": 0
         }
       }
+    },
+    {
+      "title": "Accordion Expand Item",
+      "id": "accordion-expand-item",
+      "model": "accordion-expand-item",
+      "plugins": {
+        "da": {
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            { "name": "summary", "selector": "div:nth-child(1)" },
+            { "name": "text", "selector": "div:nth-child(2)" }
+          ]
+        }
+      }
     }
   ],
-  "models": [],
+  "models": [
+    {
+      "title": "Accordion Expand Item",
+      "id": "accordion-expand-item",
+      "model": "accordion-expand-item",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "summary",
+          "value": "summary",
+          "label": "Summary",
+          "required": true
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "text",
+          "label": "Text",
+          "valueType": "string",
+          "required": true
+        }
+      ]
+    }
+  ],
   "filters": [
     {
       "id": "accordion-expand",
       "components": [
-        "accordion-item"
+        "accordion-expand-item"
       ]
     }
   ]

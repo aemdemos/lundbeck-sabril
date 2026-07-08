@@ -1,5 +1,13 @@
 @import url('./accordion-expand-tokens.css');
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/glyphicons-halflings-regular.woff2') format('woff2');
+}
+
 /* ── Grey accordion section (reference .accordian.bgGrey) ── */
 
 main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1,
@@ -28,28 +36,23 @@ main .section[data-background-color]:has(.accordion-expand) + .section[data-back
 /* sabril.net: approved-use section has no rounded container (reference .bottomTxtOuter) */
 main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section {
   border-radius: 0;
+  position: relative;
+  margin-top: 0;
+  padding-top: 20px;
+  border-top: 0;
 }
 
 /* sabril.net mobile: straight divider above approved-use (reference .bottomTxtOuter) */
-@media (width < 768px) {
-  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section {
-    position: relative;
-    margin-top: 0;
-    padding-top: 20px;
-    border-top: 0;
-  }
-
-  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: var(--section-divider-width);
-    background-color: var(--section-divider-color);
-    pointer-events: none;
-  }
+main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: var(--section-divider-width);
+  background-color: var(--section-divider-color);
+  pointer-events: none;
 }
 
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
@@ -72,43 +75,8 @@ main .section[data-background-color]:has(.accordion-expand) .default-content-wra
   line-height: 1.42857143;
 }
 
-@media (width >= 768px) {
-  main .section[data-background-color]:has(.accordion-expand) {
-    padding: 0 40px 25px;
-  }
-
-  /* sabril.net tablet+: second grey accordion margin-bottom 25px (reference .accordian.bgGrey) */
-  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) {
-    margin-bottom: 25px;
-  }
-
-  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
-  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
-    margin-top: 30px;
-  }
-
-  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:last-of-type {
-    margin-top: 16px;
-  }
-}
-
 main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wrapper {
   display: flow-root;
-}
-
-@media (width >= 992px) {
-  /* sabril.net desktop: page title spans full content width (matches .bgGrey) */
-  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) {
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) > div {
-    max-width: none;
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 /* ── Block layout ── */
@@ -154,6 +122,7 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 .accordion-expand .accordion-expand-item-body ul, /* @libs */
 .accordion-expand .accordion-expand-item-body ol { /* @libs */
   margin: 0; /* @libs */
+  margin-bottom: 0;
   padding-left: 20px; /* @libs */
   font-size: var(--accordion-expand-body-list-font-size); /* @libs */
 }
@@ -179,14 +148,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 
 /* ── Expand/collapse toggle ── */
 
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../../fonts/glyphicons-halflings-regular.woff2') format('woff2');
-}
-
 .accordion-expand .accordion-expand-item--toggle {
   display: flow-root;
   width: 100%;
@@ -211,17 +172,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
   line-height: var(--accordion-expand-toggle-line-height);
   text-align: left;
   max-width: none;
-}
-
-@media (width >= 768px) {
-  /* sabril.net: float:right on tablet+ */
-  .accordion-expand .accordion-expand-item-toggle {
-    float: right;
-  }
-
-  .accordion-expand .accordion-expand-item--toggle.active .accordion-expand-item-body {
-    clear: both;
-  }
 }
 
 .accordion-expand .accordion-expand-item-toggle:hover,
@@ -275,8 +225,10 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 /* CTA links in accordion body — keep filled button colors */
 .accordion-expand .accordion-expand-item-body a.button {
   display: inline-block;
-  margin-top: 20px;
+  white-space: normal;
+  margin-top: 10px;
   margin-bottom: 10px;
+  padding: 8px 34px;
   color: var(--button-primary-color);
   background-color: var(--button-primary-background);
   border-color: var(--button-primary-border-color);
@@ -315,16 +267,68 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
   border-color: var(--button-accent-hover-border-color);
 }
 
-@media (width < 768px) {
-  /* sabril.net mobile: wider CTA padding inside accordion */
+@media (width >= 768px) {
+  main .section[data-background-color]:has(.accordion-expand) {
+    padding: 0 40px 25px;
+  }
+
+  /* sabril.net tablet+: second grey accordion margin-bottom 25px (reference .accordian.bgGrey) */
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) {
+    margin-bottom: 25px;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section {
+    position: static;
+    margin-top: revert;
+    padding-top: revert;
+    border-top: revert;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section::before {
+    content: none;
+    display: none;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
+    margin-top: 30px;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:last-of-type {
+    margin-top: 16px;
+  }
+
+  /* sabril.net: float:right on tablet+ */
+  .accordion-expand .accordion-expand-item-toggle {
+    float: right;
+  }
+
+  .accordion-expand .accordion-expand-item--toggle.active .accordion-expand-item-body {
+    clear: both;
+  }
+
   .accordion-expand .accordion-expand-item-body a.button {
-    white-space: normal;
-    margin-top: 10px;
-    padding: 8px 34px;
+    margin-top: 20px;
+    padding: revert;
   }
 
   .accordion-expand .accordion-expand-item-body ul,
   .accordion-expand .accordion-expand-item-body ol {
-    margin-bottom: 0;
+    margin-bottom: revert;
+  }
+}
+
+@media (width >= 992px) {
+  /* sabril.net desktop: page title spans full content width (matches .bgGrey) */
+  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) > div {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
