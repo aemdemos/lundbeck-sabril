@@ -158,13 +158,15 @@ function autolinkModals(doc) {
     // external links show a "leaving site" interstitial before navigating away,
     // except same-site links, exempt hosts, and links inside the interstitial itself
     if (origin.closest('.modal')) return;
-    let gated = false;
+    let gated;
     try {
       const { hostname } = new URL(origin.href, window.location);
       const isSameSite = hostname === window.location.hostname;
       const isExempt = INTERSTITIAL_EXEMPT_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
       gated = !isSameSite && !isExempt;
-    } catch { gated = false; }
+    } catch {
+      gated = false;
+    }
     if (gated && origin.protocol.startsWith('http')) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
