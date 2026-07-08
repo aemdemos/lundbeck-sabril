@@ -2,6 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const isDesktop = window.matchMedia('(min-width: 768px)');
+const canHover = window.matchMedia('(hover: hover)');
 const mobileMenuAnimationMs = 500;
 const mobileMenuTimers = new WeakMap();
 
@@ -209,11 +210,12 @@ function decorateNavLinks(section) {
         syncMobileMenuHeight(li);
       });
       // Desktop touch fallback only: on a desktop touch device (no hover),
-      // tapping the parent toggles its submenu instead of navigating. On
-      // mobile (< 768px) the source navigates directly on tap, so the link is
-      // left alone there.
+      // tapping the parent toggles its submenu instead of navigating. On a
+      // desktop with a mouse (hover available), the parent link navigates
+      // normally and the submenu opens on hover. On mobile (< 768px) the
+      // source navigates directly on tap, so the link is left alone there.
       li.addEventListener('click', (e) => {
-        if (!isDesktop.matches) return;
+        if (!isDesktop.matches || canHover.matches) return;
         const parentLink = li.querySelector(':scope > p > a, :scope > a');
         if (e.target.closest('a') === parentLink) {
           e.preventDefault();
