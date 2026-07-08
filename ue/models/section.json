@@ -51,6 +51,7 @@
       "id": "section",
       "components": [
         "accordion",
+        "accordion-expand",
         "cards",
         "carousel",
         "columns",
