@@ -159,6 +159,16 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-wrapper {
   font-size: var(--accordion-expand-body-list-font-size); /* @libs */
 }
 
+/* Global main ul>li uses text-indent + ::before; block <p> in <li> drops the bullet to its own line */
+.accordion-expand .accordion-expand-item-body ul > li > p {
+  display: inline;
+  margin: 0;
+}
+
+.accordion-expand .accordion-expand-item-body ul > li > ul {
+  margin-top: 8px;
+}
+
 .accordion-expand .accordion-expand-item-body a:not(.button) { /* @libs */
   color: var(--link-color); /* @libs */
   font-weight: var(--font-weight-bold); /* @libs */
