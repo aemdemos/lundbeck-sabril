@@ -1,5 +1,4 @@
 @import url('./accordion-tokens.css');
-@import url('./accordion-expand-tokens.css');
 
 .accordion > ul { /* @libs */
   list-style: none; /* @libs */
