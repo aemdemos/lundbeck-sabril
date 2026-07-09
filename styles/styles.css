@@ -442,6 +442,7 @@ pre {
 }
 
 main {
+  box-sizing: border-box;
   padding: 0 15px;
 }
 
@@ -1228,6 +1229,13 @@ main .section[data-background-color] {
     /* @libs */
     height: var(--nav-height);
     /* @libs */
+  }
+
+  /* sabril.net: .container-fluid caps at 1200px, centered on wide desktops */
+  main {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   main .section.stats-callout>div:not(.bg-image) {

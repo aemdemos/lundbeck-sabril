@@ -59,6 +59,19 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Accordion Expand",
+          "id": "accordion-expand",
+          "model": "accordion-expand",
+          "filter": "accordion-expand",
+          "plugins": {
+            "da": {
+              "name": "accordion-expand",
+              "rows": 0,
+              "columns": 0
+            }
+          }
+        },
+        {
           "title": "Accordion",
           "id": "accordion",
           "model": "accordion",
