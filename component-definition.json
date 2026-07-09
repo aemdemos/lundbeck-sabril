@@ -72,27 +72,6 @@
           }
         },
         {
-          "title": "Accordion Expand Item",
-          "id": "accordion-expand-item",
-          "model": "accordion-expand-item",
-          "plugins": {
-            "da": {
-              "rows": 1,
-              "columns": 2,
-              "fields": [
-                {
-                  "name": "summary",
-                  "selector": "div:nth-child(1)"
-                },
-                {
-                  "name": "text",
-                  "selector": "div:nth-child(2)"
-                }
-              ]
-            }
-          }
-        },
-        {
           "title": "Accordion",
           "id": "accordion",
           "model": "accordion",

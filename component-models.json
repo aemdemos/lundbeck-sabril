@@ -74,29 +74,6 @@
     ]
   },
   {
-    "title": "Accordion Expand Item",
-    "id": "accordion-expand-item",
-    "model": "accordion-expand-item",
-    "fields": [
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "summary",
-        "value": "summary",
-        "label": "Summary",
-        "required": true
-      },
-      {
-        "component": "richtext",
-        "name": "text",
-        "value": "text",
-        "label": "Text",
-        "valueType": "string",
-        "required": true
-      }
-    ]
-  },
-  {
     "title": "Accordion Item",
     "id": "accordion-item",
     "model": "accordion-item",
