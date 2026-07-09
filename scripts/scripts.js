@@ -25,15 +25,107 @@ const MAX_SECTIONS = 100;
 const MAX_SECTION_CHILDREN = 200;
 
 /**
- * Hosts exempt from the "leaving site" interstitial: the site's own domains
- * (incl. links authored as absolute URLs) plus approved external domains.
+ * Site-wide outbound link policy (same rules everywhere — main, header, footer, fragments).
+ *
+ * | Link type                         | New tab | Exit modal |
+ * |-----------------------------------|---------|------------|
+ * | Same-site                         | No      | No         |
+ * | /modals/*                         | No      | No (content modal) |
+ * | PDF                               | Yes     | No         |
+ * | Trusted partner hosts (Lundbeck…) | Yes     | No         |
+ * | All other external http(s)        | Yes     | Yes        |
  */
-const INTERSTITIAL_EXEMPT_HOSTS = [
+const DIRECT_NEW_TAB_HOSTS = [
+  'lundbeck.com',
+  'lundbeck-tools.com',
   'sabril.net',
   'aem.page',
   'aem.live',
-  'lundbeck.com',
 ];
+
+function isPdfLink(href) {
+  try {
+    const { pathname } = new URL(href, window.location);
+    return pathname.toLowerCase().endsWith('.pdf');
+  } catch {
+    return false;
+  }
+}
+
+function hostMatches(hostname, hosts) {
+  const host = hostname.toLowerCase();
+  return hosts.some((h) => host === h || host.endsWith(`.${h}`));
+}
+
+/**
+ * @param {string} href
+ * @returns {{ newTab: boolean, exitModal: boolean }}
+ */
+function getLinkPolicy(href) {
+  if (!href || href.includes('/modals/')) {
+    return { newTab: false, exitModal: false };
+  }
+
+  try {
+    const { protocol, hostname } = new URL(href, window.location);
+    if (!protocol.startsWith('http')) {
+      return { newTab: false, exitModal: false };
+    }
+
+    const external = hostname !== window.location.hostname;
+    if (!external) {
+      return { newTab: false, exitModal: false };
+    }
+
+    if (isPdfLink(href) || hostMatches(hostname, DIRECT_NEW_TAB_HOSTS)) {
+      return { newTab: true, exitModal: false };
+    }
+
+    return { newTab: true, exitModal: true };
+  } catch {
+    return { newTab: false, exitModal: false };
+  }
+}
+
+function setNewTabAttrs(link) {
+  link.target = '_blank';
+  const rel = new Set((link.rel || '').split(/\s+/).filter(Boolean));
+  rel.add('noopener');
+  rel.add('noreferrer');
+  link.rel = [...rel].join(' ');
+}
+
+/**
+ * Applies site-wide link policy to all anchors under root.
+ * @param {ParentNode} root
+ */
+export function decorateLinks(root) {
+  root.querySelectorAll('a[href]').forEach((link) => {
+    if (getLinkPolicy(link.href).newTab) setNewTabAttrs(link);
+  });
+}
+
+function autolinkModals(doc) {
+  doc.addEventListener('click', async (e) => {
+    const origin = e.target.closest('a');
+    if (!origin || !origin.href) return;
+
+    if (origin.href.includes('/modals/')) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal(origin.href);
+      return;
+    }
+
+    if (origin.closest('.modal')) return;
+
+    if (getLinkPolicy(origin.href).exitModal) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal('/modals/exit', origin.href);
+    }
+  });
+}
 
 /** Keys that must not be used for object/dataset assignment (CWE-915). */
 const UNSAFE_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
@@ -141,36 +233,6 @@ export function getBlockId(name) {
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
-}
-
-function autolinkModals(doc) {
-  doc.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
-    if (!origin || !origin.href) return;
-
-    if (origin.href.includes('/modals/')) {
-      e.preventDefault();
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal(origin.href);
-      return;
-    }
-
-    // external links show a "leaving site" interstitial before navigating away,
-    // except same-site links, exempt hosts, and links inside the interstitial itself
-    if (origin.closest('.modal')) return;
-    let gated = false;
-    try {
-      const { hostname } = new URL(origin.href, window.location);
-      const isSameSite = hostname === window.location.hostname;
-      const isExempt = INTERSTITIAL_EXEMPT_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
-      gated = !isSameSite && !isExempt;
-    } catch { gated = false; }
-    if (gated && origin.protocol.startsWith('http')) {
-      e.preventDefault();
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal('/modals/exit', origin.href);
-    }
-  });
 }
 
 /**
@@ -981,6 +1043,7 @@ export function decorateMain(main) {
   decorateNestedSections(main);
   decorateButtons(main);
   a11yLinks(main);
+  decorateLinks(main);
   decorateSpanTags(main);
 }
 
@@ -1138,8 +1201,9 @@ async function loadLazy(doc) {
     if (hasQE) import('../tools/quick-edit/quick-edit.js').then((mod) => mod.default());
   })();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  await loadHeader(doc.querySelector('header'));
+  await loadFooter(doc.querySelector('footer'));
+  decorateLinks(doc);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
