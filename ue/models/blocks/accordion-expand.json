@@ -1,0 +1,26 @@
+{
+  "definitions": [
+    {
+      "title": "Accordion Expand",
+      "id": "accordion-expand",
+      "model": "accordion-expand",
+      "filter": "accordion-expand",
+      "plugins": {
+        "da": {
+          "name": "accordion-expand",
+          "rows": 0,
+          "columns": 0
+        }
+      }
+    }
+  ],
+  "models": [],
+  "filters": [
+    {
+      "id": "accordion-expand",
+      "components": [
+        "accordion-expand-item"
+      ]
+    }
+  ]
+}
