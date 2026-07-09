@@ -83,3 +83,67 @@ h3 {
 }
 
 }
+
+/* info-cards variant (about page) — two light-gray rounded cards, each with an
+   icon sitting inline to the left of its heading. Mobile: stacked cards. */
+main .columns.info-cards > div {
+  align-items: stretch;
+}
+
+main .columns.info-cards > div > div {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 15px 25px;
+  margin: 7.5px 0;
+}
+
+/* icon + heading share the first line, body text wraps full-width below */
+main .columns.info-cards .columns-img-col > p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+main .columns.info-cards .columns-img-col > p > picture {
+  flex: 0 0 auto;
+  width: 100px;
+}
+
+main .columns.info-cards .columns-img-col > p > picture img {
+  width: 100px;
+  height: auto;
+  margin: 0;
+}
+
+main .columns.info-cards h2 {
+  flex: 1 1 0;
+  margin: 0;
+  color: var(--brand-primary);
+}
+
+main .columns.info-cards .columns-img-col > p > p {
+  flex: 1 0 100%;
+}
+
+/* product-callout variant (about page) — single centered column: centered
+   size-constrained product image with a centered green caption. */
+main .columns.product-callout > div > div {
+  text-align: center;
+}
+
+main .columns.product-callout img {
+  max-width: 550px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+main .columns.product-callout h2 {
+  color: var(--brand-primary);
+}
+
+main .columns.product-callout h3 {
+  color: var(--brand-primary-light);
+  font-weight: var(--heading-font-weight, 500);
+}
