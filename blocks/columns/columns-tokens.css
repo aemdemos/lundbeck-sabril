@@ -125,3 +125,23 @@ main .columns.info-cards h2 {
 main .columns.info-cards .columns-img-col > p > p {
   flex: 1 0 100%;
 }
+
+/* single-column product callout (about page "Know What Branded Sabril Looks Like")
+   reuses the symptoms card look but is a centered ~half-width card matching the
+   source (col-sm-6 offset-3). Full-width on mobile. */
+main .columns.symptoms.columns-1-cols > div > div {
+  min-width: 0;
+  padding: 15px 25px;
+}
+
+main .columns.symptoms.columns-1-cols img {
+  width: 100%;
+  max-width: 550px;
+}
+
+@media (width >= 768px) {
+  main .columns.symptoms.columns-1-cols > div {
+    width: 50%;
+    margin: 7.5px auto;
+  }
+}
