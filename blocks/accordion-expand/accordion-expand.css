@@ -1,0 +1,334 @@
+@import url('./accordion-expand-tokens.css');
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/glyphicons-halflings-regular.woff2') format('woff2');
+}
+
+/* ── Grey accordion section (reference .accordian.bgGrey) ── */
+
+main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1,
+main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1 strong {
+  margin: 30px 0 10px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) + .section[data-background-color]:has(.accordion-expand) {
+  margin-top: 30px;
+}
+
+main .section[data-background-color]:has(.accordion-expand) {
+  display: flow-root;
+  padding: 0 25px 25px;
+  margin: 20px 0 25px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) {
+  margin-bottom: 32px;
+}
+
+/* sabril.net: approved-use section has no rounded container (reference .bottomTxtOuter) */
+main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section {
+  border-radius: 0;
+  position: relative;
+  margin-top: 0;
+  padding-top: 20px;
+  border-top: 0;
+}
+
+/* sabril.net mobile: straight divider above approved-use (reference .bottomTxtOuter) */
+main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: var(--section-divider-width);
+  background-color: var(--section-divider-color);
+  pointer-events: none;
+}
+
+main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
+main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
+  font-weight: 500;
+  line-height: 1.1;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:not(:last-of-type) {
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.42857143;
+}
+
+main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:last-of-type {
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.42857143;
+}
+
+main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wrapper {
+  display: flow-root;
+}
+
+/* ── Block layout ── */
+
+.accordion-expand > ul { /* @libs */
+  list-style: none; /* @libs */
+  margin: 0; /* @libs */
+  padding: 0; /* @libs */
+}
+
+.accordion-expand > ul > li {
+  padding-left: 0;
+  text-indent: 0;
+  margin-bottom: 0;
+}
+
+.accordion-expand > ul > li::before {
+  content: none;
+  display: none;
+  padding: 0;
+}
+
+.accordion-expand p { /* @libs */
+  margin: 0; /* @libs */
+}
+
+/* body / panel */
+.accordion-expand .accordion-expand-item-body { /* @libs */
+  display: none; /* @libs */
+}
+
+.accordion-expand li.active .accordion-expand-item-body { /* @libs */
+  display: flex; /* @libs */
+  flex-direction: column; /* @libs */
+  gap: var(--accordion-expand-body-gap); /* @libs */
+  margin-top: var(--accordion-expand-body-gap); /* @libs */
+  color: var(--accordion-expand-body-color); /* @libs */
+  font-size: var(--accordion-expand-body-font-size); /* @libs */
+  line-height: var(--accordion-expand-body-line-height); /* @libs */
+  cursor: auto; /* @libs */
+}
+
+.accordion-expand .accordion-expand-item-body ul, /* @libs */
+.accordion-expand .accordion-expand-item-body ol { /* @libs */
+  margin: 0; /* @libs */
+  margin-bottom: 0;
+  padding-left: 20px; /* @libs */
+  font-size: var(--accordion-expand-body-list-font-size); /* @libs */
+}
+
+/* Global main ul>li uses text-indent + ::before; block <p> in <li> drops the bullet to its own line */
+.accordion-expand .accordion-expand-item-body ul > li > p {
+  display: inline;
+  margin: 0;
+}
+
+.accordion-expand .accordion-expand-item-body ul > li > ul {
+  margin-top: 8px;
+}
+
+.accordion-expand .accordion-expand-item-body a:not(.button) { /* @libs */
+  color: var(--link-color); /* @libs */
+  font-weight: var(--font-weight-bold); /* @libs */
+}
+
+.accordion-expand .accordion-expand-item-body a:not(.button):hover { /* @libs */
+  color: var(--link-hover-color); /* @libs */
+}
+
+/* ── Expand/collapse toggle ── */
+
+.accordion-expand .accordion-expand-item--toggle {
+  display: flow-root;
+  width: 100%;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  cursor: default;
+}
+
+.accordion-expand .accordion-expand-item-toggle {
+  display: inline-block;
+  margin: 0;
+  padding: var(--accordion-expand-toggle-padding);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--accordion-expand-toggle-color);
+  font-family: var(--body-font-family);
+  font-size: var(--accordion-expand-toggle-font-size);
+  font-weight: var(--accordion-expand-toggle-font-weight);
+  line-height: var(--accordion-expand-toggle-line-height);
+  text-align: left;
+  max-width: none;
+}
+
+.accordion-expand .accordion-expand-item-toggle:hover,
+.accordion-expand .accordion-expand-item-toggle:focus,
+.accordion-expand .accordion-expand-item-toggle:active,
+.accordion-expand .accordion-expand-item-toggle:focus-visible {
+  color: var(--accordion-expand-toggle-hover-color);
+  background: transparent;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+
+.accordion-expand .accordion-expand-item-toggle-icon {
+  position: relative;
+  top: var(--accordion-expand-toggle-icon-offset-top);
+  display: inline-block;
+  margin-right: var(--accordion-expand-toggle-icon-gap);
+  font-family: 'Glyphicons Halflings', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--accordion-expand-toggle-icon-size);
+  line-height: 1;
+  color: var(--accordion-expand-toggle-icon-fill);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.accordion-expand .glyphicon::before {
+  display: inline-block;
+  font-family: 'Glyphicons Halflings', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.accordion-expand .glyphicon-plus-sign::before {
+  content: "\e081";
+}
+
+.accordion-expand .glyphicon-minus-sign::before {
+  content: "\e082";
+}
+
+.accordion-expand .accordion-expand-item-toggle-text {
+  display: inline;
+}
+
+/* CTA links in accordion body — keep filled button colors */
+.accordion-expand .accordion-expand-item-body a.button {
+  display: inline-block;
+  white-space: normal;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 8px 34px;
+  color: var(--button-primary-color);
+  background-color: var(--button-primary-background);
+  border-color: var(--button-primary-border-color);
+}
+
+.accordion-expand .accordion-expand-item-body a.button:hover,
+.accordion-expand .accordion-expand-item-body a.button:focus {
+  color: var(--button-primary-hover-color);
+  background-color: var(--button-primary-hover-background);
+  border-color: var(--button-primary-hover-border-color);
+}
+
+.accordion-expand .accordion-expand-item-body a.button.secondary {
+  color: var(--button-secondary-color);
+  background-color: var(--button-secondary-background);
+  border-color: var(--button-secondary-border-color);
+}
+
+.accordion-expand .accordion-expand-item-body a.button.secondary:hover,
+.accordion-expand .accordion-expand-item-body a.button.secondary:focus {
+  color: var(--button-secondary-hover-color);
+  background-color: var(--button-secondary-hover-background);
+  border-color: var(--button-secondary-hover-border-color);
+}
+
+.accordion-expand .accordion-expand-item-body a.button.accent {
+  color: var(--button-accent-color);
+  background-color: var(--button-accent-background);
+  border-color: var(--button-accent-border-color);
+}
+
+.accordion-expand .accordion-expand-item-body a.button.accent:hover,
+.accordion-expand .accordion-expand-item-body a.button.accent:focus {
+  color: var(--button-accent-hover-color);
+  background-color: var(--button-accent-hover-background);
+  border-color: var(--button-accent-hover-border-color);
+}
+
+@media (width >= 768px) {
+  main .section[data-background-color]:has(.accordion-expand) {
+    padding: 0 40px 25px;
+  }
+
+  /* sabril.net tablet+: second grey accordion margin-bottom 25px (reference .accordian.bgGrey) */
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) {
+    margin-bottom: 25px;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section {
+    position: static;
+    margin-top: revert;
+    padding-top: revert;
+    border-top: revert;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) + .section[data-background-color]:has(.accordion-expand) + .section::before {
+    content: none;
+    display: none;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
+    margin-top: 30px;
+  }
+
+  main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:last-of-type {
+    margin-top: 16px;
+  }
+
+  /* sabril.net: float:right on tablet+ */
+  .accordion-expand .accordion-expand-item-toggle {
+    float: right;
+  }
+
+  .accordion-expand .accordion-expand-item--toggle.active .accordion-expand-item-body {
+    clear: both;
+  }
+
+  .accordion-expand .accordion-expand-item-body a.button {
+    margin-top: 20px;
+    padding: revert;
+  }
+
+  .accordion-expand .accordion-expand-item-body ul,
+  .accordion-expand .accordion-expand-item-body ol {
+    margin-bottom: revert;
+  }
+}
+
+@media (width >= 992px) {
+  /* sabril.net desktop: page title spans full content width (matches .bgGrey) */
+  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) > div {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
