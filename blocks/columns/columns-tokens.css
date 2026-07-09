@@ -125,25 +125,3 @@ main .columns.info-cards h2 {
 main .columns.info-cards .columns-img-col > p > p {
   flex: 1 0 100%;
 }
-
-/* product-callout variant (about page) — single centered column: centered
-   size-constrained product image with a centered green caption. */
-main .columns.product-callout > div > div {
-  text-align: center;
-}
-
-main .columns.product-callout img {
-  max-width: 550px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-main .columns.product-callout h2 {
-  color: var(--brand-primary);
-}
-
-main .columns.product-callout h3 {
-  color: var(--brand-primary-light);
-  font-weight: var(--heading-font-weight, 500);
-}
