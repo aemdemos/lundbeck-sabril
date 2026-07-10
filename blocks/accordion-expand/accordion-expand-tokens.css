@@ -11,7 +11,7 @@
   --accordion-expand-toggle-hover-color: #ef8922; /* @libs */
   --accordion-expand-toggle-font-size: 22px; /* @libs */
   --accordion-expand-toggle-font-weight: 400; /* @libs */
-  --accordion-expand-toggle-line-height: 1.4286; /* @libs — reference .btn */
+  --accordion-expand-toggle-line-height: 1.42857143; /* @libs — reference .btn */
   --accordion-expand-toggle-icon-gap: 10px; /* @libs — reference span margin-right */
   --accordion-expand-toggle-padding: 6px 12px 6px 0; /* @libs — reference .btn.collapseExpand */
   --accordion-expand-toggle-icon-size: 30px; /* @libs — reference .glyphicon */

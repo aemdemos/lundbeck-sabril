@@ -89,7 +89,14 @@ h3 {
 }
 
 /* info-cards variant (about page) — two light-gray rounded cards, each with an
-   icon sitting inline to the left of its heading. Mobile: stacked cards. */
+   icon sitting inline to the left of its heading. Mobile: stacked cards.
+
+   The authored DOM and the local-dev DOM differ: authored content delivers the
+   picture (in its own <p>), the <h2>, and the body <p>s as direct siblings of
+   the cell; local dev wraps them all in a single <p> inside a .columns-img-col
+   div. To make one set of rules work for both, we flatten those wrappers with
+   `display: contents` so that in either case the picture, heading, and body
+   paragraphs become the direct flex children of the card cell. */
 main .columns.info-cards > div {
   align-items: stretch;
 }
@@ -101,30 +108,36 @@ main .columns.info-cards {
   margin-inline: calc(-1 * var(--spacing-m, 15px));
 }
 
+/* The card cell is the flex layout root (mobile: single column). */
 main .columns.info-cards > div > div {
   background-color: var(--card-bg-neutral);
   border-radius: 0;
   padding: 15px 25px;
   margin: 10px 0;
-}
-
-/* Card layout — mobile: icon centered on its own line at the top, heading
-   left-aligned below it, then body paragraphs. (Tablet/desktop switch to
-   icon-left-of-heading in the 768px block below.) */
-main .columns.info-cards .columns-img-col > p {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
+/* Flatten only the inner picture/text wrappers (never the card cell itself) so
+   picture/heading/body become direct flex children of the cell regardless of
+   authoring path:
+   - .columns-img-col > p : the local-dev mega-wrapper holding picture+h2+body
+   - p:has(> picture)     : the authored standalone picture wrapper */
+main .columns.info-cards .columns-img-col > p,
+main .columns.info-cards > div > div > p:has(> picture) {
+  display: contents;
+}
+
 /* icon centered above the heading (mobile) */
-main .columns.info-cards .columns-img-col > p > picture {
+main .columns.info-cards picture {
   flex: 0 0 auto;
+  display: block;
   width: 100px;
   margin: 0 auto 10px;
 }
 
-main .columns.info-cards .columns-img-col > p > picture img {
+main .columns.info-cards picture img {
   width: 100px;
   height: auto;
   margin: 0;
@@ -137,12 +150,16 @@ main .columns.info-cards h2 {
   color: var(--brand-primary);
 }
 
-/* body paragraphs: 20px below the heading, 10px between paragraphs */
-main .columns.info-cards .columns-img-col > p > p {
+/* body paragraphs (depth-agnostic: direct child on authored DOM, grandchild
+   inside the flattened wrapper on local dev): 10px between paragraphs. The
+   picture wrapper <p> is excluded via :not(:has(picture)). */
+main .columns.info-cards p:not(:has(picture)) {
   margin: 0 0 10px;
 }
 
-main .columns.info-cards .columns-img-col > p > p:first-of-type {
+/* first body paragraph sits 20px below the heading (h2 immediately precedes it
+   in both DOM variants) */
+main .columns.info-cards h2 + p {
   margin-top: 20px;
 }
 
@@ -179,22 +196,20 @@ main .columns.symptoms.columns-1-cols img {
     margin-inline: 0;
   }
 
+  /* Tablet+: cards sit within the content column again (rounded corners, side
+     gap) AND the card cell becomes a wrapping flex row so the icon sits inline
+     to the LEFT of the heading — the icon + heading share the top row and the
+     body paragraphs drop to a full-width row beneath. */
   main .columns.info-cards > div > div {
     border-radius: 10px;
     margin: 0 15px;
-  }
-
-  /* Tablet/desktop: icon sits inline to the LEFT of the heading (source
-     layout). The flex line wraps, so the icon + heading share the top row and
-     the body paragraphs drop to a full-width row beneath. */
-  main .columns.info-cards .columns-img-col > p {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
+    align-content: flex-start;
     column-gap: 1rem;
   }
 
-  main .columns.info-cards .columns-img-col > p > picture {
+  main .columns.info-cards picture {
     margin: 0;
   }
 
@@ -202,11 +217,12 @@ main .columns.symptoms.columns-1-cols img {
     flex: 1 1 0;
   }
 
-  main .columns.info-cards .columns-img-col > p > p {
+  /* body paragraphs occupy their own full-width row beneath the icon+heading */
+  main .columns.info-cards p:not(:has(picture)) {
     flex: 1 0 100%;
   }
 
-  main .columns.info-cards .columns-img-col > p > p:first-of-type {
+  main .columns.info-cards h2 + p {
     margin-top: 10px;
   }
 
@@ -243,6 +259,7 @@ main:has(.columns.info-cards) .columns.symptoms h2 {
 main:has(.columns.info-cards) .columns.info-cards h2,
 main:has(.columns.info-cards) .columns.symptoms h2 {
   font-weight: 700;
+  line-height: 1.1;
 }
 
 /* ISI intro block — the bold SABRIL header lines and the underlined

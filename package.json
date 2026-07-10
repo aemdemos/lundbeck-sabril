@@ -60,8 +60,5 @@
     "stylelint": "17.4.0",
     "stylelint-config-standard": "40.0.0",
     "ts-api-utils": "^2.4.0"
-  },
-  "dependencies": {
-    "all": "^0.0.0"
   }
 }

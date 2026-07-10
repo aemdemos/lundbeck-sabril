@@ -83,7 +83,7 @@ export default function decorate(block) {
 
       if (isExpandOnlyLabel(label)) {
         const expandLabel = formatExpandLabel(label.textContent.trim());
-        li.classList.add('accordion-expand-item-has-toggle');
+        li.classList.add('accordion-expand-item--toggle');
         expandToggle = createExpandToggle(expandLabel);
         label.remove();
         li.append(expandToggle);
