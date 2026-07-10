@@ -1043,6 +1043,10 @@ main .icon.icon-bullet {
   color: var(--brand-primary);
 }
 
+.brand-primary-light {
+  color: var(--brand-primary-light);
+}
+
 .references {
   p strong,
   li strong {

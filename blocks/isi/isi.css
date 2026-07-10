@@ -27,6 +27,14 @@ main .section > .default-content-wrapper:has(> .isi-container) {
   }
 }
 
+/* /about: divider sits above the approved-use .smalltext block, not the ISI */
+main:has(.columns.info-cards) > .section:has(.isi-container) > .default-content-wrapper:has(> .isi-container) {
+  border-top: 0;
+  margin-inline: 0;
+  padding-top: 0;
+  padding-inline: 0;
+}
+
 /* ── In-page inline content (Row 2) ───────────────────────────── */
 main .isi .isi-inline { /* @boilerplate */
   display: block; /* @boilerplate */

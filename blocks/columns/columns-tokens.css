@@ -143,9 +143,11 @@ main .columns.info-cards picture img {
   margin: 0;
 }
 
+/* source .ImageSideHeader2 h2 — 15px top, 20px bottom on mobile */
 main .columns.info-cards h2 {
-  margin: 0;
-  font-weight: 700;
+  margin: 15px 0 20px;
+  font-size: 19px;
+  font-weight: 500;
   line-height: 1.1;
   color: var(--brand-primary);
 }
@@ -155,12 +157,12 @@ main .columns.info-cards h2 {
    picture wrapper <p> is excluded via :not(:has(picture)). */
 main .columns.info-cards p:not(:has(picture)) {
   margin: 0 0 10px;
+  line-height: 1.4286;
 }
 
-/* first body paragraph sits 20px below the heading (h2 immediately precedes it
-   in both DOM variants) */
+/* source .ImagebelowText margin-top 0 on mobile — spacing comes from h2 margin */
 main .columns.info-cards h2 + p {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 /* single-column product callout (about page "Know What Branded Sabril Looks Like")
@@ -175,6 +177,7 @@ main .columns.symptoms.columns-1-cols {
 
 main .columns.symptoms.columns-1-cols > div > div {
   min-width: 0;
+  background-color: #f5f5f5;
   padding: 15px 25px;
   border-radius: 0;
 }
@@ -185,53 +188,92 @@ main .columns.symptoms.columns-1-cols img {
 }
 
 @media (width >= 768px) {
-  main .columns.symptoms.columns-1-cols > div {
-    width: 50%;
+  main:has(.columns.info-cards) > .section.columns-container {
+    max-width: none;
+  }
+
+  /* widen about-page card row to match source container (no 720px cap) */
+  main:has(.columns.info-cards) > .section.columns-container > div:not(.default-content-wrapper) {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Tablet+: cancel main side padding so card rows span full viewport */
+  main:has(.columns.info-cards) .columns.info-cards,
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols {
+    margin-inline: calc(-1 * var(--spacing-m, 15px));
+  }
+
+  /* source .iconTextComponent div.row-height — flex row, 7.5px vertical margin, no gap */
+  main .columns.info-cards > div {
+    gap: 0;
     margin: 7.5px auto;
+    align-items: stretch;
   }
 
-  /* Tablet+: cards sit within the content column again — cancel the mobile
-     full-bleed, restore rounded corners and the source's side gap. */
-  main .columns.info-cards {
-    margin-inline: 0;
-  }
-
-  /* Tablet+: cards sit within the content column again (rounded corners, side
-     gap) AND the card cell becomes a wrapping flex row so the icon sits inline
-     to the LEFT of the heading — the icon + heading share the top row and the
-     body paragraphs drop to a full-width row beneath. */
+  /* source .iconTextCol — icon left (25%), heading right, body full-width below */
   main .columns.info-cards > div > div {
     border-radius: 10px;
     margin: 0 15px;
     flex-flow: row wrap;
     align-items: center;
     align-content: flex-start;
-    column-gap: 1rem;
+    column-gap: 0;
   }
 
+  /* source .imagebox col-sm-3 — 25% column with 15px Bootstrap gutters */
   main .columns.info-cards picture {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    width: auto;
+    max-width: 25%;
+    padding-inline: 15px;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 104px;
   }
 
+  main .columns.info-cards picture img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* source .ImageSideHeader2 h2 */
   main .columns.info-cards h2 {
     flex: 1 1 0;
+    margin: 15px 0 10px;
+    font-size: 22px;
+    font-weight: 500;
   }
 
-  /* body paragraphs occupy their own full-width row beneath the icon+heading */
+  /* source .ImagebelowText margin-top 30px on tablet+ */
   main .columns.info-cards p:not(:has(picture)) {
     flex: 1 0 100%;
+    margin: 0 0 10px;
   }
 
   main .columns.info-cards h2 + p {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
-  main .columns.symptoms.columns-1-cols {
-    margin-inline: 0;
+  main .columns.symptoms.columns-1-cols > div {
+    width: 50%;
+    margin: 7.5px auto;
   }
 
   main .columns.symptoms.columns-1-cols > div > div {
     border-radius: 10px;
+    margin: 0;
+    width: 100%;
+  }
+
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:first-of-type,
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type,
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
+    font-size: 22px;
   }
 }
 
@@ -246,33 +288,102 @@ main:has(.columns.info-cards) h1 {
 }
 
 main:has(.columns.info-cards) h2 {
-  font-weight: 500;
+  font-weight: 700;
 }
 
-main:has(.columns.info-cards) .columns.symptoms h2 {
+/* intro copy above cards (source .AboutSabrilpg p) */
+main:has(.columns.info-cards) > .section.columns-container > .default-content-wrapper p {
+  margin-bottom: 20px;
+  line-height: 1.4286;
+}
+
+/* product callout headings (source .iconTextCol h2 / h3) */
+main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:first-of-type {
   margin: 20px 0 10px;
+  text-align: center;
+  color: var(--brand-primary);
 }
 
-/* the info-cards and symptoms headings emulate the source's Arial Bold face,
-   which our plain-arial stack can only match with a heavier weight. Higher
-   specificity than the page-scoped weight-500 rule above so it wins. */
-main:has(.columns.info-cards) .columns.info-cards h2,
+@media (width < 768px) {
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:first-of-type {
+    font-size: 19px;
+  }
+
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type,
+  main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
+    font-size: 17px;
+  }
+}
+
+main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type,
+main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
+  margin: 15px 0 8px;
+  text-align: center;
+  color: var(--brand-green-light);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* the symptoms headings emulate the source's Arial Bold face at weight 700;
+   info-cards h2 stays at 500 to match source .ImageSideHeader2. */
 main:has(.columns.info-cards) .columns.symptoms h2 {
   font-weight: 700;
   line-height: 1.1;
 }
 
-/* ISI intro block — the bold SABRIL header lines and the underlined
-   "Approved Use" render purple at 17px in the source; the two body
-   paragraphs below them stay black. Scope to the default-content wrapper
-   that also holds the ISI accordion so only these headers are recolored. */
-main:has(.columns.info-cards) .default-content-wrapper:has(> .isi-container) > p > strong {
-  color: var(--brand-primary);
-  font-size: 17px;
+/* Approved-use block (source .bottomTxtOuter / .bottomTxt) — lives in the
+   .smalltext section that precedes the ISI accordion on /about. */
+@media (width < 768px) {
+  main:has(.columns.info-cards) > .section:has(.smalltext) > .default-content-wrapper {
+    border-top: 4px solid #d1d1d1;
+    margin-inline: calc(-1 * var(--spacing-m, 15px));
+    padding: 20px 15px 0;
+    box-sizing: border-box;
+  }
 }
 
-/* "Approved Use" is the only header line without a ® superscript and is
-   underlined in the source. */
-main:has(.columns.info-cards) .default-content-wrapper:has(> .isi-container) > p > strong:not(:has(sup)) {
+main:has(.columns.info-cards) .smalltext h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--brand-primary);
+}
+
+/* override global .smalltext padding-bottom on about page */
+main:has(.columns.info-cards) .smalltext {
+  padding-bottom: 0;
+}
+
+main:has(.columns.info-cards) .smalltext h3 strong {
+  color: inherit;
+  font-weight: inherit;
+}
+
+main:has(.columns.info-cards) .smalltext h3:has(strong:not(:has(sup))) strong {
   text-decoration: underline;
+}
+
+main:has(.columns.info-cards) .smalltext p {
+  display: block;
+  font-size: 15px;
+  line-height: 1.3;
+  margin: 0 0 10px;
+  padding-right: 0;
+}
+
+@media (width >= 768px) {
+  main:has(.columns.info-cards) > .section.columns-container > .default-content-wrapper p {
+    margin-bottom: 15px;
+  }
+
+  main:has(.columns.info-cards) > .section:has(.smalltext) > .default-content-wrapper {
+    border-top: 0;
+    margin-inline: 0;
+    padding: 0 15px;
+  }
+
+  main:has(.columns.info-cards) .smalltext p {
+    padding-right: 4%;
+  }
 }
