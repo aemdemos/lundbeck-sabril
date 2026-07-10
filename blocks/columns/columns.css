@@ -135,4 +135,9 @@ main .columns.stats-callout:has(img) > div > div:not(.columns-img-col) > p:first
   main .columns.stats-callout:has(img) > div > div:not(.columns-img-col) {
     text-align: left;
   }
+
+  /* info-cards: cancel boilerplate row gap (source uses margin on cells, not gap) */
+  main .columns.info-cards > div {
+    gap: 0;
+  }
 }
