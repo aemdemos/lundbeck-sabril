@@ -241,10 +241,11 @@ main .columns.symptoms.columns-1-cols img {
     height: auto;
   }
 
-  /* source .ImageSideHeader2 h2 */
+  /* source .ImageSideHeader2 h2 — vertically centered beside icon on tablet+ */
   main .columns.info-cards h2 {
     flex: 1 1 0;
-    margin: 15px 0 10px;
+    margin: 0;
+    align-self: center;
     font-size: 22px;
     font-weight: 500;
   }
@@ -317,7 +318,15 @@ main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:first-of-type 
 
 main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type,
 main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
-  margin: 15px 0 8px;
+  margin: 15px 0 20px;
+  text-align: center;
+  color: var(--brand-green-light);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+main:has(.columns.info-cards) .columns.symptoms.columns-1-cols p:not(:has(picture)) {
+  margin-bottom: 20px;
   text-align: center;
   color: var(--brand-green-light);
   font-weight: 700;
