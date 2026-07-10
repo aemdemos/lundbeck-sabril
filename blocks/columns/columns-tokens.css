@@ -42,7 +42,9 @@ main .columns-img-col img {
 
 h3 {
   color: var(--brand-primary-light);
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.1;
   }
  }
 }
@@ -74,12 +76,14 @@ h3 {
   border-radius: 10px;
   height: stretch;
   }
- }
 
 h3 {
   color: var(--brand-primary-light);
-  font-size: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
 }
+ }
 }
 
 }
@@ -90,24 +94,34 @@ main .columns.info-cards > div {
   align-items: stretch;
 }
 
+/* Mobile: cards stack and span the full viewport width (the source has no side
+   gutter or rounded corners on mobile). Negative inline margin cancels the
+   main content padding so the grey box bleeds edge to edge. */
+main .columns.info-cards {
+  margin-inline: calc(-1 * var(--spacing-m, 15px));
+}
+
 main .columns.info-cards > div > div {
   background-color: #f5f5f5;
-  border-radius: 10px;
+  border-radius: 0;
   padding: 15px 25px;
-  margin: 7.5px 0;
+  margin: 10px 0;
 }
 
-/* icon + heading share the first line, body text wraps full-width below */
+/* Card layout: the icon is centered on its own line at the top, the heading
+   sits left-aligned below it, then the body paragraphs — matching the source
+   at every breakpoint. */
 main .columns.info-cards .columns-img-col > p {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
 }
 
+/* icon centered above the heading */
 main .columns.info-cards .columns-img-col > p > picture {
   flex: 0 0 auto;
   width: 100px;
+  margin: 0 auto 10px;
 }
 
 main .columns.info-cards .columns-img-col > p > picture img {
@@ -117,21 +131,35 @@ main .columns.info-cards .columns-img-col > p > picture img {
 }
 
 main .columns.info-cards h2 {
-  flex: 1 1 0;
   margin: 0;
+  font-weight: 700;
+  line-height: 1.1;
   color: var(--brand-primary);
 }
 
+/* body paragraphs: 20px below the heading, 10px between paragraphs */
 main .columns.info-cards .columns-img-col > p > p {
-  flex: 1 0 100%;
+  margin: 0 0 10px;
+}
+
+main .columns.info-cards .columns-img-col > p > p:first-of-type {
+  margin-top: 20px;
 }
 
 /* single-column product callout (about page "Know What Branded Sabril Looks Like")
    reuses the symptoms card look but is a centered ~half-width card matching the
    source (col-sm-6 offset-3). Full-width on mobile. */
+
+/* Mobile: the grey card bleeds edge to edge (no side gutter, square corners),
+   like the source. Negative inline margin cancels the main content padding. */
+main .columns.symptoms.columns-1-cols {
+  margin-inline: calc(-1 * var(--spacing-m, 15px));
+}
+
 main .columns.symptoms.columns-1-cols > div > div {
   min-width: 0;
   padding: 15px 25px;
+  border-radius: 0;
 }
 
 main .columns.symptoms.columns-1-cols img {
@@ -144,4 +172,64 @@ main .columns.symptoms.columns-1-cols img {
     width: 50%;
     margin: 7.5px auto;
   }
+
+  /* Tablet+: cards sit within the content column again — cancel the mobile
+     full-bleed, restore rounded corners and the source's side gap. */
+  main .columns.info-cards {
+    margin-inline: 0;
+  }
+
+  main .columns.info-cards > div > div {
+    border-radius: 10px;
+    margin: 0 15px;
+  }
+
+  main .columns.symptoms.columns-1-cols {
+    margin-inline: 0;
+  }
+
+  main .columns.symptoms.columns-1-cols > div > div {
+    border-radius: 10px;
+  }
+}
+
+/* About page scope — the info-cards variant is unique to /about, so
+   main:has(.columns.info-cards) targets this page only. The source uses
+   Arial Bold at weight 500 for headings (not the global 800) and specific
+   heading margins. */
+main:has(.columns.info-cards) h1 {
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 30px 0 10px;
+}
+
+main:has(.columns.info-cards) h2 {
+  font-weight: 500;
+}
+
+main:has(.columns.info-cards) .columns.symptoms h2 {
+  margin: 20px 0 10px;
+}
+
+/* the info-cards and symptoms headings emulate the source's Arial Bold face,
+   which our plain-arial stack can only match with a heavier weight. Higher
+   specificity than the page-scoped weight-500 rule above so it wins. */
+main:has(.columns.info-cards) .columns.info-cards h2,
+main:has(.columns.info-cards) .columns.symptoms h2 {
+  font-weight: 700;
+}
+
+/* ISI intro block — the bold SABRIL header lines and the underlined
+   "Approved Use" render purple at 17px in the source; the two body
+   paragraphs below them stay black. Scope to the default-content wrapper
+   that also holds the ISI accordion so only these headers are recolored. */
+main:has(.columns.info-cards) .default-content-wrapper:has(> .isi-container) > p > strong {
+  color: var(--brand-primary);
+  font-size: 17px;
+}
+
+/* "Approved Use" is the only header line without a ® superscript and is
+   underlined in the source. */
+main:has(.columns.info-cards) .default-content-wrapper:has(> .isi-container) > p > strong:not(:has(sup)) {
+  text-decoration: underline;
 }
