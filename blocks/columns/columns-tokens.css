@@ -3,7 +3,7 @@
   --columns-gap: var(--spacing-m, 24px); /* @boilerplate */
   --columns-divider-width: 1px;
   --columns-divider-spacing: var(--spacing-l, 32px);
-  --columns-divider-color: #7ebcc6;
+  --columns-divider-color: var(--link-hover-color);
 }
 
 main .columns.links p.button-wrapper {
@@ -34,7 +34,7 @@ main .columns-img-col img {
   margin: 7.5px auto;
 
 > div {
-  background-color: #f5f5f5;
+  background-color: var(--card-bg-neutral);
   padding: 25px 50px 50px;
   border-radius: 10px;
   margin:10px 0;
@@ -71,7 +71,7 @@ h3 {
   margin: 7.5px auto;
 
 > div {
-  background-color: #f5f5f5;
+  background-color: var(--card-bg-neutral);
   padding: 15px 25px;
   border-radius: 10px;
   height: stretch;
@@ -177,7 +177,7 @@ main .columns.symptoms.columns-1-cols {
 
 main .columns.symptoms.columns-1-cols > div > div {
   min-width: 0;
-  background-color: #f5f5f5;
+  background-color: var(--card-bg-neutral);
   padding: 15px 25px;
   border-radius: 0;
 }
@@ -335,7 +335,7 @@ main:has(.columns.info-cards) .columns.symptoms h2 {
    .smalltext section that precedes the ISI accordion on /about. */
 @media (width < 768px) {
   main:has(.columns.info-cards) > .section:has(.smalltext) > .default-content-wrapper {
-    border-top: 4px solid #d1d1d1;
+    border-top: var(--section-divider-width) solid var(--section-divider-color);
     margin-inline: calc(-1 * var(--spacing-m, 15px));
     padding: 20px 15px 0;
     box-sizing: border-box;
