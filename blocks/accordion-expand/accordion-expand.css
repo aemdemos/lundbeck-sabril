@@ -13,7 +13,6 @@
 main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1,
 main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1 strong {
   margin: 30px 0 10px;
-  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -57,7 +56,6 @@ main .section[data-background-color]:has(.accordion-expand) + .section[data-back
 
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
-  font-weight: 500;
   line-height: 1.1;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -122,8 +120,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 .accordion-expand .accordion-expand-item-body ul, /* @libs */
 .accordion-expand .accordion-expand-item-body ol { /* @libs */
   margin: 0; /* @libs */
-  padding-left: 20px; /* @libs */
-  font-size: var(--accordion-expand-body-list-font-size); /* @libs */
 }
 
 /* Global main ul>li uses text-indent + ::before; block <p> in <li> drops the bullet to its own line */
