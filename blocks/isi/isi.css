@@ -5,6 +5,22 @@ main .section.isi-container { /* @boilerplate */
   border-top: var(--isi-section-border-width) solid var(--isi-section-border-color); /* @boilerplate */
 }
 
+/* ISI intro divider — a 4px light-gray rule separates the preceding page
+   content from the ISI intro copy on mobile only (the source hides it at
+   768px+). Applies to any page whose ISI intro text shares a default-content
+   wrapper with the inline ISI accordion (.isi-container). */
+main .section > .default-content-wrapper:has(> .isi-container) {
+  border-top: 4px solid #d1d1d1;
+  padding-top: 20px;
+}
+
+@media (width >= 768px) {
+  main .section > .default-content-wrapper:has(> .isi-container) {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
 /* ── In-page inline content (Row 2) ───────────────────────────── */
 main .isi .isi-inline { /* @boilerplate */
   display: block; /* @boilerplate */

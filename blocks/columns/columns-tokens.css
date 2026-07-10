@@ -41,7 +41,7 @@ main .columns-img-col img {
 }
 
 h3 {
-  color: var(--brand-primary-light);
+  color: var(--brand-green-dark);
   font-size: 17px;
   font-weight: 700;
   line-height: 1.1;
@@ -78,7 +78,7 @@ h3 {
   }
 
 h3 {
-  color: var(--brand-primary-light);
+  color: var(--brand-green-dark);
   font-size: 22px;
   font-weight: 700;
   line-height: 1.1;
