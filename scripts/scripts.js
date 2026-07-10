@@ -35,7 +35,7 @@ const MAX_SECTION_CHILDREN = 200;
  * | Trusted partner hosts (Lundbeck…) | Yes     | No         |
  * | All other external http(s)        | Yes     | Yes        |
  */
-const DIRECT_NEW_TAB_HOSTS = [
+const TRUSTED_HOSTS = [
   'lundbeck.com',
   'lundbeck-tools.com',
   'sabril.net',
@@ -77,7 +77,7 @@ function getLinkPolicy(href) {
       return { newTab: false, exitModal: false };
     }
 
-    if (isPdfLink(href) || hostMatches(hostname, DIRECT_NEW_TAB_HOSTS)) {
+    if (isPdfLink(href) || hostMatches(hostname, TRUSTED_HOSTS)) {
       return { newTab: true, exitModal: false };
     }
 
@@ -107,22 +107,22 @@ export function decorateLinks(root) {
 
 function autolinkModals(doc) {
   doc.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
-    if (!origin || !origin.href) return;
+    const anchor = e.target.closest('a');
+    if (!anchor || !anchor.href) return;
 
-    if (origin.href.includes('/modals/')) {
+    if (anchor.href.includes('/modals/')) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal(origin.href);
+      openModal(anchor.href);
       return;
     }
 
-    if (origin.closest('.modal')) return;
+    if (anchor.closest('.modal')) return;
 
-    if (getLinkPolicy(origin.href).exitModal) {
+    if (getLinkPolicy(anchor.href).exitModal) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal('/modals/exit', origin.href);
+      openModal('/modals/exit', anchor.href);
     }
   });
 }
