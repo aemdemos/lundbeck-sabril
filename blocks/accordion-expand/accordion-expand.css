@@ -13,7 +13,6 @@
 main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1,
 main > .section:first-of-type:has(+ .section[data-background-color] .accordion-expand) h1 strong {
   margin: 30px 0 10px;
-  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -57,7 +56,6 @@ main .section[data-background-color]:has(.accordion-expand) + .section[data-back
 
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2,
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper h2 strong {
-  font-weight: 500;
   line-height: 1.1;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -66,13 +64,13 @@ main .section[data-background-color]:has(.accordion-expand) .default-content-wra
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:not(:last-of-type) {
   margin-top: 0;
   margin-bottom: 10px;
-  line-height: 1.42857143;
+  line-height: 1.4286;
 }
 
 main .section[data-background-color]:has(.accordion-expand) .default-content-wrapper p:last-of-type {
   margin-top: 10px;
   margin-bottom: 0;
-  line-height: 1.42857143;
+  line-height: 1.4286;
 }
 
 main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wrapper {
@@ -122,9 +120,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 .accordion-expand .accordion-expand-item-body ul, /* @libs */
 .accordion-expand .accordion-expand-item-body ol { /* @libs */
   margin: 0; /* @libs */
-  margin-bottom: 0;
-  padding-left: 20px; /* @libs */
-  font-size: var(--accordion-expand-body-list-font-size); /* @libs */
 }
 
 /* Global main ul>li uses text-indent + ::before; block <p> in <li> drops the bullet to its own line */
@@ -148,7 +143,7 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 
 /* ── Expand/collapse toggle ── */
 
-.accordion-expand .accordion-expand-item--toggle {
+.accordion-expand .accordion-expand-item-expandable {
   display: flow-root;
   width: 100%;
   background-color: transparent;
@@ -303,7 +298,7 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
     float: right;
   }
 
-  .accordion-expand .accordion-expand-item--toggle.active .accordion-expand-item-body {
+  .accordion-expand .accordion-expand-item-expandable.active .accordion-expand-item-body {
     clear: both;
   }
 
