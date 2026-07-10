@@ -1,21 +1,28 @@
 // add delayed functionality here
 import { loadScript } from './aem.js';
 
-// CookieInformation consent management platform (same CMP as www.vyepti.com)
-async function loadConsentManager() {
+function isMartechEnabled() {
   const params = new URLSearchParams(window.location.search);
-  if (params.get('martech') === 'off') return;
+  return params.get('martech') !== 'off';
+}
 
-  window.cookieInformationCustomConfig = {
-    acceptFrequency: 365,
-    declineFrequency: 365,
-  };
+async function loadAdobeLaunch() {
+  if (!isMartechEnabled()) return;
 
-  await loadScript('https://policy.app.cookieinformation.com/uc.js', {
-    id: 'CookieConsent',
-    'data-culture': 'EN',
-    type: 'text/javascript',
+  await loadScript('//assets.adobedtm.com/launch-ENad9fcb0d6f2e4256949072f08ab39bbf.min.js', {
+    async: '',
   });
 }
 
-loadConsentManager();
+async function loadMouseflow() {
+  if (!isMartechEnabled()) return;
+
+  await loadScript('//cdn.mouseflow.com/projects/d4208736-f876-46f6-bfb9-ea86e390f52e.js');
+}
+
+async function loadDelayedScripts() {
+  await loadAdobeLaunch();
+  await loadMouseflow();
+}
+
+loadDelayedScripts();
