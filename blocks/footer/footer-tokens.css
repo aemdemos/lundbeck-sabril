@@ -172,6 +172,11 @@ footer a.button {
   min-height: 20px;
 }
 
+footer u {
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
 /* Decorative multicolour brand bar — CSS-only, intentionally NOT authored
    in the DA document. Spans the full wrapper box (content max-width + the
    wrapper's two 15px side gutters), so it aligns edge-to-edge with the

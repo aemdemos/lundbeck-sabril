@@ -71,7 +71,7 @@
   --text-color-light: #666;
 
   /* @libs */
-  --link-color: var(--brand-secondary);
+  --link-color: var(--brand-primary);
 
   /* @libs */
   --link-hover-color: #7ebcc6;
@@ -608,20 +608,7 @@ a {
   text-decoration: none;
 
   /* @libs */
-  font-weight: var(--font-weight-bold);
-
-  /* @libs */
   overflow-wrap: break-word;
-
-  /* @libs */
-}
-
-a:hover {
-  /* @libs */
-  color: var(--link-hover-color);
-
-  /* @libs */
-  text-decoration: none;
 
   /* @libs */
 }
@@ -911,7 +898,7 @@ main img {
 
 main ul {
   list-style: none;
-  padding-left: 15px;
+  padding-left: 0;
 }
 
 main ol {
@@ -928,7 +915,6 @@ main ol>li {
 main ul>li {
   padding-left: .8em;
   text-indent: -1em;
-  margin-bottom: 8px;
 }
 
 main ul>li::before {
@@ -936,6 +922,21 @@ main ul>li::before {
   padding-right: .5em;
   color: var(--brand-primary);
 }
+
+main ul > li > p {
+  margin: 0;
+  display: inline;
+}
+
+main ul > li > ul {
+  list-style: none;
+  margin: 0;
+}
+
+main ul > li > ul > li::before {
+    content: "-";
+    padding-right: .5em;
+  }
 
 /* icon bullet lists — :has() prevents FOUC before JS adds .icon-bullets */
 main ul:has(> li > .icon, > li > :is(strong, em, a) > .icon) {
@@ -1039,12 +1040,16 @@ main .icon.icon-bullet {
   }
 }
 
-.purple {
+.purple, .purple a, .brand-primary, .brand-primary a {
   color: var(--brand-primary);
 }
 
-.brand-primary-light {
+.brand-primary-light, .brand-primary-light a, .green, .green a {
   color: var(--brand-primary-light);
+}
+
+.orange, .orange a, .brand-orange, .brand-orange a {
+  color: var(--brand-orange);
 }
 
 .references {
@@ -1054,11 +1059,12 @@ main .icon.icon-bullet {
   }
 
   a:not(.button) {
-    color: var(--brand-primary);
-    font-weight: unset;
-    text-decoration: underline;
+      text-decoration: none;
+      border-bottom: 1px solid;
   }
 }
+
+
 
 /* sections */
 main>.section {

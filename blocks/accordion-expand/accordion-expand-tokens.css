@@ -17,4 +17,8 @@
   --accordion-expand-toggle-icon-size: 30px; /* @libs — reference .glyphicon */
   --accordion-expand-toggle-icon-offset-top: 7px; /* @libs — reference .accordian .glyphicon */
   --accordion-expand-toggle-icon-fill: #ef8922; /* @libs — glyphicon-plus-sign */
+
+  /* scroll-into-view on expand */
+  --accordion-expand-scroll-offset: 40px;
+  --accordion-expand-scroll-duration: 500ms;
 }
