@@ -20,9 +20,18 @@ async function loadMouseflow() {
   await loadScript('//cdn.mouseflow.com/projects/d4208736-f876-46f6-bfb9-ea86e390f52e.js');
 }
 
+async function loadRecaptcha() {
+  if (!isMartechEnabled()) return;
+
+  await loadScript('https://www.gstatic.com/recaptcha/releases/rL1ELiQAg1kPezz6_H9hTZ_i/recaptcha__en.js', {
+    async: '',
+  });
+}
+
 async function loadDelayedScripts() {
   await loadAdobeLaunch();
   await loadMouseflow();
+  await loadRecaptcha();
 }
 
 loadDelayedScripts();
