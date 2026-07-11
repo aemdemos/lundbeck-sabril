@@ -12,9 +12,7 @@ main .section.isi-container { /* @boilerplate */
    margin + matching inline padding lets the rule span the full viewport width
    (cancelling the main content gutter) while keeping the text aligned. */
 main .section > .default-content-wrapper:has(> .isi-container) {
-  border-top: var(--section-divider-width) solid var(--section-divider-color);
   margin-inline: calc(-1 * var(--spacing-m, 15px));
-  padding-top: 20px;
   padding-inline: var(--spacing-m, 15px);
 }
 

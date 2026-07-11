@@ -555,6 +555,10 @@ main .icon.icon-bullet {/* @libs */
     line-height: 1.3em;
     padding-right: 4%;
   }
+
+  h3 {
+    line-height: 1.6;
+  }
 }
 
 .purple, .purple a, .brand-primary, .brand-primary a {
@@ -640,11 +644,11 @@ main > .section:first-of-type {
 main>.section.divider {
   position: relative;
   padding-bottom: 10px;
-  border-radius: 0;
 
   &.green {
     border-bottom: 2px solid var(--brand-green-light);
     margin: 15px auto 0;
+    border-radius: 0;
   }
 }
 
@@ -652,10 +656,10 @@ main>.section.divider {
 main>.section.divider:not(.green)::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw;
+  width: calc(100vw - 16px);
   height: var(--section-divider-width);
   background-color: var(--section-divider-color);
   pointer-events: none;
@@ -795,8 +799,8 @@ main .section.stats-callout h4 {
 }
 
 main .section[data-background-color] {
-  padding: 10px 25px 25px;
-  margin-top: 24px;
+  padding: 10px 25px 20px;
+  margin: 24px auto 10px;
 }
 
 @media (width >=576px) {

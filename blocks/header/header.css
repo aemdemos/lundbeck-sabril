@@ -260,6 +260,10 @@ header nav .nav-hamburger-label {
   text-align: center;
 }
 
+header nav.nav-mobile-open .nav-hamburger-label {
+  font-size: 21px;
+}
+
 /* ---------- mobile layout ---------- */
 @media (width <= 767px) {
   /* Mobile stacking order matches the source top-to-bottom: utility links
