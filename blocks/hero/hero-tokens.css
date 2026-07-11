@@ -1,8 +1,8 @@
 /* hero design tokens */
 :root {
   /* display font */
-  --hero-font-family-display: "nunito", sans-serif;
-  --hero-single-font-family: "proxima-nova";
+  --hero-font-family-display: arial, sans-serif;
+  --hero-single-font-family: arial, sans-serif;
 
   /* colors */
   --hero-text-color-light: #fff;
