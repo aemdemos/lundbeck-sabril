@@ -243,7 +243,7 @@ header nav .nav-dropdown-menu li:last-child a {
 
 header nav .nav-dropdown-menu li a:hover,
 header nav .nav-dropdown-menu li.active a {
-  background-color: #b4cd89;
+  background-color: var(--sabril-green-hover);
   color: var(--sabril-green-text);
 }
 
