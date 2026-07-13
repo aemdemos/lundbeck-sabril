@@ -25,15 +25,107 @@ const MAX_SECTIONS = 100;
 const MAX_SECTION_CHILDREN = 200;
 
 /**
- * Hosts exempt from the "leaving site" interstitial: the site's own domains
- * (incl. links authored as absolute URLs) plus approved external domains.
+ * Site-wide outbound link policy (same rules everywhere — main, header, footer, fragments).
+ *
+ * | Link type                         | New tab | Exit modal |
+ * |-----------------------------------|---------|------------|
+ * | Same-site                         | No      | No         |
+ * | /modals/*                         | No      | No (content modal) |
+ * | PDF                               | Yes     | No         |
+ * | Trusted partner hosts (Lundbeck…) | Yes     | No         |
+ * | All other external http(s)        | Yes     | Yes        |
  */
-const INTERSTITIAL_EXEMPT_HOSTS = [
+const TRUSTED_HOSTS = [
+  'lundbeck.com',
+  'lundbeck-tools.com',
   'sabril.net',
   'aem.page',
   'aem.live',
-  'lundbeck.com',
 ];
+
+function isPdfLink(href) {
+  try {
+    const { pathname } = new URL(href, window.location);
+    return pathname.toLowerCase().endsWith('.pdf');
+  } catch {
+    return false;
+  }
+}
+
+function hostMatches(hostname, hosts) {
+  const host = hostname.toLowerCase();
+  return hosts.some((h) => host === h || host.endsWith(`.${h}`));
+}
+
+/**
+ * @param {string} href
+ * @returns {{ newTab: boolean, exitModal: boolean }}
+ */
+function getLinkPolicy(href) {
+  if (!href || href.includes('/modals/')) {
+    return { newTab: false, exitModal: false };
+  }
+
+  try {
+    const { protocol, hostname } = new URL(href, window.location);
+    if (!protocol.startsWith('http')) {
+      return { newTab: false, exitModal: false };
+    }
+
+    const external = hostname !== window.location.hostname;
+    if (!external) {
+      return { newTab: false, exitModal: false };
+    }
+
+    if (isPdfLink(href) || hostMatches(hostname, TRUSTED_HOSTS)) {
+      return { newTab: true, exitModal: false };
+    }
+
+    return { newTab: true, exitModal: true };
+  } catch {
+    return { newTab: false, exitModal: false };
+  }
+}
+
+function setNewTabAttrs(link) {
+  link.target = '_blank';
+  const rel = new Set((link.rel || '').split(/\s+/).filter(Boolean));
+  rel.add('noopener');
+  rel.add('noreferrer');
+  link.rel = [...rel].join(' ');
+}
+
+/**
+ * Applies site-wide link policy to all anchors under root.
+ * @param {ParentNode} root
+ */
+export function decorateLinks(root) {
+  root.querySelectorAll('a[href]').forEach((link) => {
+    if (getLinkPolicy(link.href).newTab) setNewTabAttrs(link);
+  });
+}
+
+function autolinkModals(doc) {
+  doc.addEventListener('click', async (e) => {
+    const anchor = e.target.closest('a');
+    if (!anchor || !anchor.href) return;
+
+    if (anchor.href.includes('/modals/')) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal(anchor.href);
+      return;
+    }
+
+    if (anchor.closest('.modal')) return;
+
+    if (getLinkPolicy(anchor.href).exitModal) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal('/modals/exit', anchor.href);
+    }
+  });
+}
 
 /** Keys that must not be used for object/dataset assignment (CWE-915). */
 const UNSAFE_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
@@ -143,38 +235,6 @@ async function loadFonts() {
   if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
 }
 
-function autolinkModals(doc) {
-  doc.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
-    if (!origin || !origin.href) return;
-
-    if (origin.href.includes('/modals/')) {
-      e.preventDefault();
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal(origin.href);
-      return;
-    }
-
-    // external links show a "leaving site" interstitial before navigating away,
-    // except same-site links, exempt hosts, and links inside the interstitial itself
-    if (origin.closest('.modal')) return;
-    let gated;
-    try {
-      const { hostname } = new URL(origin.href, window.location);
-      const isSameSite = hostname === window.location.hostname;
-      const isExempt = INTERSTITIAL_EXEMPT_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
-      gated = !isSameSite && !isExempt;
-    } catch {
-      gated = false;
-    }
-    if (gated && origin.protocol.startsWith('http')) {
-      e.preventDefault();
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal('/modals/exit', origin.href);
-    }
-  });
-}
-
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -250,7 +310,7 @@ export function decorateButtons(main) {
       outer.replaceWith(a);
     } else if (strong) {
       a.classList.add('primary');
-      strong.replaceWith(a);
+      strong.appendChild(a);
     } else if (em) {
       a.classList.add('secondary');
       em.replaceWith(a);
@@ -573,13 +633,13 @@ function parseSplitClasses(raw) {
   return parseClasses(raw, /^[a-z0-9-]+$/);
 }
 
-const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR']);
+const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR', 'U', 'DEL']);
 
 const ALIGNMENT_CLASSES = new Set(['center', 'left', 'right']);
 
 const SPAN_TAG_SELECTOR = 'h1, h2, h3, h4, h5, h6, p, li';
 
-const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]\s*$/;
+const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]([^\]]*)$/;
 
 const SPAN_TAG_RE = /\[\[(?=([^\]]+))\1\](?=([^\]]*))\2\]/g;
 
@@ -646,7 +706,7 @@ function applySplitBoundaryPass(el) {
         prev.nodeValue = prev.nodeValue.replace(TOOLTIP_OPEN_RE, '');
         next.nodeValue = next.nodeValue.slice(tooltipCloseMatch[0].length);
       } else {
-        // Pattern A: "prefix[[classes]" <inline>content</inline> "]suffix"
+        // Pattern A: "prefix[[classes]leading text" <inline>content</inline> "]suffix"
         const openMatch = prev.nodeValue.match(SPLIT_OPEN_RE);
         const classes = openMatch ? parseSplitClasses(openMatch[1]) : [];
         const closeMatch = openMatch && classes.length ? next.nodeValue.match(/^\s*\]/) : null;
@@ -655,11 +715,15 @@ function applySplitBoundaryPass(el) {
           if (alignClasses.length) el.classList.add(...alignClasses);
           prev.nodeValue = prev.nodeValue.slice(0, -openMatch[0].length);
           next.nodeValue = next.nodeValue.slice(closeMatch[0].length);
+          const leadingText = openMatch[2];
           if (regularClasses.length) {
             const span = document.createElement('span');
             span.className = regularClasses.join(' ');
+            if (leadingText) span.appendChild(document.createTextNode(leadingText));
             span.appendChild(mid);
             el.insertBefore(span, next);
+          } else if (leadingText) {
+            el.insertBefore(document.createTextNode(leadingText), mid);
           }
         }
       }
@@ -688,6 +752,14 @@ function applySplitBoundaryPass(el) {
       }
     }
   }
+
+  // Recurse into inline descendants (e.g. <strong><u>REVIEW</u></strong>) so
+  // boundary patterns nested inside another inline tag are also processed.
+  [...el.childNodes].forEach((child) => {
+    if (child.nodeType === Node.ELEMENT_NODE && SPLIT_INLINE_TAGS.has(child.nodeName)) {
+      applySplitBoundaryPass(child);
+    }
+  });
 }
 
 export function applySpanTags(text) {
@@ -985,7 +1057,7 @@ function normalizeAccordionExpandBlocks(main) {
  * Decorates the main element.
  * @param {Element} main The main element
  */
-// eslint-disable-next-line import/prefer-default-export
+ 
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateIconsAndBullets(main);
@@ -996,6 +1068,7 @@ export function decorateMain(main) {
   decorateNestedSections(main);
   decorateButtons(main);
   a11yLinks(main);
+  decorateLinks(main);
   decorateSpanTags(main);
 }
 
@@ -1153,8 +1226,9 @@ async function loadLazy(doc) {
     if (hasQE) import('../tools/quick-edit/quick-edit.js').then((mod) => mod.default());
   })();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  await loadHeader(doc.querySelector('header'));
+  await loadFooter(doc.querySelector('footer'));
+  decorateLinks(doc);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
@@ -1171,7 +1245,7 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // eslint-disable-next-line import/no-cycle
+   
   const importDelayed = () => import('./delayed.js');
 
   if ('requestIdleCallback' in window) {
@@ -1203,7 +1277,7 @@ export async function loadPage() {
 
 // DA UE Editor support before page load
 if (window.location.hostname.includes('ue.da.live')) {
-  // eslint-disable-next-line import/no-unresolved
+   
   await import(`${window.hlx.codeBasePath}/ue/scripts/ue.js`).then(({ default: ue }) => ue());
 }
 loadPage();

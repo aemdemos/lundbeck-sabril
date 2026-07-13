@@ -30,14 +30,12 @@
  *     grep -rc  '/\* @boilerplate' styles/ blocks/   (remaining count per file)
  */
 :root {
-  /* @libs */
   /* sabril brand colors */
   --brand-purple: #652d89;
   --brand-green-light: #77a22f;
   --brand-green-dark: #4b7602;
   --brand-orange: #ee8a21;
-  --brand-orange-dark: #d97817;
-  /* @libs */
+  --brand-orange-dark: #d97817;/* @libs */
 
   /* libs brand colors */
   --brand-primary: var(--brand-purple);
@@ -45,250 +43,144 @@
   --brand-primary-dark: var(--brand-green-dark);
   --brand-secondary: var(--brand-orange);
   --brand-secondary-dark: var(--brand-orange-dark);
-  --accent-bg: #e1f0f6;
-  /* @libs */
+  --accent-bg: #e1f0f6;/* @libs */
   --card-bg-light: #eff6f9;
-  /* @libs */
+  --card-bg-neutral: #f5f5f5;/* @libs */
 
   /* semantic colors */
-  --background-color: #fff;
-  /* @libs */
-  --light-color: #e1f0f6;
-  /* @libs */
-  --dark-color: #046183;
-  /* @libs */
-  --text-color: #000;
-  /* @libs */
-  --text-color-light: #666;
-  /* @libs */
-  --link-color: var(--brand-secondary);
-  /* @libs */
-  --link-hover-color: #7ebcc6;
-  /* @libs */
-  --overlay-background-color: #e1f0f6;
-  /* @libs */
-  --error-color: #c02c57;
-  /* @boilerplate */
-  --section-divider-width: 4px;
-  /* @libs */
+  --background-color: #fff;/* @libs */
+  --light-color: #e1f0f6;/* @libs */
+  --dark-color: #046183;/* @libs */
+  --text-color: #000;/* @libs */
+  --text-color-light: #666;/* @libs */
+  --link-color: var(--brand-primary);/* @libs */
+  --link-hover-color: #7ebcc6;/* @libs */
+  --overlay-background-color: #e1f0f6;/* @libs */
+  --error-color: #c02c57;/* @boilerplate */
+  --section-divider-width: 4px;/* @libs */
   --section-divider-color: #d1d1d1;
   --section-padding: 24px;
 
   /* fonts */
-  --body-font-family: arial, sans-serif;
-  /* @libs */
-  --heading-font-family: arial, sans-serif;
-  /* @libs */
-  --body-line-height: 1.4;
-  /* @libs */
-  --heading-font-weight: 800;
-  /* @libs */
-  --heading-line-height: 1.2;
-  /* @libs */
-  --font-weight-bold: 700;
-  /* @libs */
-  --block-margin-top: 20px;
-  /* @libs */
-  --block-margin-bottom: 10px;
-  /* @libs */
+  --body-font-family: arial, sans-serif;/* @libs */
+  --heading-font-family: arial, sans-serif;/* @libs */
+  --body-line-height: 1.4;/* @libs */
+  --heading-font-weight: 800;/* @libs */
+  --heading-line-height: 1.2;/* @libs */
+  --font-weight-bold: 700;/* @libs */
+  --block-margin-top: 20px;/* @libs */
+  --block-margin-bottom: 10px;/* @libs */
 
   /* body sizes */
-  --body-font-size-m: 24px;
-  /* @libs */
-  --body-font-size-ms: 18px;
-  /* @libs */
-  --body-font-size-s: 16px;
-  /* @libs */
-  --body-font-size-xs: 14px;
-  /* @libs */
+  --body-font-size-m: 24px;/* @libs */
+  --body-font-size-ms: 18px;/* @libs */
+  --body-font-size-s: 16px;/* @libs */
+  --body-font-size-xs: 14px;/* @libs */
 
   /* heading sizes (mobile-first) */
-  --heading-font-size-xxl: 23px;
-  /* @libs */
-  --heading-font-size-xl: 24px;
-  /* @libs */
-  --heading-font-size-l: 20px;
-  /* @libs */
-  --heading-font-size-m: 19px;
-  /* @libs */
-  --heading-font-size-s: 17px;
-  /* @libs */
-  --heading-font-size-xs: 16px;
-  /* @libs */
+  --heading-font-size-xxl: 23px;/* @libs */
+  --heading-font-size-xl: 24px;/* @libs */
+  --heading-font-size-l: 20px;/* @libs */
+  --heading-font-size-m: 19px;/* @libs */
+  --heading-font-size-s: 17px;/* @libs */
+  --heading-font-size-xs: 16px;/* @libs */
 
   /* layout */
-  --max-width-site: 1120px;
-  /* @libs */
-  --section-padding-vertical: 40px;
-  /* @libs */
-  --icon-size: 24px;
-  /* @libs */
-  --h1-max-width: 100%;
-  /* @libs */
+  --max-width-site: 1120px;/* @libs */
+  --section-padding-vertical: 40px;/* @libs */
+  --icon-size: 24px;/* @libs */
+  --h1-max-width: 100%;/* @libs */
 
   /* nav heights */
-  --nav-height: 200px;
-  /* @libs */
-  --nav-brand-row-height-mobile: 97px;
-  /* @libs */
-  --breadcrumbs-height: 34px;
-  /* @libs */
-  --header-height: var(--nav-height);
-  /* @libs */
+  --nav-height: 200px;/* @libs */
+  --nav-brand-row-height-mobile: 97px;/* @libs */
+  --breadcrumbs-height: 34px;/* @libs */
+  --header-height: var(--nav-height);/* @libs */
 
   /* fixed-width / code */
-  --fixed-font-family: menlo, consolas, monospace;
-  /* @libs */
+  --fixed-font-family: menlo, consolas, monospace;/* @libs */
 
   /* button tokens — shared */
-  --button-margin: 0;
-  /* @libs */
-  --button-border-radius: 10px;
-  /* @libs */
-  --button-border-width: 2px;
-  /* @libs */
-  --button-padding: 8px 15px;
-  /* @libs */
-  --button-font-size: 15px;
-  /* @libs */
-  --button-line-height: 1.5;
-  /* @libs */
-  --button-transition: 0.2s ease-in-out;
-  /* @libs */
+  --button-margin: 12px 0;/* @libs */
+  --button-border-radius: 10px;/* @libs */
+  --button-border-width: 2px;/* @libs */
+  --button-padding: 8px 27px;/* @libs */
+  --button-font-size: 15px;/* @libs */
+  --button-line-height: 1.5;/* @libs */
+  --button-transition: 0.2s ease-in-out;/* @libs */
 
   /* button icon (arrow on link buttons) */
-  --button-icon-width: 22px;
-  /* @libs */
-  --button-icon-height: 10px;
-  /* @libs */
-  --button-icon-gap: 8px;
-  /* @libs */
-  --button-icon-opacity-hover: 0.5;
-  /* @libs */
-  --button-icon-url: url("/icons/arrow-right.svg");
-  /* @libs */
+  --button-icon-width: 22px;/* @libs */
+  --button-icon-height: 10px;/* @libs */
+  --button-icon-gap: 8px;/* @libs */
+  --button-icon-opacity-hover: 0.5;/* @libs */
+  --button-icon-url: url("/icons/arrow-right.svg");/* @libs */
 
   /* primary — filled CTA */
-  --button-primary-background: var(--brand-secondary);
-  /* @libs */
-  --button-primary-hover-background: var(--brand-secondary-dark);
-  /* @libs */
-  --button-primary-color: var(--background-color);
-  /* @libs */
-  --button-primary-border-color: var(--brand-secondary);
-  /* @libs */
-  --button-primary-hover-border-color: var(--brand-secondary-dark);
-  /* @libs */
-  --button-primary-hover-color: var(--background-color);
-  /* @libs */
+  --button-primary-background: var(--brand-secondary);/* @libs */
+  --button-primary-hover-background: var(--brand-secondary-dark);/* @libs */
+  --button-primary-color: var(--background-color);/* @libs */
+  --button-primary-border-color: var(--brand-secondary);/* @libs */
+  --button-primary-hover-border-color: var(--brand-secondary-dark);/* @libs */
+  --button-primary-hover-color: var(--background-color);/* @libs */
 
   /* secondary — outline / ghost */
-  --button-secondary-background: transparent;
-  /* @libs */
-  --button-secondary-hover-background: transparent;
-  /* @libs */
-  --button-secondary-color: var(--brand-primary);
-  /* @libs */
-  --button-secondary-border-color: var(--brand-primary);
-  /* @libs */
-  --button-secondary-hover-color: var(--brand-primary-light);
-  /* @libs */
-  --button-secondary-hover-border-color: var(--brand-primary-light);
-  /* @libs */
+  --button-secondary-background: transparent;/* @libs */
+  --button-secondary-hover-background: transparent;/* @libs */
+  --button-secondary-color: var(--brand-primary);/* @libs */
+  --button-secondary-border-color: var(--brand-primary);/* @libs */
+  --button-secondary-hover-color: var(--brand-primary-light);/* @libs */
+  --button-secondary-hover-border-color: var(--brand-primary-light);/* @libs */
 
   /* accent — high-impact filled CTA */
-  --button-accent-background: var(--brand-primary);
-  /* @libs */
-  --button-accent-hover-background: var(--brand-primary-light);
-  /* @libs */
-  --button-accent-color: var(--background-color);
-  /* @libs */
-  --button-accent-border-color: var(--brand-primary);
-  /* @libs */
-  --button-accent-hover-border-color: var(--brand-primary-light);
-  /* @libs */
-  --button-accent-hover-color: var(--background-color);
-  /* @libs */
+  --button-accent-background: var(--brand-primary);/* @libs */
+  --button-accent-hover-background: var(--brand-primary-light);/* @libs */
+  --button-accent-color: var(--background-color);/* @libs */
+  --button-accent-border-color: var(--brand-primary);/* @libs */
+  --button-accent-hover-border-color: var(--brand-primary-light);/* @libs */
+  --button-accent-hover-color: var(--background-color);/* @libs */
 
   /* disabled (native button elements) */
-  --button-disabled-background: var(--light-color);
-  /* @libs */
-  --button-disabled-border-color: var(--light-color);
-  /* @libs */
-  --button-disabled-color: var(--text-color-light);
-  /* @libs */
+  --button-disabled-background: var(--light-color);/* @libs */
+  --button-disabled-border-color: var(--light-color);/* @libs */
+  --button-disabled-color: var(--text-color-light);/* @libs */
 
   /* on dark sections */
-  --button-on-dark-background: var(--background-color);
-  /* @libs */
-  --button-on-dark-border-color: var(--background-color);
-  /* @libs */
-  --button-on-dark-color: var(--brand-primary);
-  /* @libs */
-  --button-on-dark-hover-opacity: 0.9;
-  /* @libs */
-  --button-on-dark-secondary-background: transparent;
-  /* @libs */
-  --button-on-dark-secondary-border-color: var(--background-color);
-  /* @libs */
-  --button-on-dark-secondary-color: var(--background-color);
-  /* @libs */
-  --button-on-dark-secondary-hover-background: var(--background-color);
-  /* @libs */
-  --button-on-dark-secondary-hover-border-color: var(--background-color);
-  /* @libs */
-  --button-on-dark-secondary-hover-color: var(--brand-primary);
-  /* @libs */
+  --button-on-dark-background: var(--background-color);/* @libs */
+  --button-on-dark-border-color: var(--background-color);/* @libs */
+  --button-on-dark-color: var(--brand-primary);/* @libs */
+  --button-on-dark-hover-opacity: 0.9;/* @libs */
+  --button-on-dark-secondary-background: transparent;/* @libs */
+  --button-on-dark-secondary-border-color: var(--background-color);/* @libs */
+  --button-on-dark-secondary-color: var(--background-color);/* @libs */
+  --button-on-dark-secondary-hover-background: var(--background-color);/* @libs */
+  --button-on-dark-secondary-hover-border-color: var(--background-color);/* @libs */
+  --button-on-dark-secondary-hover-color: var(--brand-primary);/* @libs */
 
 }
 
-/* fallback font for proxima-nova */
-@font-face {
-  /* @libs */
-  font-family: proxima-nova-fallback;
-  /* @libs */
-  font-weight: 400;
-  /* @libs */
-  size-adjust: 98%;
-  /* @libs */
-  src: local('Arial');
-  /* @libs */
+html {
+  scroll-behavior: smooth;
 }
 
-@font-face {
-  /* @libs */
-  font-family: proxima-nova-fallback;
-  /* @libs */
-  font-weight: 700;
-  /* @libs */
-  size-adjust: 98%;
-  /* @libs */
-  src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial');
-  /* @libs */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
-body {
-  /* @libs */
-  display: none;
-  /* @libs */
-  margin: 0;
-  /* @libs */
-  background-color: var(--background-color);
-  /* @libs */
-  color: var(--text-color);
-  /* @libs */
-  font-family: var(--body-font-family);
-  /* @libs */
-  font-size: var(--body-font-size-s);
-  /* @libs */
-  line-height: var(--body-line-height);
-  /* @libs */
+body {/* @libs */
+  display: none;/* @libs */
+  margin: 0;/* @libs */
+  background-color: var(--background-color);/* @libs */
+  color: var(--text-color);/* @libs */
+  font-family: var(--body-font-family);/* @libs */
+  font-size: var(--body-font-size-s);/* @libs */
+  line-height: var(--body-line-height);/* @libs */
 }
 
-body.appear {
-  /* @libs */
-  display: block;
-  /* @libs */
+body.appear {/* @libs */
+  display: block;/* @libs */
 }
 
 .color-secondary {
@@ -297,24 +189,18 @@ body.appear {
   --link-color: var(--brand-secondary);
 }
 
-header {
-  /* @libs */
-  height: var(--header-height);
-  /* @libs */
+header {/* @libs */
+  height: var(--header-height);/* @libs */
 }
 
 header .header,
-footer .footer {
-  /* @libs */
-  visibility: hidden;
-  /* @libs */
+footer .footer {/* @libs */
+  visibility: hidden;/* @libs */
 }
 
 header .header[data-block-status="loaded"],
-footer .footer[data-block-status="loaded"] {
-  /* @libs */
-  visibility: visible;
-  /* @libs */
+footer .footer[data-block-status="loaded"] {/* @libs */
+  visibility: visible;/* @libs */
 }
 
 /* headings */
@@ -323,81 +209,51 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  /* @libs */
-  margin-top: var(--block-margin-top);
-  /* @libs */
-  margin-bottom: var(--block-margin-bottom);
-  /* @libs */
-  font-family: var(--heading-font-family);
-  /* @libs */
-  font-weight: var(--heading-font-weight);
-  /* @libs */
-  line-height: var(--heading-line-height);
-  /* @libs */
-  scroll-margin: 40px;
-  /* @libs */
-  color: var(--brand-primary);
-  /* @libs */
+h6 {/* @libs */
+  margin-top: var(--block-margin-top);/* @libs */
+  margin-bottom: var(--block-margin-bottom);/* @libs */
+  font-family: var(--heading-font-family);/* @libs */
+  font-weight: var(--heading-font-weight);/* @libs */
+  line-height: var(--heading-line-height);/* @libs */
+  scroll-margin: 40px;/* @libs */
+  color: var(--brand-primary);/* @libs */
 }
 
-h1 {
-  /* @libs */
-  font-size: var(--heading-font-size-xxl);
-  /* @libs */
-  line-height: 1.125;
-  /* @libs */
-  color: var(--brand-primary);
-  /* @libs */
-  max-width: var(--h1-max-width);
-  /* @libs */
+h1 {/* @libs */
+  font-size: var(--heading-font-size-xxl);/* @libs */
+  line-height: 1.125;/* @libs */
+  color: var(--brand-primary);/* @libs */
+  max-width: var(--h1-max-width);/* @libs */
   margin: .67em 0;
 }
 
-h2 {
-  /* @libs */
-  font-size: var(--heading-font-size-m);
-  /* @libs */
-  line-height: var(--heading-line-height);
-  /* @libs */
+h2 {/* @libs */
+  font-size: var(--heading-font-size-m);/* @libs */
+  line-height: var(--heading-line-height);/* @libs */
 
 }
 
-h3 {
-  /* @libs */
-  font-size: var(--heading-font-size-s);
-  /* @libs */
-  font-weight: var(--font-weight-bold);
-  /* @libs */
+h3 {/* @libs */
+  font-size: var(--heading-font-size-s);/* @libs */
+  font-weight: var(--font-weight-bold);/* @libs */
   line-height: 1.2;
 }
 
-h4 {
-  /* @libs */
-  font-size: var(--heading-font-size-m);
-  /* @libs */
-  font-weight: var(--font-weight-bold);
-  /* @libs */
-  line-height: 1.5;
-  /* @libs */
+h4 {/* @libs */
+  font-size: var(--heading-font-size-m);/* @libs */
+  font-weight: var(--font-weight-bold);/* @libs */
+  line-height: 1.5;/* @libs */
 }
 
-h5 {
-  /* @libs */
-  font-size: var(--heading-font-size-s);
-  /* @libs */
-  font-weight: var(--font-weight-bold);
-  /* @libs */
-  line-height: 1.22;
-  /* @libs */
+h5 {/* @libs */
+  font-size: var(--heading-font-size-s);/* @libs */
+  font-weight: var(--font-weight-bold);/* @libs */
+  line-height: 1.22;/* @libs */
 }
 
-h6 {
-  /* @libs */
-  font-size: var(--heading-font-size-xs);
-  /* @libs */
-  font-weight: var(--font-weight-bold);
-  /* @libs */
+h6 {/* @libs */
+  font-size: var(--heading-font-size-xs);/* @libs */
+  font-weight: var(--font-weight-bold);/* @libs */
 }
 
 p,
@@ -405,40 +261,27 @@ dl,
 ol,
 ul,
 pre,
-blockquote {
-  /* @libs */
-  margin-top: var(--block-margin-bottom);
-  /* @libs */
-  margin-bottom: var(--block-margin-bottom);
-  /* @libs */
+blockquote {/* @libs */
+  margin-top: var(--block-margin-bottom);/* @libs */
+  margin-bottom: var(--block-margin-bottom);/* @libs */
 }
 
 main p.button-wrapper {
-  margin-top: 24px;
-  padding-left: 15px;
+  margin: var(--button-margin);
 }
 
 code,
-pre {
-  /* @libs */
-  font-family: var(--fixed-font-family);
-  /* @libs */
-  font-size: var(--body-font-size-s);
-  /* @libs */
+pre {/* @libs */
+  font-family: var(--fixed-font-family);/* @libs */
+  font-size: var(--body-font-size-s);/* @libs */
 }
 
-pre {
-  /* @libs */
-  padding: 16px;
-  /* @libs */
-  border-radius: 8px;
-  /* @libs */
-  background-color: var(--light-color);
-  /* @libs */
-  overflow-x: auto;
-  /* @libs */
-  white-space: pre;
-  /* @libs */
+pre {/* @libs */
+  padding: 16px;/* @libs */
+  border-radius: 8px;/* @libs */
+  background-color: var(--light-color);/* @libs */
+  overflow-x: auto;/* @libs */
+  white-space: pre;/* @libs */
 }
 
 main {
@@ -446,133 +289,79 @@ main {
   padding: 0 15px;
 }
 
-main>div {
-  /* @libs */
-  margin: 40px 16px;
-  /* @libs */
+main>div {/* @libs */
+  margin: 40px 16px;/* @libs */
 }
 
 input,
 textarea,
 select,
-button {
-  /* @libs */
-  font: inherit;
-  /* @libs */
+button {/* @libs */
+  font: inherit;/* @libs */
 }
 
 /* links */
-a {
-  /* @libs */
-  color: var(--link-color);
-  /* @libs */
-  text-decoration: none;
-  /* @libs */
-  font-weight: var(--font-weight-bold);
-  /* @libs */
-  overflow-wrap: break-word;
-  /* @libs */
-}
-
-a:hover {
-  /* @libs */
-  color: var(--link-hover-color);
-  /* @libs */
-  text-decoration: none;
-  /* @libs */
+a {/* @libs */
+  color: var(--link-color);/* @libs */
+  text-decoration: none;/* @libs */
+  overflow-wrap: break-word;/* @libs */
 }
 
 /* buttons — shared structure */
 main a.button,
 main span.button a,
-button {
-  /* @libs */
-  box-sizing: border-box;
-  /* @libs */
-  display: inline-block;
-  /* @libs */
-  max-width: 100%;
-  /* @libs */
-  margin: var(--button-margin);
-  /* @libs */
-  padding: var(--button-padding);
-  /* @libs */
-  border: var(--button-border-width) solid transparent;
-  /* @libs */
-  border-radius: var(--button-border-radius);
-  /* @libs */
-  font-family: var(--body-font-family);
-  /* @libs */
-  font-size: var(--button-font-size);
-  /* @libs */
-  font-style: normal;
-  /* @libs */
-  font-weight: var(--button-font-weight);
-  /* @libs */
-  line-height: var(--button-line-height);
-  /* @libs */
-  text-align: center;
-  /* @libs */
-  text-decoration: none;
-  /* @libs */
-  cursor: pointer;
-  /* @libs */
-  transition: var(--button-transition);
-  /* @libs */
-  background-color: var(--button-primary-background);
-  /* @libs */
-  border-color: var(--button-primary-border-color);
-  /* @libs */
-  color: var(--button-primary-color);
-  /* @libs */
+button {/* @libs */
+  box-sizing: border-box;/* @libs */
+  display: inline-block;/* @libs */
+  max-width: 100%;/* @libs */
+  margin: var(--button-margin);/* @libs */
+  padding: var(--button-padding);/* @libs */
+  border: var(--button-border-width) solid transparent;/* @libs */
+  border-radius: var(--button-border-radius);/* @libs */
+  font-family: var(--body-font-family);/* @libs */
+  font-size: var(--button-font-size);/* @libs */
+  font-style: normal;/* @libs */
+  font-weight: var(--button-font-weight);/* @libs */
+  line-height: var(--button-line-height);/* @libs */
+  text-align: center;/* @libs */
+  text-decoration: none;/* @libs */
+  cursor: pointer;/* @libs */
+  transition: var(--button-transition);/* @libs */
+  background-color: var(--button-primary-background);/* @libs */
+  border-color: var(--button-primary-border-color);/* @libs */
+  color: var(--button-primary-color);/* @libs */
 }
 
-a.button:focus {
-  /* @libs */
-  outline: 0;
-  /* @libs */
+a.button:focus {/* @libs */
+  outline: 0;/* @libs */
 }
 
 /* primary — filled CTA (native button elements default here) */
 a.button.primary,
 main span.button a,
-button {
-  /* @libs */
-  background-color: var(--button-primary-background);
-  /* @libs */
-  border-color: var(--button-primary-border-color);
-  /* @libs */
-  color: var(--button-primary-color);
-  /* @libs */
+button {/* @libs */
+  background-color: var(--button-primary-background);/* @libs */
+  border-color: var(--button-primary-border-color);/* @libs */
+  color: var(--button-primary-color);/* @libs */
 }
 
 a.button.primary:hover,
 a.button.primary:focus,
 span.button a:hover,
 button:hover,
-button:focus {
-  /* @libs */
-  background-color: var(--button-primary-hover-background);
-  /* @libs */
-  border-color: var(--button-primary-hover-border-color);
-  /* @libs */
-  color: var(--button-primary-hover-color);
-  /* @libs */
-  cursor: pointer;
-  /* @libs */
+button:focus {/* @libs */
+  background-color: var(--button-primary-hover-background);/* @libs */
+  border-color: var(--button-primary-hover-border-color);/* @libs */
+  color: var(--button-primary-hover-color);/* @libs */
+  cursor: pointer;/* @libs */
 }
 
 button:disabled,
-button:disabled:hover {
-  /* @libs */
-  background-color: var(--button-disabled-background);
-  /* @libs */
-  border-color: var(--button-disabled-border-color);
-  /* @libs */
-  color: var(--button-disabled-color);
-  /* @libs */
-  cursor: unset;
-  /* @libs */
+button:disabled:hover {/* @libs */
+  background-color: var(--button-disabled-background);/* @libs */
+  border-color: var(--button-disabled-border-color);/* @libs */
+  color: var(--button-disabled-color);/* @libs */
+  cursor: unset;/* @libs */
 }
 
 /* responsive visibility utilities (authorable via [hide-mobile] / [hide-desktop] bracket spans) */
@@ -583,127 +372,83 @@ button:disabled:hover {
 
 /* secondary — outline / ghost (default for unclassified link buttons) */
 a.button.secondary,
-button.secondary {
-  /* @libs */
-  background-color: var(--button-secondary-background);
-  /* @libs */
-  border-color: var(--button-secondary-border-color);
-  /* @libs */
-  color: var(--button-secondary-color);
-  /* @libs */
+button.secondary {/* @libs */
+  background-color: var(--button-secondary-background);/* @libs */
+  border-color: var(--button-secondary-border-color);/* @libs */
+  color: var(--button-secondary-color);/* @libs */
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus,
 button.secondary:hover,
-button.secondary:focus {
-  /* @libs */
-  background-color: var(--button-secondary-hover-background);
-  /* @libs */
-  border-color: var(--button-secondary-hover-border-color);
-  /* @libs */
-  color: var(--button-secondary-hover-color);
-  /* @libs */
-  text-decoration: none;
-  /* @libs */
-  cursor: pointer;
-  /* @libs */
+button.secondary:focus {/* @libs */
+  background-color: var(--button-secondary-hover-background);/* @libs */
+  border-color: var(--button-secondary-hover-border-color);/* @libs */
+  color: var(--button-secondary-hover-color);/* @libs */
+  text-decoration: none;/* @libs */
+  cursor: pointer;/* @libs */
 }
 
 /* accent — high-impact filled CTA */
-a.button.accent {
-  /* @libs */
-  background-color: var(--button-accent-background);
-  /* @libs */
-  border-color: var(--button-accent-border-color);
-  /* @libs */
-  color: var(--button-accent-color);
-  /* @libs */
+a.button.accent {/* @libs */
+  background-color: var(--button-accent-background);/* @libs */
+  border-color: var(--button-accent-border-color);/* @libs */
+  color: var(--button-accent-color);/* @libs */
 }
 
 a.button.accent:hover,
-a.button.accent:focus {
-  /* @libs */
-  background-color: var(--button-accent-hover-background);
-  /* @libs */
-  border-color: var(--button-accent-hover-border-color);
-  /* @libs */
-  color: var(--button-accent-hover-color);
-  /* @libs */
-  text-decoration: none;
-  /* @libs */
-  cursor: pointer;
-  /* @libs */
+a.button.accent:focus {/* @libs */
+  background-color: var(--button-accent-hover-background);/* @libs */
+  border-color: var(--button-accent-hover-border-color);/* @libs */
+  color: var(--button-accent-hover-color);/* @libs */
+  text-decoration: none;/* @libs */
+  cursor: pointer;/* @libs */
 }
 
 a.button:hover::after,
-a.button:focus::after {
-  /* @libs */
-  opacity: var(--button-icon-opacity-hover);
-  /* @libs */
+a.button:focus::after {/* @libs */
+  opacity: var(--button-icon-opacity-hover);/* @libs */
 }
 
 /* explicit authored icon (e.g. :search:) replaces the default arrow and uses
    flex gap so spacing sits between icon and text on whichever side it's authored */
-a.button:has(.icon) {
-  /* @libs */
-  display: inline-flex;
-  /* @libs */
-  gap: var(--button-icon-gap);
-  /* @libs */
-  align-items: center;
-  /* @libs */
-  justify-content: center;
-  /* @libs */
+a.button:has(.icon) {/* @libs */
+  display: inline-flex;/* @libs */
+  gap: var(--button-icon-gap);/* @libs */
+  align-items: center;/* @libs */
+  justify-content: center;/* @libs */
 }
 
-a.button:has(.icon)::after {
-  /* @libs */
-  content: none;
-  /* @libs */
+a.button:has(.icon)::after {/* @libs */
+  content: none;/* @libs */
 }
 
-a.button .icon {
-  /* @libs */
-  width: 1em;
-  /* @libs */
-  height: 1em;
-  /* @libs */
+a.button .icon {/* @libs */
+  width: 1em;/* @libs */
+  height: 1em;/* @libs */
 }
 
-main img {
-  /* @libs */
-  max-width: 100%;
-  /* @libs */
-  width: auto;
-  /* @libs */
-  height: auto;
-  /* @libs */
+main img {/* @libs */
+  max-width: 100%;/* @libs */
+  width: auto;/* @libs */
+  height: auto;/* @libs */
 }
 
-.icon {
-  /* @libs */
-  display: inline-block;
-  /* @libs */
-  height: var(--icon-size);
-  /* @libs */
-  width: var(--icon-size);
-  /* @libs */
+.icon {/* @libs */
+  display: inline-block;/* @libs */
+  height: var(--icon-size);/* @libs */
+  width: var(--icon-size);/* @libs */
 }
 
-.icon img {
-  /* @libs */
-  height: 100%;
-  /* @libs */
-  width: 100%;
-  /* @libs */
-  object-fit: contain;
-  /* @libs */
+.icon img {/* @libs */
+  height: 100%;/* @libs */
+  width: 100%;/* @libs */
+  object-fit: contain;/* @libs */
 }
 
 main ul {
   list-style: none;
-  padding-left: 15px;
+  padding-left: 0;
 }
 
 main ol {
@@ -718,9 +463,8 @@ main ol>li {
 }
 
 main ul>li {
-  padding-left: .8em;
+  padding-left: 1em;
   text-indent: -1em;
-  margin-bottom: 8px;
 }
 
 main ul>li::before {
@@ -729,42 +473,43 @@ main ul>li::before {
   color: var(--brand-primary);
 }
 
-/* icon bullet lists — :has() prevents FOUC before JS adds .icon-bullets */
-main ul:has(> li > .icon, > li > :is(strong, em, a) > .icon) {
-  /* @libs */
-  list-style: none;
-  /* @libs */
+main ul > li > p {
   margin: 0;
-  /* @libs */
-  padding: 0;
-  /* @libs */
+  display: inline;
+}
+
+main ul > li > ul {
+  list-style: none;
+  margin: 0;
+}
+
+main ul > li > ul > li::before {
+    content: "-";
+    padding-right: .5em;
+  }
+
+/* icon bullet lists — :has() prevents FOUC before JS adds .icon-bullets */
+main ul:has(> li > .icon, > li > :is(strong, em, a) > .icon) {/* @libs */
+  list-style: none;/* @libs */
+  margin: 0;/* @libs */
+  padding: 0;/* @libs */
 }
 
 main ul.icon-bullets>li,
-main li.icon-bullet-item {
-  /* @libs */
-  display: flex;
-  /* @libs */
-  align-items: flex-start;
-  /* @libs */
-  gap: 12px;
-  /* @libs */
-  list-style: none;
-  /* @libs */
+main li.icon-bullet-item {/* @libs */
+  display: flex;/* @libs */
+  align-items: flex-start;/* @libs */
+  gap: 12px;/* @libs */
+  list-style: none;/* @libs */
 }
 
-main .icon-bullet-text {
-  /* @libs */
-  flex: 1;
-  /* @libs */
+main .icon-bullet-text {/* @libs */
+  flex: 1;/* @libs */
 }
 
-main .icon.icon-bullet {
-  /* @libs */
-  flex-shrink: 0;
-  /* @libs */
-  margin-top: 0.15em;
-  /* @libs */
+main .icon.icon-bullet {/* @libs */
+  flex-shrink: 0;/* @libs */
+  margin-top: 0.15em;/* @libs */
 }
 
 .center {
@@ -819,90 +564,84 @@ main .icon.icon-bullet {
     line-height: 1.3em;
     padding-right: 4%;
   }
+
+  h3 {
+    line-height: 1.6;
+  }
 }
 
-.purple {
+.purple, .purple a, .brand-primary, .brand-primary a {
   color: var(--brand-primary);
 }
 
-.references {
+.brand-primary-light, .brand-primary-light a, .green, .green a {
+  color: var(--brand-primary-light);
+}
 
+.orange, .orange a, .brand-orange, .brand-orange a {
+  color: var(--brand-orange);
+}
+
+.references {
   p strong,
   li strong {
     color: var(--brand-primary);
   }
 
   a:not(.button) {
-    color: var(--brand-primary);
-    font-weight: unset;
-    text-decoration: underline;
+      text-decoration: none;
+      border-bottom: 1px solid;
   }
 }
 
+
+
 /* sections */
-main>.section {
-  /* @libs */
+main>.section {/* @libs */
   border-radius: 10px;
-  max-width: var(--max-width-site);
-  /* @boilerplate */
-  margin: 24px auto 0;
-  /* @boilerplate */
+  max-width: var(--max-width-site);/* @boilerplate */
+  margin: 24px auto 0;/* @boilerplate */
 }
 
 main>.section>div:not(.bg-image) {
   /* @boilerplate */
-  max-width: var(--max-width-site);
-  /* @boilerplate */
-  margin: auto;
-  /* @boilerplate */
-  padding: 0 var(--spacing-m);
-  /* @boilerplate */
+  max-width: var(--max-width-site);/* @boilerplate */
+  margin: auto;/* @boilerplate */
+  padding: 0 var(--spacing-m);/* @boilerplate */
 }
 
 /* Section metadata: background image sits behind content */
 main>.section:has(> .bg-image) {
   /* @boilerplate */
-  position: relative;
-  /* @boilerplate */
-  overflow: hidden;
-  /* @boilerplate */
+  position: relative;/* @boilerplate */
+  overflow: hidden;/* @boilerplate */
 }
 
 main>.section:has(> .bg-image)>div:not(.bg-image) {
   /* @boilerplate */
-  position: relative;
-  /* @boilerplate */
-  z-index: 1;
-  /* @boilerplate */
+  position: relative;/* @boilerplate */
+  z-index: 1;/* @boilerplate */
 }
 
 main>.section>.bg-image {
   /* @boilerplate */
-  position: absolute;
-  /* @boilerplate */
-  inset: 0;
-  /* @boilerplate */
-  z-index: 0;
-  /* @boilerplate */
-  pointer-events: none;
-  /* @boilerplate */
+  position: absolute;/* @boilerplate */
+  inset: 0;/* @boilerplate */
+  z-index: 0;/* @boilerplate */
+  pointer-events: none;/* @boilerplate */
 }
 
 main>.section>.bg-image picture,
 main>.section>.bg-image img {
   /* @boilerplate */
-  display: block;
-  /* @boilerplate */
-  width: 100%;
-  /* @boilerplate */
-  height: 100%;
-  /* @boilerplate */
+  display: block;/* @boilerplate */
+  width: 100%;/* @boilerplate */
+  height: 100%;/* @boilerplate */
 }
 
 main>.section>.bg-image img {
   /* @boilerplate */
-  object-fit: cover;
-  /* @boilerplate */
+  object-fit: cover;/* @boilerplate */
 }
 
 /*
@@ -914,11 +653,11 @@ main > .section:first-of-type {
 main>.section.divider {
   position: relative;
   padding-bottom: 10px;
-  border-radius: 0;
 
   &.green {
     border-bottom: 2px solid var(--brand-green-light);
     margin: 15px auto 0;
+    border-radius: 0;
   }
 }
 
@@ -926,89 +665,60 @@ main>.section.divider {
 main>.section.divider:not(.green)::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw;
+  width: calc(100vw - 16px);
   height: var(--section-divider-width);
   background-color: var(--section-divider-color);
   pointer-events: none;
 }
 
-main>.section>div {
-  /* @libs */
-  max-width: 540px;
-  /* @libs */
-  margin: auto;
-  /* @libs */
-  padding: 0 15px;
-  /* @libs */
+main>.section>div {/* @libs */
+  max-width: 540px;/* @libs */
+  margin: auto;/* @libs */
+  padding: 0 15px;/* @libs */
 }
 
 /* section metadata - accent (light blue help strip) */
-main .section.accent {
-  /* @libs */
-  background-color: var(--accent-bg);
-  /* @libs */
-  margin: 0;
-  /* @libs */
-  padding: 20px 0;
-  /* @libs */
+main .section.accent {/* @libs */
+  background-color: var(--accent-bg);/* @libs */
+  margin: 0;/* @libs */
+  padding: 20px 0;/* @libs */
 }
 
-main .section.accent>div {
-  /* @libs */
-  display: flex;
-  /* @libs */
-  align-items: center;
-  /* @libs */
-  justify-content: center;
-  /* @libs */
-  gap: 12px;
-  /* @libs */
+main .section.accent>div {/* @libs */
+  display: flex;/* @libs */
+  align-items: center;/* @libs */
+  justify-content: center;/* @libs */
+  gap: 12px;/* @libs */
 }
 
-main .section.accent p {
-  /* @libs */
-  margin: 0;
-  /* @libs */
-  font-size: var(--body-font-size-ms);
-  /* @libs */
+main .section.accent p {/* @libs */
+  margin: 0;/* @libs */
+  font-size: var(--body-font-size-ms);/* @libs */
 }
 
-main .section.accent img {
-  /* @libs */
-  max-width: unset;
-  /* @libs */
-  width: 54px;
-  /* @libs */
-  height: 54px;
-  /* @libs */
+main .section.accent img {/* @libs */
+  max-width: unset;/* @libs */
+  width: 54px;/* @libs */
+  height: 54px;/* @libs */
 }
 
 /* section metadata - light */
 main .section.light,
-main .section.highlight {
-  /* @libs */
-  background-color: var(--light-color);
-  /* @libs */
-  margin: 0;
-  /* @libs */
-  padding: var(--section-padding-vertical) 0;
-  /* @libs */
+main .section.highlight {/* @libs */
+  background-color: var(--light-color);/* @libs */
+  margin: 0;/* @libs */
+  padding: var(--section-padding-vertical) 0;/* @libs */
 }
 
 /* section metadata - dark (teal) */
-main .section.dark {
-  /* @libs */
-  background-color: var(--brand-primary);
-  /* @libs */
-  color: var(--background-color);
-  /* @libs */
-  margin: 0;
-  /* @libs */
-  padding: var(--section-padding-vertical) 0;
-  /* @libs */
+main .section.dark {/* @libs */
+  background-color: var(--brand-primary);/* @libs */
+  color: var(--background-color);/* @libs */
+  margin: 0;/* @libs */
+  padding: var(--section-padding-vertical) 0;/* @libs */
 }
 
 main .section.dark h1,
@@ -1016,34 +726,24 @@ main .section.dark h2,
 main .section.dark h3,
 main .section.dark h4,
 main .section.dark h5,
-main .section.dark h6 {
-  /* @libs */
-  color: var(--background-color);
-  /* @libs */
+main .section.dark h6 {/* @libs */
+  color: var(--background-color);/* @libs */
 }
 
-main .section.dark a {
-  /* @libs */
-  color: var(--background-color);
-  /* @libs */
+main .section.dark a {/* @libs */
+  color: var(--background-color);/* @libs */
 }
 
-main .section.dark a:hover {
-  /* @libs */
-  color: var(--brand-primary-light);
-  /* @libs */
+main .section.dark a:hover {/* @libs */
+  color: var(--brand-primary-light);/* @libs */
 }
 
 main .section.dark a.button.primary,
 main .section.dark a.button.accent,
-main .section.dark a.button:not(.secondary) {
-  /* @libs */
-  background-color: var(--button-on-dark-background);
-  /* @libs */
-  border-color: var(--button-on-dark-border-color);
-  /* @libs */
-  color: var(--button-on-dark-color);
-  /* @libs */
+main .section.dark a.button:not(.secondary) {/* @libs */
+  background-color: var(--button-on-dark-background);/* @libs */
+  border-color: var(--button-on-dark-border-color);/* @libs */
+  color: var(--button-on-dark-color);/* @libs */
 }
 
 main .section.dark a.button.primary:hover,
@@ -1051,37 +751,24 @@ main .section.dark a.button.primary:focus,
 main .section.dark a.button.accent:hover,
 main .section.dark a.button.accent:focus,
 main .section.dark a.button:not(.secondary):hover,
-main .section.dark a.button:not(.secondary):focus {
-  /* @libs */
-  background-color: var(--button-on-dark-background);
-  /* @libs */
-  border-color: var(--button-on-dark-border-color);
-  /* @libs */
-  color: var(--button-on-dark-color);
-  /* @libs */
-  opacity: var(--button-on-dark-hover-opacity);
-  /* @libs */
+main .section.dark a.button:not(.secondary):focus {/* @libs */
+  background-color: var(--button-on-dark-background);/* @libs */
+  border-color: var(--button-on-dark-border-color);/* @libs */
+  color: var(--button-on-dark-color);/* @libs */
+  opacity: var(--button-on-dark-hover-opacity);/* @libs */
 }
 
-main .section.dark a.button.secondary {
-  /* @libs */
-  background-color: var(--button-on-dark-secondary-background);
-  /* @libs */
-  border-color: var(--button-on-dark-secondary-border-color);
-  /* @libs */
-  color: var(--button-on-dark-secondary-color);
-  /* @libs */
+main .section.dark a.button.secondary {/* @libs */
+  background-color: var(--button-on-dark-secondary-background);/* @libs */
+  border-color: var(--button-on-dark-secondary-border-color);/* @libs */
+  color: var(--button-on-dark-secondary-color);/* @libs */
 }
 
 main .section.dark a.button.secondary:hover,
-main .section.dark a.button.secondary:focus {
-  /* @libs */
-  background-color: var(--button-on-dark-secondary-hover-background);
-  /* @libs */
-  border-color: var(--button-on-dark-secondary-hover-border-color);
-  /* @libs */
-  color: var(--button-on-dark-secondary-hover-color);
-  /* @libs */
+main .section.dark a.button.secondary:focus {/* @libs */
+  background-color: var(--button-on-dark-secondary-hover-background);/* @libs */
+  border-color: var(--button-on-dark-secondary-hover-border-color);/* @libs */
+  color: var(--button-on-dark-secondary-hover-color);/* @libs */
 }
 
 /* section metadata - stats-callout (light-blue→white gradient, rounded top corners).
@@ -1121,8 +808,8 @@ main .section.stats-callout h4 {
 }
 
 main .section[data-background-color] {
-  padding: 10px 25px 25px;
-  margin-top: 24px;
+  padding: 10px 25px 20px;
+  margin: 24px auto 10px;
 }
 
 @media (width >=576px) {
@@ -1131,30 +818,18 @@ main .section[data-background-color] {
   }
 }
 
-@media (width >=768px) {
-
-  /* @libs */
-  :root {
-    /* @libs */
+@media (width >=768px) {/* @libs */
+  :root {/* @libs */
     /* heading sizes scale up on desktop */
-    --body-font-size-m: 16px;
-    /* @libs */
-    --body-font-size-s: 16px;
-    /* @libs */
-    --body-font-size-xs: 14px;
-    /* @libs */
-    --heading-font-size-xxl: 30px;
-    /* @libs */
-    --heading-font-size-xl: 24px;
-    /* @libs */
-    --heading-font-size-l: 24px;
-    /* @libs */
-    --heading-font-size-m: 22px;
-    /* @libs */
-    --heading-font-size-s: 16px;
-    /* @libs */
-    --heading-font-size-xs: 16px;
-    /* @libs */
+    --body-font-size-m: 16px;/* @libs */
+    --body-font-size-s: 16px;/* @libs */
+    --body-font-size-xs: 14px;/* @libs */
+    --heading-font-size-xxl: 30px;/* @libs */
+    --heading-font-size-xl: 24px;/* @libs */
+    --heading-font-size-l: 24px;/* @libs */
+    --heading-font-size-m: 22px;/* @libs */
+    --heading-font-size-s: 16px;/* @libs */
+    --heading-font-size-xs: 16px;/* @libs */
   }
 
   .hide-desktop {
@@ -1173,10 +848,8 @@ main .section[data-background-color] {
     padding: var(--section-padding-vertical) 0;
   }
 
-  main>.section>div {
-    /* @libs */
-    max-width: 720px;
-    /* @libs */
+  main>.section>div {/* @libs */
+    max-width: 720px;/* @libs */
   }
 
   main .section.stats-callout>div:not(.bg-image) {
@@ -1184,32 +857,24 @@ main .section[data-background-color] {
   }
 }
 
-@media (width >=992px) {
-
-  /* @libs */
-  body[data-breadcrumbs] {
-    /* @libs */
-    --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
-    /* @libs */
+@media (width >=992px) {/* @libs */
+  body[data-breadcrumbs] {/* @libs */
+    --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));/* @libs */
   }
 
-  header {
-    /* @libs */
-    height: calc(var(--nav-height) + 23px);
-    /* @libs */
+  header {/* @libs */
+    height: calc(var(--nav-height) + 23px);/* @libs */
   }
 
-  main>.section>div {
-    /* @libs */
-    max-width: var(--max-width-site);
-    /* @libs */
-    padding: 0 32px;
-    /* @libs */
+  main>.section>div {/* @libs */
+    max-width: var(--max-width-site);/* @libs */
+    padding: 0 32px;/* @libs */
   }
 
   main>.section>div:not(.bg-image) {
     /* @boilerplate */
     padding: 0 var(--spacing-l);
+
     /* @boilerplate */
   }
 
@@ -1217,18 +882,14 @@ main .section[data-background-color] {
     max-width: 960px;
   }
 
-  main .section.accent>div {
-    /* @libs */
-    gap: 30px;
-    /* @libs */
+  main .section.accent>div {/* @libs */
+    gap: 30px;/* @libs */
   }
 }
 
 @media (width >=1200px) {
-  header {
-    /* @libs */
-    height: var(--nav-height);
-    /* @libs */
+  header {/* @libs */
+    height: var(--nav-height);/* @libs */
   }
 
   /* sabril.net: .container-fluid caps at 1200px, centered on wide desktops */

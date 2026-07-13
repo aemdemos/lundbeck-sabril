@@ -98,6 +98,62 @@ function closeOnClickOutside(e) {
 }
 
 /**
+ * Normalizes a URL path for nav active-state comparison.
+ * @param {string} href Link href (absolute or relative)
+ * @returns {string} Normalized pathname without trailing slash
+ */
+function normalizeNavPath(href) {
+  if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return '';
+  }
+
+  try {
+    const { pathname } = new URL(href, window.location.origin);
+    return pathname.length > 1 && pathname.endsWith('/')
+      ? pathname.slice(0, -1)
+      : pathname;
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Marks the current section's top-level nav tab (and matching submenu item) as active.
+ * @param {Element} list The main nav links list
+ */
+function markActiveNavItems(list) {
+  const currentPath = normalizeNavPath(window.location.pathname);
+
+  list.querySelectorAll(':scope > li.nav-item').forEach((li) => {
+    const parentLink = li.querySelector(':scope > p > a, :scope > a');
+    if (!parentLink) return;
+
+    const parentPath = normalizeNavPath(parentLink.getAttribute('href'));
+    const subUl = li.querySelector(':scope > ul');
+    let childActive = false;
+
+    if (subUl) {
+      subUl.querySelectorAll('a').forEach((childLink) => {
+        const childPath = normalizeNavPath(childLink.getAttribute('href'));
+        if (childPath && childPath === currentPath) {
+          childLink.closest('li')?.classList.add('active');
+          childActive = true;
+        }
+      });
+    }
+
+    const isParentMatch = parentPath && (
+      currentPath === parentPath
+      || (parentPath !== '/' && currentPath.startsWith(`${parentPath}/`))
+    );
+
+    if (isParentMatch || childActive) {
+      li.classList.add('active');
+    }
+  });
+}
+
+/**
  * Decorates a secondary nav section (utility links, tools, ISI/social, etc.)
  * generically by preserving its authored content. Used for every section after
  * the brand row and the main menu, so re-authored documents render without the
@@ -229,6 +285,7 @@ function decorateNavLinks(section) {
     }
   });
 
+  markActiveNavItems(list);
   row.append(list);
   return row;
 }

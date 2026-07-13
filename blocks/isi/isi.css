@@ -1,8 +1,42 @@
 @import url('./isi-tokens.css');
 
+/* Reset global button margin inside the ISI block */
+main .isi button,
+.isi-bar button {
+  margin: 0;
+}
+
 /* ── In-page ISI section (matches vyepti.com full-width divider) ─ */
 main .section.isi-container { /* @boilerplate */
   border-top: var(--isi-section-border-width) solid var(--isi-section-border-color); /* @boilerplate */
+}
+
+/* ISI intro divider — a 4px light-gray rule separates the preceding page
+   content from the ISI intro copy on mobile only (the source hides it at
+   768px+). Applies to any page whose ISI intro text shares a default-content
+   wrapper with the inline ISI accordion (.isi-container). The negative inline
+   margin + matching inline padding lets the rule span the full viewport width
+   (cancelling the main content gutter) while keeping the text aligned. */
+main .section > .default-content-wrapper:has(> .isi-container) {
+  margin-inline: calc(-1 * var(--spacing-m, 15px));
+  padding-inline: var(--spacing-m, 15px);
+}
+
+@media (width >= 768px) {
+  main .section > .default-content-wrapper:has(> .isi-container) {
+    border-top: 0;
+    margin-inline: 0;
+    padding-top: 0;
+    padding-inline: 0;
+  }
+}
+
+/* /about: divider sits above the approved-use .smalltext block, not the ISI */
+main:has(.columns.info-cards) > .section:has(.isi-container) > .default-content-wrapper:has(> .isi-container) {
+  border-top: 0;
+  margin-inline: 0;
+  padding-top: 0;
+  padding-inline: 0;
 }
 
 /* ── In-page inline content (Row 2) ───────────────────────────── */
