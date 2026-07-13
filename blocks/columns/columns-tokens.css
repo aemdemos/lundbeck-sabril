@@ -27,10 +27,6 @@ main .columns-img-col img {
 }
 
 .columns.symptoms {
-  &.columns-2-cols {
-    margin: 20px auto;
-  }
-
  > div {
   display: flex;
   margin: 7.5px auto;
@@ -84,13 +80,6 @@ h3 {
   border-radius: 10px;
   height: stretch;
   }
-
-h3 {
-  color: var(--brand-primary-light);
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.1;
-}
  }
 }
 
