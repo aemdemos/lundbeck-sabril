@@ -74,9 +74,12 @@ export default function decorate(block) {
   if (!section) return;
 
   /* Animate the page scroll over a fixed duration (matches the source
-     site's 2s jQuery animate; native smooth scroll is too fast). */
+     site's 2s jQuery animate; native smooth scroll is too fast). Ease-out
+     (rather than ease-in-out) keeps the motion at full speed from the
+     start and decelerates into the landing, reading as one smooth motion
+     instead of a slow ramp-up followed by a fast finish. */
   const SCROLL_DURATION = 2000;
-  const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  const easeOut = (t) => 1 - (1 - t) ** 3;
   const animateScrollTo = (targetY) => {
     const startY = window.scrollY;
     const distance = targetY - startY;
@@ -84,7 +87,11 @@ export default function decorate(block) {
     const step = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / SCROLL_DURATION, 1);
-      window.scrollTo(0, startY + distance * easeInOut(progress));
+      window.scrollTo({
+        top: startY + distance * easeOut(progress),
+        left: 0,
+        behavior: 'instant',
+      });
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
