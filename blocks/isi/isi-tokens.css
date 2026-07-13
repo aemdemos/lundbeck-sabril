@@ -37,7 +37,7 @@
   --isi-toggle-border-width: 2px; /* @boilerplate */
   --isi-toggle-size: 24px; /* @boilerplate */
   --isi-toggle-color: var(--brand-secondary);
-  --isi-toggle-hover-color: var(--brand-secondary);
+  --isi-toggle-hover-color: white;
   --isi-toggle-transition-duration: 0.2s; /* @boilerplate */
   --isi-toggle-z-index: 21; /* @boilerplate */
   --isi-toggle-icon-size: 12px; /* @boilerplate */
@@ -48,6 +48,10 @@
   --isi-toggle-right-mobile: 100px; /* @boilerplate */
   --isi-toggle-right-desktop: 40px; /* @boilerplate */
   --isi-bar-heading-color: white; /* @boilerplate */
+}
+
+.isi-bar > button:focus {
+  background-color: transparent;
 }
 
 /* Widen the ISI section to the source site's 1170px content width
@@ -87,8 +91,8 @@ main .isi .isi-bar ul > li {
   padding-top: 10px;
 }
 
-.isi-bar blockquote p,
-.isi-bar blockquote li {
+main .isi blockquote p,
+main .isi blockquote li {
   font-size: var(--body-font-size-s);
   margin-bottom: 0;
 }
