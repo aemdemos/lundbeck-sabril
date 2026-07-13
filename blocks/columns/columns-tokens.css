@@ -7,7 +7,8 @@
 }
 
 main .columns.links p.button-wrapper {
-  margin-top: unset;
+  margin: unset;
+  padding-left: 0;
 
   a.button.primary {
 color: var(--brand-secondary);
@@ -17,6 +18,7 @@ margin: unset;
 padding: unset;
 font-style: unset;
 font-weight: 700;
+line-height: unset;
  }
 }
 
@@ -47,6 +49,12 @@ h3 {
   line-height: 1.1;
   }
  }
+}
+
+.columns blockquote h3 {
+  text-align: center;
+  color: var(--brand-primary-light);
+  font-size: var(--heading-font-size-m);
 }
 
 @media (width >= 768px) {
@@ -112,11 +120,11 @@ main .columns.info-cards {
 main .columns.info-cards > div > div {
   background-color: var(--card-bg-neutral);
   border-radius: 0;
-  padding: 15px 25px;
-  margin: 10px 0;
+  padding: 36px 40px 16px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin-top: 16px;
 }
 
 /* Flatten only the inner picture/text wrappers (never the card cell itself) so
@@ -194,7 +202,6 @@ main .columns.symptoms.columns-1-cols img {
 
   /* widen about-page card row to match source container (no 720px cap) */
   main:has(.columns.info-cards) > .section.columns-container > div:not(.default-content-wrapper) {
-    max-width: none;
     padding: 0;
   }
 
@@ -267,7 +274,6 @@ main .columns.symptoms.columns-1-cols img {
 
   main .columns.symptoms.columns-1-cols > div > div {
     border-radius: 10px;
-    margin: 0;
     width: 100%;
   }
 
@@ -314,23 +320,6 @@ main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:first-of-type 
   main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
     font-size: 17px;
   }
-}
-
-main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type,
-main:has(.columns.info-cards) .columns.symptoms.columns-1-cols h2:last-of-type .brand-primary-light {
-  margin: 15px 0 20px;
-  text-align: center;
-  color: var(--brand-green-light);
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-main:has(.columns.info-cards) .columns.symptoms.columns-1-cols p:not(:has(picture)) {
-  margin-bottom: 20px;
-  text-align: center;
-  color: var(--brand-green-light);
-  font-weight: 700;
-  line-height: 1.3;
 }
 
 /* the symptoms headings emulate the source's Arial Bold face at weight 700;

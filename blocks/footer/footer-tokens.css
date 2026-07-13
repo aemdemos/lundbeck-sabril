@@ -172,6 +172,11 @@ footer a.button {
   min-height: 20px;
 }
 
+footer u {
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
 /* Decorative multicolour brand bar — CSS-only, intentionally NOT authored
    in the DA document. Spans the full wrapper box (content max-width + the
    wrapper's two 15px side gutters), so it aligns edge-to-edge with the
@@ -206,12 +211,20 @@ footer .footer a[href^="tel:"] {
   /* keep logo + links on one row, vertically centred (columns.css defaults
      to flex-direction: column on mobile). `.divider` wins specificity over
      the @imported columns.css / footer.css base rules. */
-  footer .footer .columns.divider.columns-2-cols > div {
-    flex-direction: row;
+     footer .columns {
+      max-width: 420px;
+     }
+
+     footer .columns > div {
+      display: flex;
+      flex-direction: row;
+      gap: 50px;
+      align-items: center;
+      justify-content: space-between;
   }
 
   /* logo column ~5/12; links column ~7/12 (live col-xs-5 / col-xs-7) */
-  footer .footer .columns.divider.columns-2-cols > div > .columns-img-col {
+  footer .footer .columns > div > .columns-img-col {
     flex: 0 0 41.6667%;
   }
 
@@ -223,19 +236,19 @@ footer .footer a[href^="tel:"] {
 
   /* logo fills its narrow column, capped at natural width (live shrinks the
      logo to the column width on small screens) */
-  footer .footer .columns.divider.columns-2-cols > div > .columns-img-col img {
+  footer .footer .columns > div > .columns-img-col img {
     width: auto;
     max-width: 100%;
   }
 
   /* links as a 2-column grid: each link takes half the column width */
-  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) > p {
+  footer .footer .columns > div > :nth-child(2) > p {
     flex: 0 0 50%;
     margin: 0;
     text-align: left;
   }
 
-  footer .footer .columns.divider.columns-2-cols > div > :nth-child(2) a {
+  footer .footer .columns > div > :nth-child(2) a {
     font-size: var(--footer-link-font-size-mobile);
     line-height: var(--footer-link-line-height-mobile);
   }
@@ -243,13 +256,6 @@ footer .footer a[href^="tel:"] {
   footer .footer::after {
     background: var(--footer-bar-gradient-mobile);
   }
-
-  footer .columns > div {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: center;
-}
 
 /* Top rule + content padding, applied to the centered wrapper so the
    3px line spans the max-width content (mirrors the live .footerTopBorder

@@ -1,5 +1,55 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+function getScrollOffset() {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accordion-expand-scroll-offset')
+    .trim();
+  const parsed = parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 40;
+}
+
+function getScrollDuration() {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accordion-expand-scroll-duration')
+    .trim();
+  const parsed = parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 500;
+}
+
+function scrollAccordionItemIntoView(item) {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const offset = getScrollOffset();
+  const scrollTarget = () => item.getBoundingClientRect().top + window.scrollY - offset;
+
+  if (reduce) {
+    window.scrollTo({ top: scrollTarget(), behavior: 'auto' });
+    return;
+  }
+
+  const duration = getScrollDuration();
+  const start = window.scrollY;
+  const target = scrollTarget();
+  const distance = target - start;
+
+  if (Math.abs(distance) < 1) {
+    return;
+  }
+
+  let startTime;
+  const step = (timestamp) => {
+    if (startTime === undefined) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+    window.scrollTo({ top: start + distance * eased, behavior: 'auto' });
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+
+  window.requestAnimationFrame(step);
+}
+
 const EXPAND_LABEL_PATTERN = /^expand$/i;
 const COLLAPSE_LABEL = 'Collapse';
 const GLYPH_EXPAND = 'glyphicon-plus-sign';
@@ -97,6 +147,7 @@ export default function decorate(block) {
         e.stopPropagation();
         const isExpanded = li.classList.toggle('active');
         updateExpandToggle(expandToggle, isExpanded);
+        scrollAccordionItemIntoView(li);
       });
     }
 

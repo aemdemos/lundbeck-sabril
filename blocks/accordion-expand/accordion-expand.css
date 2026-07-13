@@ -107,7 +107,7 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 }
 
 .accordion-expand li.active .accordion-expand-item-body { /* @libs */
-  display: flex; /* @libs */
+  display: block; /* @libs */
   flex-direction: column; /* @libs */
   gap: var(--accordion-expand-body-gap); /* @libs */
   margin-top: var(--accordion-expand-body-gap); /* @libs */
@@ -217,51 +217,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
   display: inline;
 }
 
-/* CTA links in accordion body — keep filled button colors */
-.accordion-expand .accordion-expand-item-body a.button {
-  display: inline-block;
-  white-space: normal;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 8px 34px;
-  color: var(--button-primary-color);
-  background-color: var(--button-primary-background);
-  border-color: var(--button-primary-border-color);
-}
-
-.accordion-expand .accordion-expand-item-body a.button:hover,
-.accordion-expand .accordion-expand-item-body a.button:focus {
-  color: var(--button-primary-hover-color);
-  background-color: var(--button-primary-hover-background);
-  border-color: var(--button-primary-hover-border-color);
-}
-
-.accordion-expand .accordion-expand-item-body a.button.secondary {
-  color: var(--button-secondary-color);
-  background-color: var(--button-secondary-background);
-  border-color: var(--button-secondary-border-color);
-}
-
-.accordion-expand .accordion-expand-item-body a.button.secondary:hover,
-.accordion-expand .accordion-expand-item-body a.button.secondary:focus {
-  color: var(--button-secondary-hover-color);
-  background-color: var(--button-secondary-hover-background);
-  border-color: var(--button-secondary-hover-border-color);
-}
-
-.accordion-expand .accordion-expand-item-body a.button.accent {
-  color: var(--button-accent-color);
-  background-color: var(--button-accent-background);
-  border-color: var(--button-accent-border-color);
-}
-
-.accordion-expand .accordion-expand-item-body a.button.accent:hover,
-.accordion-expand .accordion-expand-item-body a.button.accent:focus {
-  color: var(--button-accent-hover-color);
-  background-color: var(--button-accent-hover-background);
-  border-color: var(--button-accent-hover-border-color);
-}
-
 @media (width >= 768px) {
   main .section[data-background-color]:has(.accordion-expand) {
     padding: 0 40px 25px;
@@ -304,7 +259,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 
   .accordion-expand .accordion-expand-item-body a.button {
     margin-top: 20px;
-    padding: revert;
   }
 
   .accordion-expand .accordion-expand-item-body ul,
