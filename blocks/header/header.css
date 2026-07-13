@@ -191,6 +191,11 @@ header nav .nav-links-list .nav-item > p > a:hover {
   background-color: var(--sabril-green-dark);
 }
 
+header nav .nav-links-list .nav-item.active > a,
+header nav .nav-links-list .nav-item.active > p > a {
+  background-color: var(--sabril-green-dark);
+}
+
 /* ---------- About Sabril dropdown ---------- */
 header nav .nav-dropdown-menu {
   display: none;
@@ -236,7 +241,8 @@ header nav .nav-dropdown-menu li:last-child a {
   border-bottom: 0;
 }
 
-header nav .nav-dropdown-menu li a:hover {
+header nav .nav-dropdown-menu li a:hover,
+header nav .nav-dropdown-menu li.active a {
   background-color: #b4cd89;
   color: var(--sabril-green-text);
 }
