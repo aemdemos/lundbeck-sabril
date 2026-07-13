@@ -310,7 +310,7 @@ export function decorateButtons(main) {
       outer.replaceWith(a);
     } else if (strong) {
       a.classList.add('primary');
-      strong.replaceWith(a);
+      strong.appendChild(a);
     } else if (em) {
       a.classList.add('secondary');
       em.replaceWith(a);

@@ -208,7 +208,7 @@ blockquote p.center  {
 
   /* Full-bleed to the viewport edges: cancel main's 15px side padding */
   margin-left: -16px;
-  margin-right: -16px;
+  margin-right: -15px;
 
   span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
     display: inline-block;

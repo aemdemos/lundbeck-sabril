@@ -259,7 +259,6 @@ main .section[data-background-color]:has(.accordion-expand) .accordion-expand-wr
 
   .accordion-expand .accordion-expand-item-body a.button {
     margin-top: 20px;
-    padding: revert;
   }
 
   .accordion-expand .accordion-expand-item-body ul,

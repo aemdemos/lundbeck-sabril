@@ -101,10 +101,10 @@
   --fixed-font-family: menlo, consolas, monospace;/* @libs */
 
   /* button tokens — shared */
-  --button-margin: 0;/* @libs */
+  --button-margin: 12px 0;/* @libs */
   --button-border-radius: 10px;/* @libs */
   --button-border-width: 2px;/* @libs */
-  --button-padding: 8px 15px;/* @libs */
+  --button-padding: 8px 27px;/* @libs */
   --button-font-size: 15px;/* @libs */
   --button-line-height: 1.5;/* @libs */
   --button-transition: 0.2s ease-in-out;/* @libs */
@@ -157,6 +157,16 @@
   --button-on-dark-secondary-hover-border-color: var(--background-color);/* @libs */
   --button-on-dark-secondary-hover-color: var(--brand-primary);/* @libs */
 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {/* @libs */
@@ -257,8 +267,7 @@ blockquote {/* @libs */
 }
 
 main p.button-wrapper {
-  margin-top: 24px;
-  padding-left: 15px;
+  margin: var(--button-margin);
 }
 
 code,
@@ -454,7 +463,7 @@ main ol>li {
 }
 
 main ul>li {
-  padding-left: .8em;
+  padding-left: 1em;
   text-indent: -1em;
 }
 
