@@ -8,6 +8,9 @@
   --header-white-text-color: #fff;
   --header-text-color: #484848;
 
+  /* nav dropdown hover / active background */
+  --sabril-green-hover: #b4cd89;
+
   /* font */
   --header-font-weight-xs: 500;
   --header-font-weight-s: 600;

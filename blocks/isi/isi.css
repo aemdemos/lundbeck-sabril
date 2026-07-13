@@ -1,5 +1,11 @@
 @import url('./isi-tokens.css');
 
+/* Reset global button margin inside the ISI block */
+main .isi button,
+.isi-bar button {
+  margin: 0;
+}
+
 /* ── In-page ISI section (matches vyepti.com full-width divider) ─ */
 main .section.isi-container { /* @boilerplate */
   border-top: var(--isi-section-border-width) solid var(--isi-section-border-color); /* @boilerplate */
