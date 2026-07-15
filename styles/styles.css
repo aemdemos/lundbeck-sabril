@@ -60,6 +60,9 @@
   --section-divider-width: 4px;/* @libs */
   --section-divider-color: #d1d1d1;
   --section-padding: 24px;
+  --flex-group-gap: 24px;
+  --div-width-margin: auto;
+  --div-width-align-items: flex-start;
 
   /* fonts */
   --body-font-family: arial, sans-serif;/* @libs */
@@ -680,6 +683,20 @@ main>.section>div {/* @libs */
   padding: 0 15px;/* @libs */
 }
 
+/* flex sections — a run of adjacent style=flex sections is wrapped by JS in a
+.flex-group; the group is its own independent flex context (no crossover with
+other groups). Section-level only: equal-width columns regardless of block type.
+Stacks below 900px, side-by-side at >=900px. */
+main .flex-group {
+display: flex;
+flex-direction: column;
+gap: var(--flex-group-gap);
+}
+
+main .flex-group > .section.flex {
+margin: 0;
+}
+
 /* section metadata - accent (light blue help strip) */
 main .section.accent {/* @libs */
   background-color: var(--accent-bg);/* @libs */
@@ -844,6 +861,42 @@ main .section[data-background-color] {
     display: none;
   }
 
+  /* ==== Start widths ==== */
+
+  div[class^="width-"], div[class*=" width-"] {
+    margin: var(--div-width-margin);
+  }
+  
+  .width-75 {
+    width: 73.5%;
+  }
+  
+  .width-66 {
+    width: 64.5%;
+  }
+  
+  .width-50 {
+    width: 48.5%;
+  }
+  
+  .width-33 {
+    width: 31.5%;
+  }
+  
+  .width-25 {
+    width: 23.5%;
+  }
+  
+  .columns > div:has(> div[class^="width-"],> div[class*=" width-"]) {
+    align-items: var(--div-width-align-items);
+  
+    > div[class^="width-"],> div[class*=" width-"] {
+      flex: none;
+    }
+  }
+  
+  /* ==== End widths ==== */
+
   main .section.stats-callout {
     padding: var(--section-padding-vertical) 0;
   }
@@ -884,6 +937,16 @@ main .section[data-background-color] {
 
   main .section.accent>div {/* @libs */
     gap: 30px;/* @libs */
+  }
+
+  main .flex-group {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  main .flex-group > .section.flex {
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 
