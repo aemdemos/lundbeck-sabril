@@ -1,15 +1,9 @@
 /* isi design tokens */
 :root { /* @boilerplate */
   --isi-text-color: var(--text-color);
-  --isi-line-height: 1.4286; /* sabril.net body / safetyInfo */
-  --isi-list-line-height: 1.4286; /* sabril.net ul.bulletlist */
-  --isi-list-item-margin-bottom: 10px; /* sabril.net ul.bulletlist li */
-  --isi-list-bullet-padding-left: 0.9em; /* sabril.net .safetyInfo ul.bulletlist li */
-  --isi-list-bullet-text-indent: -0.85em; /* sabril.net .safetyInfo ul.bulletlist li */
-  --isi-blockquote-padding: 15px 15px 0; /* sabril.net .warningInfo mobile */
-  --isi-blockquote-margin-bottom: 5px; /* sabril.net .warningInfo */
-  --isi-blockquote-last-li-margin-bottom: 20px; /* sabril.net .warningInfo ul li:last-child */
-  --isi-blockquote-list-margin-top: 1.4286em; /* sabril.net empty <p> spacer before bullets */
+  --isi-line-height: 1.5; /* @boilerplate */
+  --isi-list-line-height: 1.5; /* @boilerplate */
+  --isi-list-item-margin-bottom: 10px; /* @boilerplate */
   --isi-inline-padding-bottom: 30px; /* @boilerplate */
   --isi-heading-color: white;
   --isi-heading-font-size: 15px; /* @boilerplate */
@@ -87,65 +81,20 @@ main .isi .isi-bar ul > li {
 .isi blockquote,
 .isi-bar blockquote {
   border: 2px solid var(--brand-primary);
-  padding: var(--isi-blockquote-padding);
-  margin: 0 0 var(--isi-blockquote-margin-bottom);
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 16px 0 36px;
+}
+
+.isi-bar blockquote {
+  padding-top: 10px;
 }
 
 main .isi blockquote p,
-main .isi blockquote li,
-.isi-bar blockquote p,
-.isi-bar blockquote li {
+main .isi blockquote li {
   font-size: var(--body-font-size-s);
-  line-height: var(--isi-list-line-height);
   margin-bottom: 0;
-}
-
-main .isi blockquote p,
-main .isi blockquote ul,
-.isi-bar blockquote p,
-.isi-bar blockquote ul {
-  margin-top: 0;
-}
-
-/* Source inserts an empty <p> between the title and bullets; replicate that gap. */
-main .isi blockquote p + ul,
-.isi-bar blockquote p + ul {
-  margin-top: var(--isi-blockquote-list-margin-top);
-}
-
-main .isi blockquote li:last-child,
-.isi-bar blockquote li:last-child {
-  margin-bottom: var(--isi-blockquote-last-li-margin-bottom);
-}
-
-/* Match sabril.net .safetyInfo ul.bulletlist li indent (overrides global 1em / -1em). */
-.isi ul > li,
-.isi-bar ul > li,
-.isi-bar-col ul > li {
-  padding-left: var(--isi-list-bullet-padding-left);
-  text-indent: var(--isi-list-bullet-text-indent);
-}
-
-/* Purple bullets — sabril.net .safetyInfo ul.bulletlist.purple > li::before */
-main .isi ul > li::before,
-.isi-bar ul > li::before,
-.isi-bar-col ul > li::before {
-  color: var(--brand-primary);
-  font-weight: 400;
-}
-
-/* sabril.net uses a dedicated Arial Bold face for <b> (not synthetic bold). */
-main .isi strong,
-main .isi b,
-.isi-bar strong,
-.isi-bar b {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-}
-
-main .isi ul,
-.isi-bar-col ul {
-  margin-top: 0;
 }
 
 .isi li > p,
@@ -178,17 +127,14 @@ main .isi ul,
 .isi-inline blockquote h4,
 .isi-bar blockquote h4 {
   font-size: var(--heading-font-size-m);
-  line-height: 1.1;
-  margin-top: 1px;
-  margin-bottom: 0;
+  margin-top: 8px;
 }
 
 .isi-inline blockquote h5,
 .isi-bar blockquote h5 {
-  line-height: 1.1;
+  line-height: 1;
   font-size: var(--heading-font-size-xs);
-  margin-top: 1px;
-  margin-bottom: 10px;
+  margin-top: 3px;
 }
 
 .isi-bar-col h3:first-of-type {
@@ -270,7 +216,6 @@ blockquote p.center  {
 
   span:not(.isi-inline-toggle, .isi-inline-toggle-label, .isi-inline-toggle-icon) {
     display: inline-block;
-    line-height: 1.4286;
   }
 }
 
@@ -325,7 +270,6 @@ blockquote p.center  {
 @media (width >= 768px) {
   :root {
     --isi-bar-height: 190px;
-    --isi-blockquote-padding: 18px 20px 0;
     }
 
   .isi-bar h4 {
@@ -344,16 +288,11 @@ main .isi .isi-inline li {
 
 .isi-bar-col h3:first-of-type,
 .isi-inline h3:first-of-type {
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-size: 14px;
 
   span {
     width: unset;
-  }
-
-  /* sabril.net hides the title <br> on tablet/desktop */
-  br {
-    display: none;
   }
 }
 
