@@ -1,4 +1,21 @@
 /**
+ * Splits "IMPORTANT SAFETY INFORMATION" after the first word to match sabril.net.
+ * @param {Element} titleEl
+ */
+function splitImportantSafetyTitle(titleEl) {
+  if (!titleEl) return;
+  const text = titleEl.textContent.replace(/\s+/g, ' ').trim();
+  if (!text.startsWith('IMPORTANT') || !text.includes('SAFETY INFORMATION')) return;
+
+  titleEl.textContent = '';
+  titleEl.append(
+    document.createTextNode('IMPORTANT '),
+    document.createElement('br'),
+    document.createTextNode('SAFETY INFORMATION'),
+  );
+}
+
+/**
  * ISI (Important Safety Information) block.
  *
  * Authored with two rows:
@@ -45,6 +62,7 @@ export default function decorate(block) {
     const title = document.createElement('span');
     title.className = 'isi-bar-title';
     title.append(...heading.childNodes);
+    splitImportantSafetyTitle(title);
     heading.append(title);
   });
 
@@ -110,6 +128,11 @@ export default function decorate(block) {
   const inlineInner = inlineRow.querySelector(':scope > div') || inlineRow;
   const inlineHeading = inlineInner.querySelector('h3');
   if (inlineHeading) {
+    const titleSpan = inlineHeading.querySelector(
+      'span.br, span:not(.isi-inline-toggle):not(.isi-inline-toggle-label):not(.isi-inline-toggle-icon)',
+    );
+    splitImportantSafetyTitle(titleSpan);
+
     const inlineToggle = document.createElement('button');
     inlineToggle.className = 'isi-inline-toggle';
     inlineToggle.type = 'button';
