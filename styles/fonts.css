@@ -22,12 +22,13 @@
 
 /* "Arial Bold" is a bold-by-design face on the source: text renders bold
    regardless of the element's font-weight. Point it at the local Arial Bold
-   face and declare a full weight range so any requested weight uses the bold
-   design. */
+   face, fixed at weight 700 (matching --heading-font-weight) — a 400-900
+   range let Safari pick the 900 end, rendering noticeably heavier than the
+   source. */
 @font-face {
   font-family: 'Arial Bold';
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 700;
   font-display: swap;
   src: local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Bold');
 }
