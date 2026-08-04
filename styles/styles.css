@@ -63,9 +63,13 @@
 
   /* fonts */
   --body-font-family: arial, sans-serif;/* @libs */
-  --heading-font-family: arial, sans-serif;/* @libs */
+  /* Source headings use the bold-by-design "Arial Bold" face, so they read bold
+     regardless of font-weight. Prefer it here so headings match the source even
+     where a weight override applies (e.g. info-cards h1); plain arial + the
+     weight token below is the fallback when "Arial Bold" is unavailable. */
+  --heading-font-family: 'Arial Bold', arial, sans-serif;
   --body-line-height: 1.4;/* @libs */
-  --heading-font-weight: 800;/* @libs */
+  --heading-font-weight: 700;
   --heading-line-height: 1.2;/* @libs */
   --font-weight-bold: 700;/* @libs */
   --block-margin-top: 20px;/* @libs */
