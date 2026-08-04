@@ -1,1 +1,34 @@
 /* custom font files go here with font-display: swap */
+
+/*
+ * The source site (sabril.net) uses two licensed webfonts that are literally
+ * named "Arial Regular" and "Arial Bold". Several stylesheets in this project
+ * reference those exact family names. Without these declarations, browsers
+ * treat the names as unknown and fall back to a generic sans-serif (most
+ * visibly in Safari), and text meant to be bold ("Arial Bold") renders as
+ * regular. Map the names to the locally-installed Arial faces (zero network
+ * cost, no font licensing required) so they resolve to real Arial with the
+ * correct weight, matching the source wherever the names are used. Broader
+ * cross-platform fallback (systems without a local Arial) is handled by the
+ * font-family stack in styles.css, not here.
+ */
+@font-face {
+  font-family: 'Arial Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Arial'), local('ArialMT'), local('Helvetica');
+}
+
+/* "Arial Bold" is a bold-by-design face on the source: text renders bold
+   regardless of the element's font-weight. Point it at the local Arial Bold
+   face, fixed at weight 700 (matching --heading-font-weight) — a 400-900
+   range let Safari pick the 900 end, rendering noticeably heavier than the
+   source. */
+@font-face {
+  font-family: 'Arial Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Bold');
+}
