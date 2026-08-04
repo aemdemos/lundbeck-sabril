@@ -63,6 +63,7 @@
 
   /* fonts */
   --body-font-family: arial, sans-serif;/* @libs */
+
   /* Source headings use the bold-by-design "Arial Bold" face, so they read bold
      regardless of font-weight. Prefer it here so headings match the source even
      where a weight override applies (e.g. info-cards h1); plain arial + the
