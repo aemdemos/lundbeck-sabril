@@ -284,6 +284,11 @@ pre {/* @libs */
   font-size: var(--body-font-size-s);/* @libs */
 }
 
+b, strong {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+}
+
 pre {/* @libs */
   padding: 16px;/* @libs */
   border-radius: 8px;/* @libs */
@@ -326,10 +331,8 @@ button {/* @libs */
   padding: var(--button-padding);/* @libs */
   border: var(--button-border-width) solid transparent;/* @libs */
   border-radius: var(--button-border-radius);/* @libs */
-  font-family: var(--body-font-family);/* @libs */
   font-size: var(--button-font-size);/* @libs */
   font-style: normal;/* @libs */
-  font-weight: var(--button-font-weight);/* @libs */
   line-height: var(--button-line-height);/* @libs */
   text-align: center;/* @libs */
   text-decoration: none;/* @libs */
