@@ -7,15 +7,17 @@
  * treat the names as unknown and fall back to a generic sans-serif (most
  * visibly in Safari), and text meant to be bold ("Arial Bold") renders as
  * regular. Map the names to the locally-installed Arial faces (zero network
- * cost, no font licensing required) so they always resolve to real Arial with
- * the correct weight, matching the source everywhere the names are used.
+ * cost, no font licensing required) so they resolve to real Arial with the
+ * correct weight, matching the source wherever the names are used. Broader
+ * cross-platform fallback (systems without a local Arial) is handled by the
+ * font-family stack in styles.css, not here.
  */
 @font-face {
   font-family: 'Arial Regular';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Arial'), local('ArialMT'), local('Helvetica'), local('Liberation Sans');
+  src: local('Arial'), local('ArialMT'), local('Helvetica');
 }
 
 /* "Arial Bold" is a bold-by-design face on the source: text renders bold
@@ -27,5 +29,5 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Bold'), local('Liberation Sans Bold');
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Bold');
 }

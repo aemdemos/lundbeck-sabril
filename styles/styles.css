@@ -62,13 +62,13 @@
   --section-padding: 24px;
 
   /* fonts */
-  --body-font-family: arial, sans-serif;/* @libs */
+  --body-font-family: 'Arial Regular', 'Helvetica Neue', helvetica, arial, sans-serif;
 
   /* Source headings use the bold-by-design "Arial Bold" face, so they read bold
      regardless of font-weight. Prefer it here so headings match the source even
-     where a weight override applies (e.g. info-cards h1); plain arial + the
-     weight token below is the fallback when "Arial Bold" is unavailable. */
-  --heading-font-family: 'Arial Bold', arial, sans-serif;
+     where a weight override applies (e.g. info-cards h1); the rest of the stack
+     is the fallback when "Arial Bold" is unavailable. */
+  --heading-font-family: 'Arial Bold', 'Helvetica Neue', helvetica, arial, sans-serif;
   --body-line-height: 1.4;/* @libs */
   --heading-font-weight: 700;
   --heading-line-height: 1.2;/* @libs */
