@@ -666,14 +666,15 @@ function parseSplitClasses(raw) {
   return parseClasses(raw, /^[a-z0-9-]+$/);
 }
 
-const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR']);
+const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR', 'U', 'DEL']);
 
 const ALIGNMENT_CLASSES = new Set(['center', 'center-mobile', 'center-desktop',
   'left', 'left-mobile', 'left-desktop', 'right', 'right-mobile', 'right-desktop']);
 
 const SPAN_TAG_SELECTOR = 'h1, h2, h3, h4, h5, h6, p, li';
 
-const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]\s*$/;
+// const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]\s*$/;
+const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]([^\]]*)$/;
 
 const SPAN_TAG_RE = /\[\[(?=([^\]]+))\1\](?=([^\]]*))\2\]/g;
 
@@ -782,6 +783,14 @@ function applySplitBoundaryPass(el) {
       }
     }
   }
+
+  // Recurse into inline descendants (e.g. <strong><u>REVIEW</u></strong>) so
+  // boundary patterns nested inside another inline tag are also processed.
+  [...el.childNodes].forEach((child) => {
+    if (child.nodeType === Node.ELEMENT_NODE && SPLIT_INLINE_TAGS.has(child.nodeName)) {
+      applySplitBoundaryPass(child);
+    }
+  });
 }
 
 export function applySpanTags(text) {
