@@ -284,6 +284,11 @@ pre {/* @libs */
   font-size: var(--body-font-size-s);/* @libs */
 }
 
+b, strong {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+}
+
 pre {/* @libs */
   padding: 16px;/* @libs */
   border-radius: 8px;/* @libs */
