@@ -43,6 +43,22 @@ h3 {
   font-size: 17px;
   font-weight: 700;
   line-height: 1.1;
+
+  /* source heading spacing is 10px top/bottom; the global heading margin
+     (20px top) makes the migrated cards taller than the original */
+  margin: 10px 0;
+  }
+
+  /* the icon sits in its own wrapper <p>. The source gives every icon a fixed
+     104px-tall centered zone (source .imagebox), so a short icon (e.g. the eye)
+     gets extra space below it before the label, while tall icons sit tight.
+     Replicate that fixed zone with the icon vertically centered. */
+  p:has(picture) {
+   margin: 0;
+   min-height: 104px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
   }
  }
 }
@@ -65,22 +81,43 @@ h3 {
 
 .columns.symptoms {
   &.columns-2-cols {
-    width: 66%;
-    margin: 0 auto;
+    /* source bottom-row cards are wider than the 3-col top row (~323px vs
+       ~293px), so the 2-col row uses ~72% of the container, not 66% */
+    width: 72%;
+
+    /* the two symptom rows are separate blocks; pull the bottom one up so the
+       inter-row gap matches the source (~15px instead of ~28px) */
+    margin: -13px auto 0;
   }
 
  > div {
   width: 83%;
   display: flex;
+
+  /* equalize card heights across the row (cross-browser via flex stretch,
+     not the non-standard `height: stretch` which Firefox/Safari ignore) */
+  align-items: stretch;
   margin: 7.5px auto;
 
 > div {
   background-color: var(--card-bg-neutral);
   padding: 15px 25px;
   border-radius: 10px;
-  height: stretch;
+
+  /* top-align content like the source (col-sm-top). The even look on short
+     cards comes from the fixed icon zone below, not vertical centering. */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   }
  }
+}
+
+/* the global `main .columns > div { align-items: start }` (below) has higher
+   specificity than the nested rule above and would cancel the stretch, so
+   re-assert stretch for symptoms rows with a matching main-scoped selector */
+main .columns.symptoms > div {
+  align-items: stretch;
 }
 
 }

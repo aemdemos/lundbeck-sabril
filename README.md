@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--ise-boilerplate--aemdemos.aem.page/
-- Live: https://main--ise-boilerplate--aemdemos.aem.live/
+- Preview: https://main--lundebck-sabril--aemdemos.aem.page/
+- Live: https://main--lundbeck-sabril--aemdemos.aem.live/
 
 ## Documentation
 
