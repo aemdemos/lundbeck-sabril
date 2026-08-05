@@ -647,7 +647,7 @@ export function decorateIconsAndBullets(element, prefix = '') {
   iconsToBullets(element);
 }
 
-/* === BRACKET TAGS ===
+/* === BRACKET TAGS V3 ===
  * Bracket syntax: [[class1,class2]text] → <span class="class1 class2">text</span>
  * Nested section syntax: [#section-id] → cloned content from section-metadata ID.
  * Only alphanumeric, hyphen, and underscore are allowed in class names.
