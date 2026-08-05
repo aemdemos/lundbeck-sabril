@@ -355,7 +355,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
     display: block;
     width: 100%;
     margin: 10px 0;
-    font-size: 19px;
     line-height: 27.1429px;
     text-decoration: none;
     padding-bottom: 15px;
@@ -564,7 +563,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
 
   header nav .nav-utility-0 a {
     margin-right: 34px;
-    font-size: 15px;
     white-space: nowrap;
   }
 
@@ -620,7 +618,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
   }
 
   header nav .nav-utility-0 a {
-    font-size: 17px;
     position: relative;
     top: 9px;
   }
