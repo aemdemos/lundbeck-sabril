@@ -94,6 +94,10 @@ header nav .nav-utility-0 a {
 
 header nav .nav-utility-0 a span {
   border-bottom: 2px solid var(--sabril-orange);
+
+  /* source's REMS link uses a bold-by-design font face rather than a
+     numeric font-weight; see styles/fonts.css for why. */
+  font-family: 'Arial Bold', arial, helvetica, sans-serif;
 }
 
 header nav .nav-utility-0 a i {
@@ -352,7 +356,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
     width: 100%;
     margin: 10px 0;
     font-size: 19px;
-    font-weight: 700;
     line-height: 27.1429px;
     text-decoration: none;
     padding-bottom: 15px;
@@ -509,10 +512,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
     display: inline-block;
     margin-right: 30px;
     line-height: 17.6px;
-  }
-  
-  header nav .nav-utility-0 a i {
-      font-weight: 700;
   }
 
   header nav .nav-links-row {       /* green nav tabs */
