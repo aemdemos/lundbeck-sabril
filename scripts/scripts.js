@@ -666,14 +666,13 @@ function parseSplitClasses(raw) {
   return parseClasses(raw, /^[a-z0-9-]+$/);
 }
 
-const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR', 'U', 'DEL']);
+const SPLIT_INLINE_TAGS = new Set(['STRONG', 'EM', 'A', 'BR', 'U', 'SUP', 'SUB', 'DEL']);
 
 const ALIGNMENT_CLASSES = new Set(['center', 'center-mobile', 'center-desktop',
   'left', 'left-mobile', 'left-desktop', 'right', 'right-mobile', 'right-desktop']);
 
 const SPAN_TAG_SELECTOR = 'h1, h2, h3, h4, h5, h6, p, li';
 
-// const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]\s*$/;
 const SPLIT_OPEN_RE = /\[\[([a-z0-9,-]+)\]([^\]]*)$/;
 
 const SPAN_TAG_RE = /\[\[(?=([^\]]+))\1\](?=([^\]]*))\2\]/g;
@@ -711,7 +710,21 @@ function splitAlignmentClasses(classes) {
   }, { alignClasses: [], regularClasses: [] });
 }
 
-function applySplitBoundaryPass(el) {
+// Descends through single-child wrappers (e.g. a heading whose entire content is one
+// <strong>) to find the element whose direct children actually hold the split text/inline
+// nodes. Bracket content can be nested one or more levels inside such a wrapper.
+function getSplitContainer(el) {
+  let container = el;
+  while (container.childNodes.length === 1) {
+    const [only] = container.childNodes;
+    if (only.nodeType !== Node.ELEMENT_NODE || !SPLIT_INLINE_TAGS.has(only.nodeName)) break;
+    container = only;
+  }
+  return container;
+}
+
+function applySplitBoundaryPass(container, alignTarget = container) {
+  const el = container;
   const children = [...el.childNodes];
 
   for (let i = 0; i < children.length - 2; i += 1) {
@@ -747,7 +760,7 @@ function applySplitBoundaryPass(el) {
         const closeMatch = openMatch && classes.length ? next.nodeValue.match(/^\s*\]/) : null;
         if (closeMatch) {
           const { alignClasses, regularClasses } = splitAlignmentClasses(classes);
-          if (alignClasses.length) el.classList.add(...alignClasses);
+          if (alignClasses.length) alignTarget.classList.add(...alignClasses);
           prev.nodeValue = prev.nodeValue.slice(0, -openMatch[0].length);
           next.nodeValue = next.nodeValue.slice(closeMatch[0].length);
           if (regularClasses.length) {
@@ -768,7 +781,7 @@ function applySplitBoundaryPass(el) {
       if (isPrevInline && isNextInline && openerText.endsWith('[[') && classes.length
         && closerText.startsWith(']') && closerText.endsWith(']')) {
         const { alignClasses, regularClasses } = splitAlignmentClasses(classes);
-        if (alignClasses.length) el.classList.add(...alignClasses);
+        if (alignClasses.length) alignTarget.classList.add(...alignClasses);
         next.textContent = closerText.slice(1, -1);
         if (regularClasses.length) {
           const insertRef = next.nextSibling;
@@ -783,14 +796,6 @@ function applySplitBoundaryPass(el) {
       }
     }
   }
-
-  // Recurse into inline descendants (e.g. <strong><u>REVIEW</u></strong>) so
-  // boundary patterns nested inside another inline tag are also processed.
-  [...el.childNodes].forEach((child) => {
-    if (child.nodeType === Node.ELEMENT_NODE && SPLIT_INLINE_TAGS.has(child.nodeName)) {
-      applySplitBoundaryPass(child);
-    }
-  });
 }
 
 export function applySpanTags(text) {
@@ -953,8 +958,8 @@ function findMultiNodeSpanBoundary(el) {
   return null;
 }
 
-function applyMultiNodeSpanTag(el) {
-  const boundary = findMultiNodeSpanBoundary(el);
+function applyMultiNodeSpanTag(container, alignTarget = container) {
+  const boundary = findMultiNodeSpanBoundary(container);
   if (!boundary) return false;
   const {
     openNode, afterOpen, openIndex, classes, closeNode, closeIdx,
@@ -974,7 +979,7 @@ function applyMultiNodeSpanTag(el) {
   } else {
     range.insertNode(fragment);
   }
-  if (alignClasses.length) el.classList.add(...alignClasses);
+  if (alignClasses.length) alignTarget.classList.add(...alignClasses);
 
   openNode.nodeValue = openNode.nodeValue.slice(0, openIndex);
   closeNode.nodeValue = closeNode.nodeValue.slice(1);
@@ -983,14 +988,18 @@ function applyMultiNodeSpanTag(el) {
 
 export function decorateSpanTags(element) {
   element.querySelectorAll(SPAN_TAG_SELECTOR).forEach((el) => {
-    if (el.textContent.includes('[[')) hoistAlignmentAcrossInlines(el);
+    if (!el.textContent.includes('[[')) return;
+
+    hoistAlignmentAcrossInlines(el);
 
     const nodes = collectTextNodes(el, '[[');
     nodes.forEach((n) => replaceTextNode(n, el));
-    applySplitBoundaryPass(el);
+
+    const container = getSplitContainer(el);
+    applySplitBoundaryPass(container, el);
 
     while (el.textContent.includes('[[')) {
-      if (!applyMultiNodeSpanTag(el)) break;
+      if (!applyMultiNodeSpanTag(container, el)) break;
     }
   });
 
@@ -1173,96 +1182,6 @@ export function decorateMain(main) {
   decorateLinks(main);
   decorateSpanTags(main);
 }
-
-/**
- * Loads a theme spread sheet config.
- * To use, create a design sheet with columns: Property, Value, Section, Block.
- * add column 'design' to the metadata and set it to the path of the design sheet for your page.
- */
-
-/* uncomment if using theme spread sheets
-function addOverlayRule(ruleSet, selector, property, value) {
-  if (!ruleSet.has(selector)) {
-    ruleSet.set(selector, [`--${property}: ${value};`]);
-  } else {
-    ruleSet.get(selector).push(`--${property}: ${value};`);
-  }
-}
-
-async function loadThemeSpreadSheetConfig() {
-  const theme = getMetadata('design');
-  if (!theme) return;
-  // make sure the json files are added to paths.json first
-  const resp = await fetch(`/${theme}.json?offset=0&limit=500`);
-
-  if (resp.status === 200) {
-    // create style element that should be last in the head
-    document.head.insertAdjacentHTML('beforeend', '<style id="style-overrides"></style>');
-    const sheets = window.document.styleSheets;
-    const sheet = sheets.item(sheets.length - 1);
-    // load spreadsheet
-    const json = await resp.json();
-    const tokens = json.data || json.default.data;
-    // go through the entries and create the rule set
-    const ruleSet = new Map();
-    tokens.forEach((e) => {
-      const {
-        Property, Value, Section, Block,
-      } = e;
-      let selector = '';
-      if (Section.length === 0 && Block.length === 0) {
-        // :root { --<property>: <value>; }
-        addOverlayRule(ruleSet, ':root', Property, Value);
-      } else {
-        // define the section selector if set
-        if (Section.length > 0) {
-          selector = `main .section.${Section}`;
-        } else {
-          selector = 'main .section';
-        }
-        // define the block selector if set
-        if (Block.length) {
-          Block.split(',').forEach((entry) => {
-            // eslint-disable-next-line no-param-reassign
-            entry = entry.trim();
-            let blockSelector = selector;
-            // special cases: default wrapper, text, image, button, title
-            switch (entry) {
-              case 'default':
-                blockSelector += ' .default-content-wrapper';
-                break;
-              case 'image':
-                blockSelector += ` .default-content-wrapper img, ${selector} .block.columns img`;
-                break;
-              case 'text':
-                blockSelector += ` .default-content-wrapper p:not(:has(:is(a.button , picture))), ${selector} .columns.block p:not(:has(:is(a.button , picture)))`;
-                break;
-              case 'button':
-                blockSelector += ' .default-content-wrapper a.button';
-                break;
-              case 'title':
-                blockSelector += ` .default-content-wrapper :is(h1,h2,h3,h4,h5,h6), ${selector} .columns.block :is(h1,h2,h3,h4,h5,h6)`;
-                break;
-              default:
-                blockSelector += ` .block.${entry}`;
-            }
-            // main .section.<section-name> .block.<block-name> { --<property>: <value>; }
-            // or any of the spacial cases above
-            addOverlayRule(ruleSet, blockSelector, Property, Value);
-          });
-        } else {
-          // main .section.<section-name> { --<property>: <value>; }
-          addOverlayRule(ruleSet, selector, Property, Value);
-        }
-      }
-    });
-    // finally write the rule sets to the style element
-    ruleSet.forEach((rules, selector) => {
-      sheet.insertRule(`${selector} {${rules.join(';')}}`, sheet.cssRules.length);
-    });
-  }
-}
-*/
 
 /**
  * Loads everything needed to get to LCP.
