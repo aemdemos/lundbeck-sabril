@@ -94,6 +94,7 @@ header nav .nav-utility-0 a {
 
 header nav .nav-utility-0 a span {
   border-bottom: 2px solid var(--sabril-orange);
+  font-family: 'Arial Bold', arial, helvetica, sans-serif;
 }
 
 header nav .nav-utility-0 a i {
@@ -351,8 +352,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
     display: block;
     width: 100%;
     margin: 10px 0;
-    font-size: 19px;
-    font-weight: 700;
     line-height: 27.1429px;
     text-decoration: none;
     padding-bottom: 15px;
@@ -510,10 +509,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
     margin-right: 30px;
     line-height: 17.6px;
   }
-  
-  header nav .nav-utility-0 a i {
-      font-weight: 700;
-  }
 
   header nav .nav-links-row {       /* green nav tabs */
     order: 3;
@@ -565,7 +560,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
 
   header nav .nav-utility-0 a {
     margin-right: 34px;
-    font-size: 15px;
     white-space: nowrap;
   }
 
@@ -621,7 +615,6 @@ header nav.nav-mobile-open .nav-hamburger-label {
   }
 
   header nav .nav-utility-0 a {
-    font-size: 17px;
     position: relative;
     top: 9px;
   }
