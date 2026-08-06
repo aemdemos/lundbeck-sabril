@@ -700,6 +700,15 @@ main>.section.divider {
   }
 }
 
+/* 404 "Return to Homepage" link keeps the source site's orange, not the global purple */
+main>.section.divider a[href="/"] {
+  color: var(--brand-secondary);
+}
+
+main>.section.divider a[href="/"]:hover {
+  color: var(--brand-secondary-dark);
+}
+
 /* Full-bleed divider line without widening the section (keeps content aligned) */
 main>.section.divider:not(.green)::after {
   content: '';
