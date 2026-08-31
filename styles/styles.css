@@ -373,6 +373,11 @@ p.button:hover a {
   background-color: unset;
 }
 
+p.button.center {
+  justify-self: center;
+    display: flex;
+}
+
 p > a {
   margin-right: 4px;
 }
