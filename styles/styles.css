@@ -324,7 +324,7 @@ a {/* @libs */
 
 /* buttons — shared structure */
 main a.button,
-main span.button a,
+main p.button,
 button {/* @libs */
   box-sizing: border-box;/* @libs */
   display: inline-block;/* @libs */
@@ -351,7 +351,7 @@ a.button:focus {/* @libs */
 
 /* primary — filled CTA (native button elements default here) */
 a.button.primary,
-main span.button a,
+main p.button a,
 button {/* @libs */
   background-color: var(--button-primary-background);/* @libs */
   border-color: var(--button-primary-border-color);/* @libs */
@@ -360,13 +360,26 @@ button {/* @libs */
 
 a.button.primary:hover,
 a.button.primary:focus,
-span.button a:hover,
+p.button:hover,
 button:hover,
 button:focus {/* @libs */
   background-color: var(--button-primary-hover-background);/* @libs */
   border-color: var(--button-primary-hover-border-color);/* @libs */
   color: var(--button-primary-hover-color);/* @libs */
   cursor: pointer;/* @libs */
+}
+
+p.button:hover a {
+  background-color: unset;
+}
+
+p.button.center {
+  justify-self: center;
+    display: flex;
+}
+
+p > a {
+  margin-right: 4px;
 }
 
 button:disabled,
@@ -545,7 +558,7 @@ main .icon.icon-bullet {/* @libs */
 }
 
 .center, .center-mobile {
-  text-align: center;
+  text-align: center !important;
 
   &.columns .columns-img-col img {
     display: inline-block;
@@ -558,7 +571,7 @@ main .icon.icon-bullet {/* @libs */
 }
 
 .left, .left-mobile {
-  text-align: left;
+  text-align: left !important;
 
   &.columns .columns-img-col img {
     display: inline-block;
@@ -566,7 +579,7 @@ main .icon.icon-bullet {/* @libs */
 }
 
 .right, .right-mobile {
-  text-align: right;
+  text-align: right !important;
 
   &.columns .columns-img-col img {
     display: inline-block;
